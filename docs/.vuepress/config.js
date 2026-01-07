@@ -15,22 +15,19 @@ export default defineUserConfig({
     navbar: [
       '/',
       {
-        text: 'Article',
-        link: '/article/',
+        text: '梦起',
+        link: 'https://bianyingsu.github.io',
       },
       {
-        text: 'Category',
-        link: '/category/',
-      },
-      {
-        text: 'Tag',
-        link: '/tag/',
-      },
-      {
-        text: 'Timeline',
-        link: '/timeline/',
+        text: '梦路',
+        link: '/guide/action-createLink',
       },
     ],
+    sidebar: {
+      '/guide/': [
+        '/guide/action-createLink.md',
+      ],
+    },
   }),
 
   plugins: [
