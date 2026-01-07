@@ -24,7 +24,7 @@ export default defineUserConfig({
       },
       {
         text: 'post',
-        link: '/article/',
+        link: '/posts/',
       },
       {
         text: 'Article',
