@@ -84,11 +84,11 @@ export default defineUserConfig({
           itemLayout: 'Category',
           frontmatter: () => ({
             title: 'Categories',
-            sidebar: false,
+            sidebar: true,
           }),
           itemFrontmatter: (name) => ({
             title: `Category ${name}`,
-            sidebar: false,
+            sidebar: true,
           }),
         },
         {
@@ -98,11 +98,11 @@ export default defineUserConfig({
           itemLayout: 'Tag',
           frontmatter: () => ({
             title: 'Tags',
-            sidebar: false,
+            sidebar: true,
           }),
           itemFrontmatter: (name) => ({
             title: `Tag ${name}`,
-            sidebar: false,
+            sidebar: true,
           }),
         },
       ],
@@ -115,7 +115,7 @@ export default defineUserConfig({
           layout: 'Article',
           frontmatter: () => ({
             title: 'Articles',
-            sidebar: false,
+            sidebar: true,
           }),
           // Sort pages with time and sticky
           sorter: (pageA, pageB) => {
@@ -146,7 +146,7 @@ export default defineUserConfig({
           layout: 'Timeline',
           frontmatter: () => ({
             title: 'Timeline',
-            sidebar: false,
+            sidebar: true,
           }),
         },
       ],
