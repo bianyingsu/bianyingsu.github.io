@@ -23,10 +23,6 @@ export default defineUserConfig({
         link: '/guide/action-createLink',
       },
       {
-        text: 'post',
-        link: '/posts/',
-      },
-      {
         text: 'Article',
         link: '/article/',
       },
