@@ -1,10 +1,10 @@
 ---
 home: true
 title: Home
-heroImage: https://vuejs.press/images/hero.png
+heroImage: https://github.com/bianyingsu/bianyingsu.github.io/blob/master/docs/.vuepress/public/img/logo.png
 actions:
   - text: 快速开始
-    link: /get-started.html
+    link: /action-createLink.html
     type: primary
 
   - text: Introduction

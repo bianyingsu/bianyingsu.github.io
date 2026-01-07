@@ -10,7 +10,7 @@ export default defineUserConfig({
   description: '欢迎来到bays的笔记文档空间',
 
   theme: defaultTheme({
-    logo: 'https://github.com/bianyingsu/bianyingsu.github.io/blob/master/docs/.vuepress/public/img/logo.jpg',
+    logo: 'https://github.com/bianyingsu/bianyingsu.github.io/blob/master/docs/.vuepress/public/img/logo.png',
 
     navbar: [
       '/',
