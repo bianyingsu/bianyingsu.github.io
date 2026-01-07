@@ -4,7 +4,7 @@ title: Home
 heroImage: https://github.com/bianyingsu/bianyingsu.github.io/blob/master/docs/.vuepress/public/img/logo.png
 actions:
   - text: 快速开始
-    link: /action-createLink.html
+    link: /guide/action-createLink.html
     type: primary
 
   - text: Introduction
