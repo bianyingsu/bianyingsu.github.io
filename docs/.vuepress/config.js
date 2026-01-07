@@ -22,6 +22,26 @@ export default defineUserConfig({
         text: '梦路',
         link: '/guide/action-createLink',
       },
+      {
+        text: 'post',
+        link: '/article/',
+      },
+      {
+        text: 'Article',
+        link: '/article/',
+      },
+      {
+        text: 'Category',
+        link: '/category/',
+      },
+      {
+        text: 'Tag',
+        link: '/tag/',
+      },
+      {
+        text: 'Timeline',
+        link: '/timeline/',
+      },
     ],
     sidebar: {
       '/guide/': [
