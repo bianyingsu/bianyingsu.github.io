@@ -112,7 +112,7 @@ Session：会话，由Connection创建，实质上就是发送、接受消息的
 http://localhost:8161/admin（用户名和密码默认为admin），则启动成功。
 
 
-![activeMQ.pdf-2-0.png](/img/activeMQ.pdf-2-0.png)
+<img src="/img/activeMQ.pdf-2-0.png">
 
 **三、SpringBoot 集成 ActiveMQ**
 

@@ -19,8 +19,8 @@ export default defineUserConfig({
         link: 'https://bianyingsu.github.io',
       },
       {
-        text: 'ActiveMQ',
-        link: '/guide/ActiveMQ.md',
+        text: 'activeMQ',
+        link: '/guide/activeMQ.md',
       },
       {
         text: 'Article',
@@ -41,10 +41,12 @@ export default defineUserConfig({
     ],
     sidebar: {
       '/guide/': [
-        '/guide/ActiveMQ.md',
+        '/guide/activeMQ.md',
         '/guide/Arthas.md',
       ],
     },
+
+    sidebarDepth: 0,
   }),
 
   plugins: [
