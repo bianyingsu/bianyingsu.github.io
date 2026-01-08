@@ -49,6 +49,7 @@ export default defineUserConfig({
         '/guide/elasticsearch.md',
         '/guide/etcd.md',
         '/guide/excel.md',
+        '/guide/git.md',
         '/guide/Sort.md',
       ],
     },
