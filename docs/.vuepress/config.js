@@ -19,7 +19,7 @@ export default defineUserConfig({
         link: 'https://bianyingsu.github.io',
       },
       {
-        text: 'activeMQ',
+        text: 'ActiveMQ',
         link: '/guide/ActiveMQ.md',
       },
       {
