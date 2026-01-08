@@ -4,7 +4,7 @@ title: Home
 heroImage: /logo.png
 actions:
   - text: 快速开始
-    link: /guide/activeMQ.html
+    link: /guide/ActiveMQ.html
     type: primary
 
   - text: Introduction

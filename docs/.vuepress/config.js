@@ -20,7 +20,7 @@ export default defineUserConfig({
       },
       {
         text: 'activeMQ',
-        link: '/guide/activeMQ.md',
+        link: '/guide/ActiveMQ.md',
       },
       {
         text: 'Article',
@@ -41,7 +41,7 @@ export default defineUserConfig({
     ],
     sidebar: {
       '/guide/': [
-        '/guide/activeMQ.md',
+        '/guide/ActiveMQ.md',
       ],
     },
   }),
