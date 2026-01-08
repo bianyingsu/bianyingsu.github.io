@@ -45,6 +45,7 @@ export default defineUserConfig({
         '/guide/Arthas.md',
         '/guide/awt.md',
         '/guide/docker.md',
+        '/guide/dubbo.md',
       ],
     },
 
