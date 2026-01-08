@@ -42,6 +42,7 @@ export default defineUserConfig({
     sidebar: {
       '/guide/': [
         '/guide/ActiveMQ.md',
+        '/guide/Arthas.md',
       ],
     },
   }),
