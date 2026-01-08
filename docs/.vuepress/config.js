@@ -47,6 +47,7 @@ export default defineUserConfig({
         '/guide/docker.md',
         '/guide/dubbo.md',
         '/guide/elasticsearch.md',
+        '/guide/etcd.md',
       ],
     },
 
