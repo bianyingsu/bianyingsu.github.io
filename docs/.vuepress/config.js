@@ -48,6 +48,7 @@ export default defineUserConfig({
         '/guide/dubbo.md',
         '/guide/elasticsearch.md',
         '/guide/etcd.md',
+        '/guide/excel.md',
         '/guide/Sort.md',
       ],
     },
