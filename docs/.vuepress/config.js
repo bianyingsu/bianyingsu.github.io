@@ -43,6 +43,7 @@ export default defineUserConfig({
       '/guide/': [
         '/guide/activeMQ.md',
         '/guide/Arthas.md',
+        '/guide/awt.md',
       ],
     },
 
