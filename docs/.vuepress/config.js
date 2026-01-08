@@ -44,6 +44,7 @@ export default defineUserConfig({
         '/guide/activeMQ.md',
         '/guide/Arthas.md',
         '/guide/awt.md',
+        '/guide/docker.md',
       ],
     },
 
