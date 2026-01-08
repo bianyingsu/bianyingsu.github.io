@@ -46,6 +46,7 @@ export default defineUserConfig({
         '/guide/awt.md',
         '/guide/docker.md',
         '/guide/dubbo.md',
+        '/guide/elasticsearch.md',
       ],
     },
 

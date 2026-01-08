@@ -1023,8 +1023,5 @@ public class UserServiceImpl implements UserService {
 
 <img src="/img/dubbo.pdf-25-1.png">
 
-发现依然能访问成功，这是因为虽然zookeeper停了，但是我们的服务有缓存，也就是说，即使没有注册中心，
-
-
-置，然后再去请求，这体现了Dubbo的高可用性
+发现依然能访问成功，这是因为虽然zookeeper停了，但是我们的服务有缓存，也就是说，即使没有注册中心，我们也可以通过这个缓存，去得知我们需要的服务在哪个位置，然后再去请求，这体现了Dubbo的高可用性
 
