@@ -757,13 +757,13 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/x
 ```yml
  # activemq 的配置
  # 地址
- spring . activemq . broker - url = tcp ://192.168.244.135:61616
+ spring.activemq.broker-url=tcp ://192.168.244.135:61616
  # 信任所有的包
- spring . activemq . packages . trust - all =true
+ spring.activemq.packages.trust-all=true
  # 用户名
- spring . activemq . user = admin
+ spring.activemq.user=admin
  # 密码
- spring . activemq . password = admin
+ spring.activemq.password=admin
 ```
 
 **2.3 消息实体**
@@ -1021,13 +1021,13 @@ pub/sub消息传递模型允许多个主题订阅者接收同一条消息。JMS�
 mq的topic起作用：
 
 ```
- spring . jms . pub - sub - domain =true
+ spring.jms.pub-sub-domain=true
 ```
 
 mq的queue起作用：
 
 ```
-spring . jms . pub - sub - domain =false
+spring.jms.pub-sub-domain=false
 ```
 
 **springboot activemq This class is not trusted to be serialized as ObjectMessage payload .**

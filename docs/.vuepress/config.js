@@ -19,8 +19,8 @@ export default defineUserConfig({
         link: 'https://bianyingsu.github.io',
       },
       {
-        text: '梦路',
-        link: '/guide/action-createLink',
+        text: 'activeMQ',
+        link: '/guide/activeMQ.md',
       },
       {
         text: 'Article',
@@ -41,7 +41,7 @@ export default defineUserConfig({
     ],
     sidebar: {
       '/guide/': [
-        '/guide/action-createLink.md',
+        '/guide/activeMQ.md',
       ],
     },
   }),
