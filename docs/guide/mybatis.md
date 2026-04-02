@@ -3610,7 +3610,7 @@ SqlSession session = sqlSessionFactory.openSession();
 
 StudentMapper mapper = session.getMapper( StudentMapper .class);
 
-List <Student> list = mapper.selectStudents();
+List `<`Student`>` list = mapper.selectStudents();
 
 for(Student s : list) {
 System. out .println("------------------");
