@@ -1323,7 +1323,7 @@ key。
 配置redis最大内存
 
 
-在配置文件redis.conf 中，可以通过参数 maxmemory <bytes> 来设定最大内存：
+在配置文件redis.conf 中，可以通过参数 maxmemory `<`bytes`>` 来设定最大内存：
 
 
 当数据内存达到 maxmemory 时，便会触发redis的内存淘汰策略。该参数通常设定为

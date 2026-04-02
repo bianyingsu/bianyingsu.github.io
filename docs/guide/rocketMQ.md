@@ -703,7 +703,7 @@ NameServer 时， namesrvIndex+1 之后，对 namesrvAddrList
 namesrvAddrChoosed 字段中：
 
 
-private final AtomicReference<String> namesrvAd
+private final AtomicReference`<`String`>` namesrvAd
 
 如果某个 NameServer 节点创建连接失败是，会自动重试其他
 

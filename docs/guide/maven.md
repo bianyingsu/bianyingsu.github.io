@@ -704,13 +704,13 @@ repositoryId: maven 本地 settings.xml 中，与上述 URL 对应的节点中�
 ### **Maven的pom.xml文件结构之环境配置** **distributionManagement**
 
 
-Maven项目的POM中，环境配置<distributionManagement>负责管理构件的发布。
+Maven项目的POM中，环境配置`<`distributionManagement`>`负责管理构件的发布。
 
 
 当然，完整的配置，还需要在settings.xml中配置构件库所在的服务器server相关的参数。
 
 
-1.<distributionManagement>的基本配置
+1.`<`distributionManagement`>`的基本配置
 
 ```
  <distributionManagement>
@@ -731,7 +731,7 @@ Maven项目的POM中，环境配置<distributionManagement>负责管理构件的
 downloadUrl，一个URL，其他Maven项目可以通过该URL下载并引用当前Maven项目的构件。
 
 
-注意区别本文下面的<repository>中的URL，<repository>中的URL给出了当前Maven项目的构件的发布UR
+注意区别本文下面的`<`repository`>`中的URL，`<`repository`>`中的URL给出了当前Maven项目的构件的发布UR
 
 
 status，当前Maven项目的状态，可用的状态如下所示。注意，该值是由Maven自动设置，永远不要人工设
@@ -752,7 +752,7 @@ deployed，该Maven项目的构件是通过Maven 2或Maven 3发布的，最常�
 verified，该Maven项目的构件已经被验证过
 
 
-2.<distributionManagement>的<repository>配置
+2.`<`distributionManagement`>`的`<`repository`>`配置
 
 
 给出Maven部署当前项目的构件到远程库时，关于远程库的配置。示例如下：
@@ -797,7 +797,7 @@ verified，该Maven项目的构件已经被验证过
 具体配置参数，参考前文。
 
 
-3. <distributionManagement>的<site>配置
+3. `<`distributionManagement`>`的`<`site`>`配置
 
 
 除了部署当前Maven项目的构件，还可以部署当前Maven项目的网站和文档。示例如下：
@@ -824,16 +824,17 @@ verified，该Maven项目的构件已经被验证过
 
 ```
 
-这里的配置参数与<repository>中的对应配置参数一致。
+这里的配置参数与`<`repository`>`中的对应配置参数一致。
 
 
-4. <distributionManagement>的<relocation>配置
+4. `<`distributionManagement`>`的`<`relocation`>`配置
 
 
 随着一个Maven项目的发展壮大，该Maven项目的构件可能需要重新发布到新的库。
 
 
-<relocation>可以将当前Maven项目以新的构件的形式发布到另一个库。示例如下：
+`<`relocation`>`可以将当前Maven项目以新的构件的形式发布到另一个库。示例如下：
+
 
 ```
  <distributionManagement>
@@ -1032,7 +1033,7 @@ MyProject项目的pom.xml **就是我们的所说的父类型，它的打包类�
 <img src="/img/maven.pdf-29-1.png">29-1
 <img src="/img/maven.pdf-30-0.png">30-0
 
-在ＭyProject下的pom.xml通过<modules>标签指定了子项目的相对路径。
+在ＭyProject下的pom.xml通过`<`modules`>`标签指定了子项目的相对路径。
 
 
 这就可以 **直接在MyProject项目里执行mvn命令，一次构建全部模块。**
@@ -1041,7 +1042,7 @@ MyProject项目的pom.xml **就是我们的所说的父类型，它的打包类�
 **当然，到每个模块的目录下执行mvn命令，逐个构建也是没问题的** 。
 
 
-在分模块（子项目）下的pom.xml通过 **<parent>标签继承ＭyProject下的pom.xml即可** ，如SubProject1子项目
+在分模块（子项目）下的pom.xml通过 **`<`parent`>`标签继承ＭyProject下的pom.xml即可** ，如SubProject1子项目
 
 
 
@@ -1531,11 +1532,11 @@ archetype文件夹下，两个pom.xml是不一样的，不要混淆了
 
 
 
-除了 **<distributionManagement>** 标签部分的是自己加的，其他的是createfrom的时候就生
+除了 **`<`distributionManagement`>`** 标签部分的是自己加的，其他的是createfrom的时候就生
 成的
 
 
-**<distributionManagement>部分，是为了将这个脚手架发布到远程的私服仓库(我这里是自**
+**`<`distributionManagement`>`部分，是为了将这个脚手架发布到远程的私服仓库(我这里是自**
 
 <img src="/img/maven.pdf-49-0.png">49-0
 **己搭建的nexus)，对应的maven settings.xml文件也要设置好**
@@ -2034,7 +2035,7 @@ prefer-ip-address: true
 **依赖配置**
 
 
-这个大家应该都很熟悉了，通过<dependency>标签引入Maven依赖
+这个大家应该都很熟悉了，通过`<`dependency`>`标签引入Maven依赖
 
 
 引入依赖之后，刷新一下Maven依赖就可以引入相关的Jar包了。
@@ -2054,7 +2055,7 @@ prefer-ip-address: true
 而言之就是套娃就完事了。
 
 
-我们将这三个依赖称为间接引入的依赖，而我们在<dependency>标签中引入的依赖称为直接
+我们将这三个依赖称为间接引入的依赖，而我们在`<`dependency`>`标签中引入的依赖称为直接
 依赖，那么如果这两个重复了并且版本不一样的话会怎么办呢，最后引入的到底是哪个版本呢，
 还是说都会引入呢？
 
@@ -2479,9 +2480,9 @@ pom文件配置
 Maven多环境对应Idea中Maven工具的Profiles
 
 
-配置文件：通过<profiles>配置文件配置，一个profile代表一个可选项
+配置文件：通过`<`profiles`>`配置文件配置，一个profile代表一个可选项
 
-
+```
 <profiles>
 <profile>
 <id>local</id>
@@ -2490,12 +2491,14 @@ Maven多环境对应Idea中Maven工具的Profiles
 <profiles.active>local</profiles.active>
 <logging.level>debug</logging.level>
 </properties>
+```
 
 
+<img src="/img/maven.pdf-69-1.png">
 
-<img src="/img/maven.pdf-69-1.png">69-1
+<img src="/img/maven.pdf-69-2.png">
 
-<img src="/img/maven.pdf-69-2.png">69-2
+```
 </profile>
 <profile>
 <id>dev</id>
@@ -2522,7 +2525,8 @@ Maven多环境对应Idea中Maven工具的Profiles
 <profiles.active>prod</profiles.active>
 <logging.level>warn</logging.level>
 </properties>
-</profile></profiles>复制代码
+</profile></profiles>
+```
 
 
 然后我们在application.yml配置文件中设置即可，之后通过设置maven的profiles，就可以动
@@ -2623,7 +2627,7 @@ Nexus是Sonatype公司的一款Maven私服产品
 
 **配置Servers**
 
-
+```
 <servers>
 
 <server>
@@ -2637,12 +2641,13 @@ Nexus是Sonatype公司的一款Maven私服产品
 <id>ticknet-snapshots</id>
 <username>admin</username>
 <password>admin</password>
-</server></servers>复制代码
-
+</server>
+</servers>
+```
 
 **配置setting.xml的Profiles**
 
-
+```
 <profiles>
 <profile>
 <id>artifactory</id>
@@ -2665,8 +2670,8 @@ Nexus是Sonatype公司的一款Maven私服产品
 </repository>
 </repositories>
 </profile>
-</profiles>复制代码
-
+</profiles>
+```
 
 此处的URL通过
 
@@ -2676,10 +2681,11 @@ Nexus是Sonatype公司的一款Maven私服产品
 
 **配置激活profiles**
 
-
+```
 <activeProfiles>
 <activeProfile>artifactory</activeProfile>
-</activeProfiles>复制代码
+</activeProfiles>
+```
 
 
 之后就可以从私服获取资源了
@@ -2690,7 +2696,7 @@ Nexus是Sonatype公司的一款Maven私服产品
 
 配置项目pom文件
 
-
+```
 <distributionManagement>
 <repository>
 <id>ticknet-release</id>
@@ -2699,7 +2705,8 @@ Nexus是Sonatype公司的一款Maven私服产品
 <snapshotRepository>
 <id>ticknet-snapshots</id>
 <url>http://localhost:8081/repository/ticknet-release/</url>
-</snapshotRepository></distributionManagement>复制代码
+</snapshotRepository></distributionManagement>
+```
 
 
 配置完执行生命周期的deploy即可。
@@ -3035,7 +3042,7 @@ Nexus是Sonatype公司的一款Maven私服产品
 
 
 项目的打包类型：pom、jar、war
-指定打包类型使用<packing>标签，它默认是jar类型。
+指定打包类型使用`<`packing`>`标签，它默认是jar类型。
 
 **pom** ：父类型都为pom类型
 
@@ -3072,12 +3079,12 @@ pom.xml中来继承它，这样模块项目就可以用到公共部分的东西�
 
 
 
-在ＭyProject下的pom.xml通过<modules>标签指定了子项目的相对路径。这就可以直接在
+在ＭyProject下的pom.xml通过`<`modules`>`标签指定了子项目的相对路径。这就可以直接在
 MyProject项目里执行mvn命令，一次构建全部模块。当然，到每个模块的目录下执行mvn命
 令，逐个构建也是没问题的。
 
 
-在分模块（子项目）下的pom.xml通过<parent>标签继承ＭyProject下的pom.xml即可，如
+在分模块（子项目）下的pom.xml通过`<`parent`>`标签继承ＭyProject下的pom.xml即可，如
 SubProject1子项目的pom.xml：
 
 
@@ -3102,7 +3109,7 @@ SubProject1子项目的pom.xml：
 其他的子项目依此类推。
 
 
-**springboot pom文件设置＜packaging＞pom＜/packaging＞ 对于application.yml无法加载读取**
+**springboot `＜`packaging`＞`pom`＜`/packaging`＞` 对于application.yml无法加载读取**
 **的问题**
 
 
@@ -3181,12 +3188,12 @@ pom.xml中来继承它，这样模块项目就可以用到公共部分的东西�
 就是我们的所说的父类型，它的打包类型要写成pom，如：
 
 
-在ＭyProject下的pom.xml通过<modules>标签指定了子项目的相对路径。这就可以直接在
+在ＭyProject下的pom.xml通过`<`modules`>`标签指定了子项目的相对路径。这就可以直接在
 MyProject项目里执行mvn命令，一次构建全部模块。当然，到每个模块的目录下执行mvn命
 令，逐个构建也是没问题的。
 
 
-在分模块（子项目）下的pom.xml通过<parent>标签继承ＭyProject下的pom.xml即可，如
+在分模块（子项目）下的pom.xml通过`<`parent`>`标签继承ＭyProject下的pom.xml即可，如
 
 <img src="/img/maven.pdf-88-1.png">88-1
 SubProject1子项目的pom.xml：
@@ -3423,7 +3430,7 @@ MAVEN_HOME这个变量里面可以只存放maven相关的路径配置，方便�
 **2、修改maven的原地址为阿里源**
 
 
-**a、同样打开conf文件夹中的setting.xml文件，找到</mirrors>，在</>上一行中加入下面**
+**a、同样打开conf文件夹中的setting.xml文件，找到`<`/mirrors`>`，在`<`/`>`上一行中加入下面**
 
 **这段代码即可**
 
@@ -3436,3 +3443,4 @@ MAVEN_HOME这个变量里面可以只存放maven相关的路径配置，方便�
 
 
 <img src="/img/maven.pdf-94-3.png">94-3
+在分模块（子项目）下的pom.xml

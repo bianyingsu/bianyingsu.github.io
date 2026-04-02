@@ -3349,7 +3349,7 @@ Dumping heap to /apps/svr/app/44051_heap.bin ...
 Heap dump file created
 
 
-**1、jmap -histo[:live] <pid>**
+**1、jmap -histo[:live] `<pid>`**
 
 
 通过histo选项，打印当前java堆中各个对象的数量、大小。如果添加了live，只会
@@ -3357,7 +3357,7 @@ Heap dump file created
 打印活跃的对象。
 
 
-**2、jmap -dump:[live,]format=b,file=<filename> <pid>**
+**2、jmap -dump:[live,]format=b,file=`<filename>` `<pid>`**
 
 
 通过-dump选项，把java堆中的对象dump到本地文件，然后使用MAT进行分
@@ -3365,19 +3365,19 @@ Heap dump file created
 析。如果添加了live，只会dump活跃的对象。
 
 
-**3、jmap -heap <pid>**
+**3、jmap -heap `<pid>`**
 
 
 通过-heap选项，打印java堆的配置情况和使用情况，还有使用的GC算法。
 
 
-**4、jmap -finalizerinfo <pid>**
+**4、jmap -finalizerinfo `<pid>`**
 
 
 通过-finalizerinfo选项，打印那些正在等待执行finalize方法的对象。
 
 
-**5、jmap -permstat <pid>**
+**5、jmap -permstat `<pid>`**
 
 
 通过-permstat选项，打印java堆永久代的信息，包括class loader相关的信息,和

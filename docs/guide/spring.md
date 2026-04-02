@@ -3385,7 +3385,7 @@ Spring为此提供了一个 `org.springframework.bean.factory.FactoryBean` 的�
 `FactoryBean` 接口对于Spring框架来说占用重要的地位，
 Spring自身就提供了70多个 `FactoryBean` 的实现。
 它们隐藏了实例化一些复杂bean的细节，给上层应用带来了便利。
-从Spring3.0开始， `FactoryBean` 开始支持泛型，即接口声明改为 `FactoryBean<T>` 的形式
+从Spring3.0开始， `FactoryBean` 开始支持泛型，即接口声明改为 `FactoryBean`<`T`>`` 的形式
 
 
 使用场景：用户可以扩展这个类，来为要实例化的bean作一个代理，
@@ -3580,7 +3580,7 @@ Spring Bean的完整生命周期从创建Spring容器开始，直到最终Spring
 Bean的完整生命周期经历了各种方法调用，这些方法可以划分为以下几类：
 
 
-1、Bean自身的方法 ： 这个包括了Bean本身调用的方法和通过配置文件中<bean>的init-method和des
+1、Bean自身的方法 ： 这个包括了Bean本身调用的方法和通过配置文件中`<`bean`>`的init-method和des
 
 
 2、Bean级生命周期接口方法 ： 这个包括了BeanNameAware、BeanFactoryAware、 [InitializingBean](https://so.csdn.net/so/search?q=InitializingBean&spm=1001.2101.3001.7020)
@@ -3602,7 +3602,7 @@ Bean的完整生命周期经历了各种方法调用，这些方法可以划分�
 
 1、首先是一个简单的Spring Bean，调用Bean自身的方法和Bean级生命周期接口方法，为了方便演示，它实现
 
-和DiposableBean这4个接口，同时有2个方法，对应配置文件中<bean>的init-method和destroy-method。如下
+和DiposableBean这4个接口，同时有2个方法，对应配置文件中`<`bean`>`的init-method和destroy-method。如下
 
 
 
@@ -3709,21 +3709,21 @@ Bean的完整生命周期经历了各种方法调用，这些方法可以划分�
 
 87
 
-88   // 通过<bean>的init-method属性指定的初始化方法
+88   // 通过`<`bean`>`的init-method属性指定的初始化方法
 
 89 public void myInit () {
 
-90     System.out.println("【init-method】调用<bean>的init-method属性指定的初始化方法");
+90     System.out.println("【init-method】调用`<`bean`>`的init-method属性指定的初始化方法");
 
 91   }
 
 92
 
-93   // 通过<bean>的destroy-method属性指定的初始化方法
+93   // 通过`<`bean`>`的destroy-method属性指定的初始化方法
 
 94 public void myDestory () {
 
-95     System.out.println("【destroy-method】调用<bean>的destroy-method属性指定的初始化方法
+95     System.out.println("【destroy-method】调用`<`bean`>`的destroy-method属性指定的初始化方法
 
 96   }
 
@@ -3851,14 +3851,14 @@ InstantiationAwareBeanPostProcessorAdapter来使用它，如下：
  【 BeanFactoryAware 接口】调用 BeanFactoryAware.setBeanFactory()
  BeanPostProcessor 接口方法 postProcessBeforeInitialization 对属性进行更改！
  【 InitializingBean 接口】调用 InitializingBean.afterPropertiesSet()
- 【 init-method 】调用 <bean> 的 init-method 属性指定的初始化方法
+ 【 init-method 】调用 `<`bean`>` 的 init-method 属性指定的初始化方法
  BeanPostProcessor 接口方法 postProcessAfterInitialization 对属性进行更改！
  InstantiationAwareBeanPostProcessor 调用 postProcessAfterInitialization 方法
  容器初始化成功
  Person [address= 广州, name= 张三, phone=110]
  现在开始关闭容器！
  【 DiposibleBean 接口】调用 DiposibleBean.destory()
- 【 destroy-method 】调用 <bean> 的 destroy-method 属性指定的初始化方法
+ 【 destroy-method 】调用 `<`bean`>` 的 destroy-method 属性指定的初始化方法
 
 ```
 
@@ -5403,7 +5403,7 @@ Future 中的结果执行完成时，传入的 Runnable 会在传入的 Executor
 ### **添加回调函数**
 
 
-使用者偏向于使用 **Futures.addCallback(ListenableFuture<V>, FutureCallback<V>,**
+使用者偏向于使用 **Futures.addCallback(ListenableFuture`<`V`>`, FutureCallback`<`V`>`,**
 **Executor)**,
 
 
@@ -5411,7 +5411,7 @@ Future 中的结果执行完成时，传入的 Runnable 会在传入的 Executor
 本。
 
 
-FutureCallback<V> 实现了两个方法:
+FutureCallback`<`V`>` 实现了两个方法:
 
 
 onSuccess(V) ：当 future 执行成功时候的反应。
@@ -5429,12 +5429,12 @@ ListeningExecutorService，可以使用
 ```
 ListeningExecutorService service =
 MoreExecutors.listeningDecorator(Executors.newFixedThreadPool(10));
-ListenableFuture<Explosion> explosion = service.submit(new Callable<Explosion>() {
+ListenableFuture`<`Explosion`>` explosion = service.submit(new Callable`<`Explosion`>`() {
 public Explosion call() {
 return pushBigRedButton();
 }
 });
-Futures.addCallback(explosion, new FutureCallback<Explosion>() {
+Futures.addCallback(explosion, new FutureCallback`<`Explosion`>`() {
 // we want this handler to run immediately after we push the big red button!
 
 ```
@@ -5451,12 +5451,12 @@ battleArchNemesis(); // escaped the explosion!
 ```
 
 如果你想从一个基于 **FutureTask** 的 API 转换过来，Guava 提供了
-**ListenableFutureTask.create(Callable<V>)** 和 **ListenableFutureTask.create(Runnable,**
+**ListenableFutureTask.create(Callable`<`V`>`)** 和 **ListenableFutureTask.create(Runnable,**
 **V)** 。和 JDK 不一样，ListenableFutureTask 并不意味着可以直接扩展。
 
 
 如果你更喜欢可以设置 future 值的抽象，而不是实现一个方法来计算结果，那么可以考虑直接
-扩展 **AbstractFuture<V>** 或者 **SettableFuture** 。
+扩展 **AbstractFuture`<`V`>`** 或者 **SettableFuture** 。
 
 
 如果你一定要将一个基于 Future 的 API 转换为基于 ListenableFuture 的话，你不得不采用硬
@@ -5470,13 +5470,13 @@ ListenableFuture 的转换。所以，尽可能地使用 ListenableFuture。
 示：
 
 ```
-ListenableFuture<RowKey> rowKeyFuture = indexService.lookUp(query);
-AsyncFunction<RowKey, QueryResult> queryFunction = new AsyncFunction<RowKey, QueryResult>() {
-public ListenableFuture<QueryResult> apply(RowKey rowKey) {
+ListenableFuture`<`RowKey`>` rowKeyFuture = indexService.lookUp(query);
+AsyncFunction`<`RowKey, QueryResult`>` queryFunction = new AsyncFunction`<`RowKey, QueryResult`>`() {
+public ListenableFuture`<`QueryResult`>` apply(RowKey rowKey) {
 return dataService.read(rowKey);
 }
 };
-ListenableFuture<QueryResult> queryFuture = Futures.transformAsync(rowKeyFuture, queryFunction,
+ListenableFuture`<`QueryResult`>` queryFuture = Futures.transformAsync(rowKeyFuture, queryFunction,
 queryExecutor);
 
 ```
@@ -5499,22 +5499,22 @@ future 同时完成时，称作“扇入”。可以参考 **Futures.allAsList**
 
 |方法|描述|参考|
 |---|---|---|
-|transformAsync(ListenableFuture<A>,<br>AsyncFunction<A, B>, Executor)|返回新的<br>ListenableFuture，<br>它是给定<br>AsyncFunction 结<br>合的结果|transformAsync(ListenableF<br>AsyncFunction<A, B>)|
-|transform(ListenableFuture<A>, Function<A, B>,<br>Executor)|返回新的<br>ListenableFuture,<br>它是给定 Function<br>结合的结果|transform(ListenableFuture<br>Function<A, B>)|
-|allAsList(Iterable<ListenableFuture<V>>)|返回一个<br>ListenableFuture,<br>它的值是一个输入<br>futures 的值的按序<br>列表，任何一个<br>future 的失败都会<br>导致最后结果的失<br>败|allAsList(ListenableFuture<V|
-|successfulAsList(Iterable<ListenableFuture<V>>)|返回一个<br>ListenableFuture,<br>它的值是一个输入<br>futures 的成功执行<br>值的按序列表，对|successfulAsList(ListenableF|
+|transformAsync(ListenableFuture`<`A`>`,<br>AsyncFunction`<`A, B`>`, Executor)|返回新的<br>ListenableFuture，<br>它是给定<br>AsyncFunction 结<br>合的结果|transformAsync(ListenableF<br>AsyncFunction`<`A, B`>`)|
+|transform(ListenableFuture`<`A`>`, Function`<`A, B`>`,<br>Executor)|返回新的<br>ListenableFuture,<br>它是给定 Function<br>结合的结果|transform(ListenableFuture<br>Function`<`A, B`>`)|
+|allAsList(Iterable`<`ListenableFuture`<`V`>` `>`)|返回一个<br>ListenableFuture,<br>它的值是一个输入<br>futures 的值的按序<br>列表，任何一个<br>future 的失败都会<br>导致最后结果的失<br>败|allAsList(ListenableFuture`<`V|
+|successfulAsList(Iterable<ListenableFuture`<`V`>` `>`)|返回一个<br>ListenableFuture,<br>它的值是一个输入<br>futures 的成功执行<br>值的按序列表，对|successfulAsList(ListenableF|
 
 
 <img src="/img/spring.pdf-102-0.png">102-0
 
-AsyncFunction<A, B> 提供了一个方法：ListenableFuture<B> apply(A input)。可以被用来
+AsyncFunction`<`A, B`>` 提供了一个方法：ListenableFuture`<`B`>` apply(A input)。可以被用来
 异步转换一个值。
 
 ```
-List<ListenableFuture<QueryResult>> queries;// The queries go to all different data centers, but
+List`<`ListenableFuture`<`QueryResult`>` `>` queries;// The queries go to all different data centers, but
 we want to wait until they're all done or failed.
 
-ListenableFuture<List<QueryResult>> successfulQueries = Futures.successfulAsList(queries);
+ListenableFuture`<`List`<`QueryResult`>` `>` successfulQueries = Futures.successfulAsList(queries);
 
 Futures.addCallback(successfulQueries, callbackOnSuccessfulQueries);
 
@@ -5525,16 +5525,16 @@ Futures.addCallback(successfulQueries, callbackOnSuccessfulQueries);
 在使用通用接口返回 Future 的代码中，很有可能会嵌套 Future。例如：
 
 ```
-executorService.submit(new Callable<ListenableFuture<Foo>() {
+executorService.submit(new Callable`<`ListenableFuture`<`Foo`>`() {
 @Override
-public ListenableFuture<Foo> call() {
+public ListenableFuture`<`Foo`>` call() {
 return otherExecutorService.submit(otherCallable);
 }
 });
 
 ```
 
-上述代码将会返回：ListenableFuture<ListenableFuture<Foo>>。这样的代码是不正确的，
+上述代码将会返回：ListenableFuture`<`ListenableFuture`<`Foo`>` `>`。这样的代码是不正确的，
 因为外层 future 的取消操作不能传递到内层的 future。此外，一个常犯的错误是：使用 get()
 或者 listener 来检测其它 future 的失败。为了避免这样的情况，Guava 所有处理 future 的方
 法（以及一些来自 JDK 的代码）具有安全解决嵌套的版本。
@@ -5542,12 +5542,12 @@ return otherExecutorService.submit(otherCallable);
 ### **CheckedFuture**
 
 
-Guava 也提供 **CheckedFuture<V, X extends Exception>** 接口。
+Guava 也提供 **CheckedFuture`<`V, X extends Exception`>`** 接口。
 
 
 CheckedFuture 是这样的一个 ListenableFuture：具有多个可以抛出受保护异常的 get 方法。
 这使得创建一个执行逻辑可能抛出异常的 future 变得容易。使用
-**Futures.makeChecked(ListenableFuture<V>, Function<Exception, X>)** 可以将
+**Futures.makeChecked(ListenableFuture`<`V`>`, Function`<`Exception, X`>`)** 可以将
 ListenableFuture 转换为 CheckedFuture。
 
 
@@ -6847,7 +6847,7 @@ json 工具类：
 ```
  *
 
- * @param <T>
+ * @param `<`T`>`
 
  * @param object
 
@@ -6860,7 +6860,7 @@ json 工具类：
 
  */
 
- public static <T> T toBean(Object object, Class<T> beanClass) {
+ public static `<`T`>` T toBean(Object object, Class`<`T`>` beanClass) {
 
  JSONObject jsonObject = JSONObject.fromObject(object);
 
@@ -6877,7 +6877,7 @@ json 工具类：
 ```
  *
 
- * @param <T>
+ * @param `<`T`>`
 
  * @param jsonArray
 
@@ -6887,7 +6887,7 @@ json 工具类：
 
  */
 
- public static <T> List<T> toList(Object object, Class<T> objectClass) {
+ public static `<`T`>` List`<`T`>` toList(Object object, Class`<`T`>` objectClass) {
 
  JSONArray jsonArray = JSONArray.fromObject(object);
 
@@ -8145,14 +8145,14 @@ String os = System.getProperty("os.name");
 
 
 **2、FactoryBean**
-**一般情况下，Spring通过反射机制利用<bean>的class属性指定实现类实例化Bean，在某些**
-**情况下，实例化Bean过程比较复杂，如果按照传统的方式，则需要在<bean>中提供大量的配**
+**一般情况下，Spring通过反射机制利用`<`bean`>`的class属性指定实现类实例化Bean，在某些**
+**情况下，实例化Bean过程比较复杂，如果按照传统的方式，则需要在`<`bean`>`中提供大量的配**
 **置信息。配置方式的灵活性是受限的，这时采用编码的方式可能会得到一个简单的方案。**
 **Spring为此提供了一个org.springframework.bean.factory.FactoryBean的工厂类接口，**
 **用户可以通过实现该接口定制实例化Bean的逻辑。**
 **FactoryBean接口对于Spring框架来说占用重要的地位，Spring自身就提供了70多个**
 **FactoryBean的实现。它们隐藏了实例化一些复杂Bean的细节，给上层应用带来了便利。从**
-**Spring3.0开始，FactoryBean开始支持泛型，即接口声明改为FactoryBean<T>的形式**
+**Spring3.0开始，FactoryBean开始支持泛型，即接口声明改为FactoryBean`<`T`>`的形式**
 
 
 **Java代码**
@@ -8170,11 +8170,11 @@ String os = System.getProperty("os.name");
 
 **boolean isSingleton()：返回由FactoryBean创建的Bean实例的作用域是singleton还是**
 **prototype；**
-**Class<T> getObjectType()：返回FactoryBean创建的Bean类型。**
-**当配置文件中<bean>的class属性配置的实现类是FactoryBean时，通过getBean()方法返回**
+**Class`<`T`>` getObjectType()：返回FactoryBean创建的Bean类型。**
+**当配置文件中`<`bean`>`的class属性配置的实现类是FactoryBean时，通过getBean()方法返回**
 **的不是FactoryBean本身，而是FactoryBean#getObject()方法所返回的对象，相当于**
 **FactoryBean#getObject()代理了getBean()方法。**
-**例：如果使用传统方式配置下面Car的<bean>时，Car的每个属性分别对应一个<property>**
+**例：如果使用传统方式配置下面Car的`<`bean`>`时，Car的每个属性分别对应一个<property>**
 **元素标签。**
 
 

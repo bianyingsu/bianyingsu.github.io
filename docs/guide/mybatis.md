@@ -102,10 +102,10 @@ MapperProxyFactory对象里保存了mapper接口的class对象，就是一个普
 继续看MapperProxyFactory中的newInstance方法。
 
 ```
- public class MapperProxyFactory<T> {
- private final Class<T> mapperInterface;
- private final Map<Method, MapperMethod> methodCache = new ConcurrentHashMap<>();
- public MapperProxyFactory(Class<T> mapperInterface) {
+ public class MapperProxyFactory`<`T`>` {
+ private final Class`<`T`>` mapperInterface;
+ private final Map`<`Method, MapperMethod`>` methodCache = new ConcurrentHashMap`<` `>`();
+ public MapperProxyFactory(Class`<`T`>` mapperInterface) {
 
 ```
 
@@ -114,11 +114,11 @@ MapperProxyFactory对象里保存了mapper接口的class对象，就是一个普
  }
  public T newInstance(SqlSession sqlSession) {
  // 创建 MapperProxy 对象
- final MapperProxy<T> mapperProxy = new MapperProxy<>(sqlSession, mapperInter
+ final MapperProxy`<`T`>` mapperProxy = new MapperProxy`<` `>`(sqlSession, mapperInter
  return newInstance(mapperProxy);
  }
  // 最终以 JDK 动态代理创建对象并返回
- protected T newInstance(MapperProxy<T> mapperProxy) {
+ protected T newInstance(MapperProxy`<`T`>` mapperProxy) {
  return (T) Proxy.newProxyInstance(mapperInterface.getClassLoader(), new Clas
  }
  }
@@ -133,7 +133,7 @@ MapperProxy 对象。
  // 接口是 UserMapper
  //h 是 mapperProxy 对象
  public static Object newProxyInstance(ClassLoader loader,
- Class<?>[] interfaces,
+ Class`<`  `?` `>`[] interfaces,
  InvocationHandler h){
  }
 
@@ -403,7 +403,7 @@ Proxy+数字）,这个代理类会继承MapperProxy类，实现被代理的接�
 
 
 自定义代理类
-public class MyMapperProxy<T> implements InvocationHandler, Serializable {
+public class MyMapperProxy`<`T`>` implements InvocationHandler, Serializable {
 
 
 private static final long serialVersionUID = -5892500526905816916L;
@@ -413,12 +413,12 @@ MethodHandles.Lookup.PROTECTED
 private static final Constructor<MethodHandles.Lookup> lookupConstructor;
 private static final Method privateLookupInMethod;
 private SqlSession sqlSession;
-private final Class<T> mapperInterface;
+private final Class`<`T`>` mapperInterface;
 private final Map<Method, MyMapperMethod> methodCache;
 
 
-public MyMapperProxy(SqlSession sqlSession, Class<T> mapperInterface, Map<Method,
-MyMapperMethod> methodCache) {
+public MyMapperProxy(SqlSession sqlSession, Class`<`T`>` mapperInterface, Map`<`Method,
+MyMapperMethod`>` methodCache) {
 this.sqlSession = sqlSession;
 this.mapperInterface = mapperInterface;
 this.methodCache = methodCache;
@@ -436,7 +436,7 @@ privateLookupIn = null;
 privateLookupInMethod = privateLookupIn;
 
 
-Constructor<MethodHandles.Lookup> lookup = null;
+Constructor`<`MethodHandles.Lookup`>` lookup = null;
 if (privateLookupInMethod == null) {
 // JDK 1.8
 try {
@@ -481,13 +481,13 @@ return mapperMethod.execute(sqlSession, args);
 
 private MyMapperMethod cachedMapperMethod(Method method) {
 return methodCache.computeIfAbsent(method,
-k -> new MyMapperMethod(mapperInterface, method, sqlSession.getConfiguration()));
+k -`>` new MyMapperMethod(mapperInterface, method, sqlSession.getConfiguration()));
 }
 
 
 private Object invokeDefaultMethodJava9(Object proxy, Method method, Object[] args)
 throws Throwable {
-final Class<?> declaringClass = method.getDeclaringClass();
+final Class`<`  `?` `>` declaringClass = method.getDeclaringClass();
 return ((MethodHandles.Lookup) privateLookupInMethod.invoke(null, declaringClass,
 MethodHandles.lookup()))
 .findSpecial(declaringClass, method.getName(),
@@ -499,7 +499,7 @@ declaringClass)
 
 private Object invokeDefaultMethodJava8(Object proxy, Method method, Object[] args)
 throws Throwable {
-final Class<?> declaringClass = method.getDeclaringClass();
+final Class`<`  `?` `>` declaringClass = method.getDeclaringClass();
 return lookupConstructor.newInstance(declaringClass,
 ALLOWED_MODES).unreflectSpecial(method, declaringClass)
 .bindTo(proxy).invokeWithArguments(args);
@@ -508,7 +508,7 @@ ALLOWED_MODES).unreflectSpecial(method, declaringClass)
 
 
 自定义代理工厂类
-public class MyMapperProxyFactory<T> {
+public class MyMapperProxyFactory`<`T`>` {
 
 
 /**
@@ -517,22 +517,22 @@ public class MyMapperProxyFactory<T> {
 
 @Getter
 
-private final Class<T> mapperInterface;
-private final Map<Method, MyMapperMethod> methodCache = new ConcurrentHashMap<>();
+private final Class`<`T`>` mapperInterface;
+private final Map`<`Method, MyMapperMethod`>` methodCache = new ConcurrentHashMap`<` `>`();
 
 
-public MyMapperProxyFactory(Class<T> mapperInterface) {
+public MyMapperProxyFactory(Class`<`T`>` mapperInterface) {
 this.mapperInterface = mapperInterface;
 }
 
 
-public Map<Method, MyMapperMethod> getMethodCache() {
+public Map`<`Method, MyMapperMethod`>` getMethodCache() {
 return methodCache;
 }
 
 
 @SuppressWarnings("unchecked")
-protected T newInstance(MyMapperProxy<T> mapperProxy) {
+protected T newInstance(MyMapperProxy`<`T`>` mapperProxy) {
 return (T) Proxy.newProxyInstance(mapperInterface.getClassLoader(), new Class[]
 {mapperInterface}, mapperProxy);
 }
@@ -547,7 +547,7 @@ return (T) Proxy.newProxyInstance(mapperInterface.getClassLoader(), new Class[]
 */
 @SuppressWarnings("unchecked")
 public T newInstance(SqlSession sqlSession) {
-final MyMapperProxy<T> mapperProxy = new MyMapperProxy<>(sqlSession, mapperInterface,
+final MyMapperProxy`<`T`>` mapperProxy = new MyMapperProxy`<` `>`(sqlSession, mapperInterface,
 methodCache);
 return (T) Proxy.newProxyInstance(mapperInterface.getClassLoader(), new Class[]
 {mapperInterface}, mapperProxy);
@@ -566,7 +566,7 @@ public class MyMapperRegistry extends MapperRegistry {
 
 
 */
-private final Map<Class<?>, MyMapperProxyFactory<?>> knownMappers = new HashMap<>();
+private final Map<Class`<`  `?` `>`, MyMapperProxyFactory`<`  `?` `>` `>` knownMappers = new HashMap`<` `>`();
 private final MyMapperConfiguration config;
 
 
@@ -581,8 +581,8 @@ this.config = config;
 */
 
 @Override
-public <T> T getMapper(Class<T> type, SqlSession sqlSession) {
-final MyMapperProxyFactory<T> mapperProxyFactory = (MyMapperProxyFactory<T>)
+public `<`T`>` T getMapper(Class`<`T`>` type, SqlSession sqlSession) {
+final MyMapperProxyFactory`<`T`>` mapperProxyFactory = (MyMapperProxyFactory`<`T`>`)
 knownMappers.get(type);
 if (mapperProxyFactory == null) {
 throw new RuntimeException("Type " + type + " is not known to the MapperRegistry.");
@@ -597,7 +597,7 @@ throw new RuntimeException("Error getting mapper instance. Cause: " + e, e);
 
 
 @Override
-public <T> void addMapper(Class<T> type) {
+public `<`T`>` void addMapper(Class`<`T`>` type) {
 /* Mapper 必须是接口才会注册 */
 if (type.isInterface()) {
 if (hasMapper(type)) {
@@ -606,7 +606,7 @@ return;
 }
 boolean loadCompleted = false;
 try {
-knownMappers.put(type, new MyMapperProxyFactory<>(type));
+knownMappers.put(type, new MyMapperProxyFactory`<` `>`(type));
 MybatisMapperAnnotationBuilder parser = new
 MybatisMapperAnnotationBuilder(config, type);
 parser.parse();
@@ -621,7 +621,7 @@ knownMappers.remove(type);
 
 
 @Override
-public <T> boolean hasMapper(Class<T> type) {
+public `<`T`>` boolean hasMapper(Class`<`T`>` type) {
 return knownMappers.containsKey(type);
 }
 
@@ -637,7 +637,7 @@ addMappers(packageName, Object.class);
 */
 
 @Override
-public Collection<Class<?>> getMappers() {
+public Collection`<`Class`<`  `?` `>` `>` getMappers() {
 return Collections.unmodifiableCollection(knownMappers.keySet());
 }
 
@@ -1200,7 +1200,7 @@ List<Student> list = session.selectList("com.maven.dao.StudentDao.getall",null,n
 Java接口定义为：
 
 
-List<Map> selectListBySelective(Map<String, Object> map);
+List`<`Map`>` selectListBySelective(Map`<`String, Object`>` map);
 
 
 mybatis mapper文件定义：
@@ -2623,7 +2623,7 @@ SqlProvider.java ：
 的注解
 
 ```
- public MapperAnnotationBuilder(Configuration configuration, Class<?> type) {
+ public MapperAnnotationBuilder(Configuration configuration, Class`<`  `?`> type) {
 
  ...
 
@@ -2723,8 +2723,8 @@ SQL 类是 mybatis 提供开发者在代码中灵活编写 sql 语句的工具�
 在 mybatis 初始化定义 `MappedStatement` 时, 使用了两种不同的逻辑进行组装 `SqlSource`
 
 ```
- Class<? extends Annotation> sqlAnnotationType = getSqlAnnotationType(method);
- Class<? extends Annotation> sqlProviderAnnotationType = getSqlProviderAnnotationType(metho
+ Class`<`  `?` extends Annotation> sqlAnnotationType = getSqlAnnotationType(method);
+ Class`<`  `?` extends Annotation> sqlProviderAnnotationType = getSqlProviderAnnotationType(metho
 
  d);
  if (sqlAnnotationType != null) {
@@ -3024,12 +3024,12 @@ Object[] args)方法
 ```
  private final SqlSession sqlSession;
 
- private final Class<T> mapperInterface;
+ private final Class`<`T`>` mapperInterface;
 
  private final Map<Method, MapperMethod> methodCache;
 
- public MapperProxy(SqlSession sqlSession, Class<T> mapperInterface,
- Map<Method, MapperMethod> methodCache){this.sqlSession = sqlSession;
+ public MapperProxy(SqlSession sqlSession, Class`<`T`>` mapperInterface,
+ Map`<`Method, MapperMethod`>` methodCache){this.sqlSession = sqlSession;
 
  this.mapperInterface = mapperInterface;
 
@@ -3119,7 +3119,7 @@ private final SqlCommand command;
 
 private final MethodSignature method;
 
-public MapperMethod(Class<?> mapperInterface, Method method, Configuration
+public MapperMethod(Class`<`  `?`> mapperInterface, Method method, Configuration
 ```
 
 `config){` _`//SqlCommand`_ 封装该接口方法需要执行 _`sql`_ 的相关属性，如： _`id(name),`_ 类型
@@ -3406,7 +3406,7 @@ private List <Teacher> teachers;
 **二、在映射文件中开启二级缓存**
 
 ```
-<?xml version="1.0" encoding="UTF-8" ?>
+`<`  `?`xml version="1.0" encoding="UTF-8" ?>
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
@@ -3438,8 +3438,9 @@ _**`readOnly:`**_ **只读，意味着缓存数据只能读取而不能修改，
 **办法修改缓存，他的默认值是** _**`false`**_ **，不允许我们修改**
 
 ```
--->
+--`>`
 
+```
 <cache eviction="LRU" flushInterval="100000" readOnly="true" size="1024"/>
 
 <resultMap id="studentMap" type="Student">
@@ -3512,7 +3513,7 @@ SELECT id, name, age FROM student
 **三、在 mybatis-config.xml中开启二级缓存**
 
 ```
-<?xml version="1.0" encoding="UTF-8" ?>
+`<`  `?`xml version="1.0" encoding="UTF-8" `?` `>`
 
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-config.dtd">

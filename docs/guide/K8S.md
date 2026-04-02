@@ -426,10 +426,10 @@ myniginx为前缀，叫mynginx-5b686ccd46-wshz6的Pod。
 **访问nginx**
 
 
-浏览器输入<任意一个节点IP>:<port>，都可以访问nginx首页表示测试成功。
+浏览器输入`<任意一个节点IP>`:`<port>`，都可以访问nginx首页表示测试成功。
 
 
-<img src="/img/K8S.pdf-7-0.png">7-0
+<img src="/img/K8S.pdf-7-0.png">
 
 **六、安装Dashboard**
 
@@ -2072,7 +2072,7 @@ Service的LoadBalancer示意图
 但是，并不是所有的k8s集群都能够支持LoadBalancer，笔者目前使用的k8s集群就不支持，
 
 
-在'EXTERNAL-IP'这一列一直处于<pending>状态：
+在'EXTERNAL-IP'这一列一直处于`<pending>`状态：
 
 
 Service的LoadBalancer
@@ -2097,7 +2097,7 @@ Service的LoadBalancer
 
 
 
-<img src="/img/K8S.pdf-33-0.png">33-0
+<img src="/img/K8S.pdf-33-0.png">
 首先需要了解k8s另一个API对象 `Endpoint` ，端点切片。 **`Endpoint`** **是随着** **`Service`** **的生成而被动生成**
 
 
@@ -2113,7 +2113,7 @@ Service的LoadBalancer
 会看到 `Endpoint` 其实是一个如倒排表的结构，存储了 `Service` 名称和其绑定的一系列 `Pod` IP+Port。
 
 
-但是，如果仅仅创建了一个 `Service` 而没有 `Pod` 的话，再查看 `Endpoint` 会发现其内容为<none>：
+但是，如果仅仅创建了一个 `Service` 而没有 `Pod` 的话，再查看 `Endpoint` 会发现其内容为`<none>`：
 
 
 再比如， `Service` 和 `Pod` 都被创建了，但是 `Pod` 由于种种原因没有正常服务，这个时候 `EndPoint` 内容是

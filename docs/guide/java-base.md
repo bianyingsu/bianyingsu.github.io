@@ -305,10 +305,10 @@ myObjct对象创建时默认被强引用指向，GC后不会被回收；后将�
 
 应图片对象关联的软引用之间的映射关系，在内存不足时，JVM会自动回收这些缓存图片对象所
 
-占用的空间，从而有效地避免了 **OOM** 的问题。 Map<String, SoftReference<Bitmap>>
+占用的空间，从而有效地避免了 **OOM** 的问题。 Map`<`String, SoftReference`<`Bitmap`>` `>`
 
 
-imageCache = new HashMap<String, SoftReference<Bitmap>>()
+imageCache = new HashMap`<`String, SoftReference`<`Bitmap`>` `>`()
 
 
 **代码示例**
@@ -1189,7 +1189,7 @@ JAVA8提供了Optional类来优化这种写法，接下来的正文部分进行�
 博主也仅在写junit测试用例中用到过此函数。
 
 
-2、orElse(T other)，orElseGet(Supplier<? extends T> other)和orElseThrow(Supplier<? extends X> exceptio
+2、orElse(T other)，orElseGet(Supplier`<? extends T>` other)和orElseThrow(Supplier`<?` extends X> exceptio
 
 
 这三个函数放一组进行记忆，都是在构造函数传入的value值为null时，进行调用的。
@@ -1215,7 +1215,7 @@ JAVA8提供了Optional类来优化这种写法，接下来的正文部分进行�
 
 
 
-3、map(Function<? super T, ? extends U> mapper)和flatMap(Function<? super T, Optional<U>> mapper)
+3、map(Function`<?` super T, `?` extends U`>` mapper)和flatMap(Function`<?` super T, Optional`<U>``>` mapper)
 
 
 这两个函数放在一组记忆，这两个函数做的是转换值的操作。
@@ -1238,10 +1238,10 @@ JAVA8提供了Optional类来优化这种写法，接下来的正文部分进行�
 这两个函数，在函数体上没什么区别。唯一区别的就是入参，
 
 
-map函数所接受的入参类型为 `Function<? super T, ? extends U>` ，
+map函数所接受的入参类型为 `Function` `<?` super T, `?` extends U`>` ，
 
 
-而flapMap的入参类型为 `Function<? super T, Optional<U>>` 。
+而flapMap的入参类型为 `Function` `<?` super T, Optional`<U>` `>` 。
 
 
 在具体用法上，对于map而言：
@@ -1282,7 +1282,7 @@ map函数所接受的入参类型为 `Function<? super T, ? extends U>` ，
 
 ```
 
-4、isPresent()和ifPresent(Consumer<? super T> consumer)
+4、isPresent()和ifPresent(Consumer`<?` super T`>` consumer)
 
 
 这两个函数放在一起记忆， `isPresent` 即判断value值是否为空，
@@ -1318,7 +1318,7 @@ map函数所接受的入参类型为 `Function<? super T, ? extends U>` ，
 因为这样写，代码结构依然丑陋。博主会在后面给出正确写法
 
 
-至于 `ifPresent(Consumer<? super T> consumer)` ，用法也很简单，如下所示
+至于 `ifPresent(Consumer`<?` super T`>` consumer)` ，用法也很简单，如下所示
 
 
 
@@ -1328,7 +1328,7 @@ map函数所接受的入参类型为 `Function<? super T, ? extends U>` ，
 
 
 
-5、filter(Predicate<? super T> predicate)
+5、filter(Predicate`<?` super T`>` predicate)
 
 
 不多说，直接上源码
@@ -1639,7 +1639,7 @@ SPI （Service Provider Interface）是调用方来制定接口规范，提供�
 的源码，如下：
 
 ```
-public final class ServiceLoader<S> implements Iterable<S> {
+public final class ServiceLoader`<`S`>` implements Iterable`<`S`>` {
 
 ```
 
@@ -1656,14 +1656,14 @@ private final Class<S> service;
 
 ```
 
-`//` 用于定位、加载和实例化实现方实现的类的类加载器
+//用于定位、加载和实例化实现方实现的类的类加载器
 
 ```
 private final ClassLoader loader;
 
 ```
 
-`//` 上下文对象
+//上下文对象
 
 ```
 private final AccessControlContext acc;
@@ -1685,11 +1685,11 @@ private java.util.ServiceLoader.LazyIterator lookupIterator;
 
 `//` 私有内部类，提供对所有的 `service` 的类的加载与实例化
 ```
-private class LazyIterator implements Iterator<S> {
-Class<S> service;
+private class LazyIterator implements Iterator`<`S`>` {
+Class`<`S`>` service;
 ClassLoader loader;
 
-Enumeration<URL> configs = null;
+Enumeration`<`URL`>` configs = null;
 
 String nextName = null;
 
@@ -1819,15 +1819,15 @@ mysqlJDBC，会触发如下代码：
 **computeIfAbsent函数**
 
 
-比如，很多时候我们需要对数据进行分组，变成Map<Integer, List<?>>的形式，在java8之
+比如，很多时候我们需要对数据进行分组，变成Map<Integer, List`<?` `>` `>`的形式，在java8之
 前，一般如下实现：
 
 ```
-List<Payment> payments = getPayments();
-Map<Integer, List<Payment>> paymentByTypeMap = new HashMap<>();
+List`<`Payment`>` payments = getPayments();
+Map`<`Integer, List`<`Payment`>` `>` paymentByTypeMap = new HashMap`<` `>`();
 for(Payment payment : payments){
 if(!paymentByTypeMap.containsKey(payment.getPayTypeId())){
-paymentByTypeMap.put(payment.getPayTypeId(), new ArrayList<>());
+paymentByTypeMap.put(payment.getPayTypeId(), new ArrayList`<` `>`());
 }
 paymentByTypeMap.get(payment.getPayTypeId())
 .add(payment);
@@ -1860,11 +1860,11 @@ computeIfAbsent方法的逻辑是，如果map中没有(Absent)相应的key，则
 由于这种需要默认值的Map太常用了，我一般会封装一个工具类出来使用，如下：
 
 ```
-public class DefaultHashMap<K, V> extends HashMap<K, V> {
-Function<K, V> function;
+public class DefaultHashMap`<`K, V`>` extends HashMap`<`K, V`>` {
+Function`<`K, V`>` function;
 
-public DefaultHashMap(Supplier<V> supplier) {
-this.function = k -> supplier.get();
+public DefaultHashMap(Supplier`<`V`>` supplier) {
+this.function = k -`>` supplier.get();
 }
 
 @Override
@@ -1879,8 +1879,8 @@ return super.computeIfAbsent((K) key, this.function);
 然后再这么使用，如下：
 
 ```
-List<Payment> payments = getPayments();
-Map<Integer, List<Payment>> paymentByTypeMap = new DefaultHashMap<>(ArrayList::new);
+List`<`Payment`>` payments = getPayments();
+Map`<`Integer, List`<`Payment`>` `>` paymentByTypeMap = new DefaultHashMap`<` `>`(ArrayList::new);
 for(Payment payment : payments){
 paymentByTypeMap.get(payment.getPayTypeId())
 .add(payment);
@@ -1898,11 +1898,11 @@ paymentByTypeMap.get(payment.getPayTypeId())
 computeIfAbcent，如下：
 
 ```
-List<Payment> payments = getPayments();
-Map<Integer, PayType> payTypeCacheMap = new HashMap<>();
+List`<`Payment`>` payments = getPayments();
+Map`<`Integer, PayType`>` payTypeCacheMap = new HashMap`<` `>`();
 for(Payment payment : payments){
 PayType payType = payTypeCacheMap.computeIfAbsent(payment.getPayTypeId(),
-k -> payTypeMapper.queryByPayType(k));
+k -`>` payTypeMapper.queryByPayType(k));
 payment.setPayTypeName(payType.getPayTypeName());
 }
 
@@ -1933,11 +1933,11 @@ computeIfPresent函数与computeIfAbcent的逻辑是相反的，如果map中存�
 @Data
 public static class OrderPayment {
 private Order order;
-private List<Payment> payments;
+private List`<`Payment`>` payments;
 
 public OrderPayment(Order order) {
 this.order = order;
-this.payments = new ArrayList<>();
+this.payments = new ArrayList`<` `>`();
 }
 
 public OrderPayment addPayment(Payment payment){
@@ -1947,19 +1947,19 @@ return this;
 }
 
 public static void getOrderWithPayment(){
-List<Order> orders = getOrders();
-Map<Long, OrderPayment> orderPaymentMap = new HashMap<>();
+List`<` Order`>` orders = getOrders();
+Map`<`Long, OrderPayment`>` orderPaymentMap = new HashMap<>();
 for(Order order : orders){
 orderPaymentMap.put(order.getOrderId(), new OrderPayment(order));
 }
-List<Payment> payments = getPayments();
+List`<`Payment`>` payments = getPayments();
 ```
 
 `//` 将 `payment` 关联到相关的 `order` 上
 ```
 for(Payment payment : payments){
 orderPaymentMap.computeIfPresent(payment.getOrderId(),
-(k, orderPayment) -> orderPayment.addPayment(payment));
+(k, orderPayment) -`>` orderPayment.addPayment(payment));
 }
 }
 
@@ -1985,11 +1985,11 @@ map中到底有没有值，都执行lambda表达式计算新值并放入map中�
 是一个根据不同typeId来分组统计汇总金额的例子：
 
 ```
-List<Payment> payments = getPayments();
-Map<Integer, BigDecimal> amountByTypeMap = new HashMap<>();
+List`<`Payment`>` payments = getPayments();
+Map`<`Integer, BigDecimal`>` amountByTypeMap = new HashMap`<` `>`();
 for(Payment payment : payments){
 amountByTypeMap.compute(payment.getPayTypeId(),
-(key, oldVal) -> oldVal == null ? payment.getAmount() :
+(key, oldVal) -`>` oldVal == null `?` payment.getAmount() :
 oldVal.add(payment.getAmount())
 );
 }
@@ -2007,8 +2007,8 @@ oldVal.add(payment.getAmount())
 值，稍微麻烦了点，而使用merge函数的话，可以进一步简化代码，如下：
 
 ```
-List<Payment> payments = getPayments();
-Map<Integer, BigDecimal> amountByTypeMap = new HashMap<>();
+List`<`Payment`>` payments = getPayments();
+Map`<`Integer, BigDecimal`>` amountByTypeMap = new HashMap`<` `>`();
 for(Payment payment : payments){
 amountByTypeMap.merge(payment.getPayTypeId(), payment.getAmount(), BigDecimal::add);
 }
@@ -2044,7 +2044,7 @@ putIfAbsent保留最早插入的数据。
 下：
 
 ```
-for(Map.Entry<String, BigDecimal> entry: amountByTypeMap.entrySet()){
+for(Map.Entry`<`String, BigDecimal`>` entry: amountByTypeMap.entrySet()){
 Integer payTypeId = entry.getKey();
 BigDecimal amount = entry.getValue();
 System.out.printf("payTypeId: %s, amount: %s /n", payTypeId, amount);
@@ -2064,7 +2064,7 @@ print("payTypeId: %s, amount: %s /n" % (payTypeId, amount))
 未支持这种写法，但使用map的forEach函数，也可以简化出类似的效果来，如下：
 
 ```
-amountByTypeMap.forEach((payTypeId, amount) -> {
+amountByTypeMap.forEach((payTypeId, amount) -`>` {
 System.out.printf("payTypeId: %s, amount: %s /n", payTypeId, amount);
 });
 
@@ -3773,7 +3773,7 @@ a==b==c。
 **源码**
 
 ```
-public final class Integer extends Number implements Comparable <Integer> {
+public final class Integer extends Number implements Comparable `<`Integer`>` {
 
 ```
 
@@ -4603,11 +4603,11 @@ public class Test {
 
 public static void main(String[] args) {
 
-ArrayList<String> list1 = new ArrayList<String>();
+ArrayList`<`String`>` list1 = new ArrayList`<`String`>`();
 
 list1.add("abc");
 
-ArrayList<Integer> list2 = new ArrayList<Integer>();
+ArrayList`<`Integer`>` list2 = new ArrayList`<`Integer`>`();
 
 list2.add(123);
 
@@ -4622,10 +4622,10 @@ System.out.println(list1.getClass() == list2.getClass());
 在这个例子中，我们定义了两个 `ArrayList` 数组，
 
 
-不过一个是 `ArrayList<String>` 泛型类型的，只能存储字符串；
+不过一个是 `ArrayList` `<`String`>` 泛型类型的，只能存储字符串；
 
 
-一个是 `ArrayList<Integer>` 泛型类型的，只能存储整数，
+一个是 `ArrayList` `<`Integer`>` 泛型类型的，只能存储整数，
 
 
 **2、通过反射添加其它类型元素**
@@ -4640,7 +4640,7 @@ public class Test {
 ```
 public static void main(String[] args) throws Exception {
 
-ArrayList<Integer> list = new ArrayList<Integer>();
+ArrayList`<`Integer`>` list = new ArrayList`<`Integer`>`();
 
 ```
 
@@ -4649,7 +4649,7 @@ ArrayList<Integer> list = new ArrayList<Integer>();
 ```
 list.getClass().getMethod("add", Object.class).invoke(list, "asd");
 
-for (int i = 0; i < list.size(); i++) {
+for (int i = 0; i `<` list.size(); i++) {
 
 System.out.println(list.get(i));
 
@@ -4679,7 +4679,7 @@ System.out.println(list.get(i));
 **1、原始类型Object**
 
 ```
-public class Pair<T> {
+public class Pair`<`T`>` {
 
 private T value;
 
@@ -4737,7 +4737,7 @@ this.value = value;
 比如: Pair这样声明的话
 
 ```
-public class Pair<T extends Comparable > {}
+public class Pair`<`T extends Comparable `>` {}
 
 ```
 
@@ -4796,7 +4796,7 @@ public static void main(String[] args) {
 **`//`** **这是一个简单的泛型方法**
 
 ```
-public static <T> T add(T x,T y){
+public static `<`T`>` T add(T x,T y){
 
 return y;
 
@@ -4880,16 +4880,16 @@ list.add(new Date());
 现在的写法:
 
 ```
- ArrayList<String> list = new ArrayList<String>();
+ ArrayList`<`String`>` list = new ArrayList`<`String`>`();
 
 ```
 
 如果是与以前的代码兼容，各种引用传值之间，必然会出现如下的情况：
 
 
-**`ArrayList<String> list1 = new ArrayList(); //`** **第一种** **情况**
+**`ArrayList` `<`String`>` list1 = new ArrayList(); //`** **第一种** **情况**
 
-**`ArrayList list2 = new ArrayList<String>(); //`** **第二种** **情况**
+**`ArrayList list2 = new ArrayList`<`String`>`(); //`** **第二种** **情况**
 
 
 这样是没有错误的，不过会有个 **编译时警告** 。
@@ -4919,9 +4919,9 @@ list.add(new Date());
 在Java中，像下面形式的 **引用传递是不允许** 的:
 
 
-**`ArrayList<String> list1 = new ArrayList<Object>(); //`** **编译错误**
+**`ArrayList` `<`String`>` list1 = new ArrayList`<`Object`>`(); //`** **编译错误**
 
-**`ArrayList<Object> list2 = new ArrayList<String>(); //`** **编译错误**
+**`ArrayList`<`Object`>` list2 = new ArrayList`<`String`>`(); //`** **编译错误**
 
 
 我们先看第一种情况，将第一种情况拓展成下面的形式：
@@ -5006,7 +5006,7 @@ return (E) elementData[index];
 现在有这样一个泛型类：
 
 ```
-class Pair<T> {
+class Pair`<`T`>` {
 
 private T value;
 
@@ -5264,17 +5264,17 @@ return super.getValue();
 **5、编译时集合的instanceof**
 
 ```
- ArrayList<String> arrayList = new ArrayList<String>();
+ ArrayList`<`String`>` arrayList = new ArrayList`<`String`>`();
 
 ```
 
-因为类型擦除之后， `ArrayList<String>` 只剩下原始类型，泛型信息 `String` 不存在了。
+因为类型擦除之后， `ArrayList` `<`String`>` 只剩下原始类型，泛型信息 `String` 不存在了。
 
 
 那么，编译时进行类型查询的时候使用下面的方法是错误的
 
 ```
- if ( arrayList instanceof ArrayList<String>)
+ if ( arrayList instanceof ArrayList`<`String`>`)
 
 ```
 
@@ -5287,7 +5287,7 @@ return super.getValue();
 举例说明：
 
 ```
-public class Test2<T> {
+public class Test2`<`T`>` {
 ```
 
 **`public`** **`static T one; //`** **编译错误**
@@ -5327,22 +5327,22 @@ return null;
 ```
 public class GenericTest {
 
-public void listMethod( List <String> stringList){
+public void listMethod( List `<`String`>` stringList){
 }
-public void listMethod( List <Integer> intList) {
+public void listMethod( List `<`Integer`>` intList) {
 }
 }
 ```
 
 代码很简单，看起来没什么问题，但是编译器却报出如下错误信息：
-Error:(15, 17) java: 名称冲突: listMethod(java.util.List<java.lang.Integer>)和
+Error:(15, 17) java: 名称冲突: listMethod(java.util.List`<`java.lang.Integer`>`)和
 
 <img src="/java-base.pdf-100-2.png">
-listMethod(java.util.List<java.lang.String>)具有相同疑符
+listMethod(java.util.List`<`java.lang.String`>`)具有相同疑符
 
 
-此错误的意思是说listMethod(List<String>) 方法在编译时擦除类型后的方法是
-listMethod(List<E>)，
+此错误的意思是说listMethod(List`<`String`>`) 方法在编译时擦除类型后的方法是
+listMethod(List`<`E`>`)，
 它与另外一个方法重复，也就是方法签名重复。反编译之后的方法代码如下：
 
 
@@ -6297,8 +6297,8 @@ instanceof 运算符只能用作对象的判断。
 否则返回 false
 
 ```
-  public class ArrayList<E> extends AbstractList<E>
-  implements List<E>, RandomAccess, Cloneable, java.io.Serializable
+  public class ArrayList`<`E`>` extends AbstractList`<`E`>`
+  implements List`<`E`>`, RandomAccess, Cloneable, java.io.Serializable
 
   ArrayList arrayList = new ArrayList();
   System.out.println(arrayList instanceof List);//true
@@ -7675,7 +7675,7 @@ Servlet时， **通常只需要覆写doGet或doPost方法** ，而不要去覆�
 置详细信息如下：
 
 ```
-  <?xml version="1.0" encoding="UTF-8"?>
+&lt;?xml version="1.0" encoding="UTF-8"?>
 
 ```
 

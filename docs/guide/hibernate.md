@@ -368,7 +368,7 @@ hibernate提供多种主键生成策略，有点是类似于JPA，以下是hiber
 hibernate_unique_key，默认字段为integer类型，名称是next_hi（比较少用）；
 
 
-**assigned** ：在插入数据的时候主键由程序处理（很常用），这是 <generator>元素没有指定时
+**assigned** ：在插入数据的时候主键由程序处理（很常用），这是 `<generator>`元素没有指定时
 
 
 的默认生成策略。等同于JPA中的AUTO；
@@ -401,7 +401,7 @@ INDENTITY；
 就维护一个计数器，所以在多个实例运行的时候不能使用这个方法；
 
 
-**foreign** ：使用另外一个相关联的对象的主键，通常和<one-to-one>联合起来使用；
+**foreign** ：使用另外一个相关联的对象的主键，通常和`<one-to-one>`联合起来使用；
 
 
 **guid** ：采用数据库底层的guid算法机制，对应MYSQL的 **uuid()** 函数，SQL Server的 **newid()** 函
