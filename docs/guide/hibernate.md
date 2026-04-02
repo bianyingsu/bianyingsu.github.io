@@ -1627,7 +1627,6 @@ Caused by: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: Table
 
 
 
-![hibernate.pdf-21-1.png](hibernate.pdf-21-1.png)
 <img src="/img/hibernate.pdf-21-1.png">
 
 

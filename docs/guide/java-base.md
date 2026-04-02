@@ -1652,7 +1652,7 @@ private static final String PREFIX = "META-INF/services/";
 `//` 被加载的类或接口
 
 ```
-private final Class<S> service;
+private final Class`<`S`>` service;
 
 ```
 
@@ -1672,7 +1672,7 @@ private final AccessControlContext acc;
 
 `//` 按照实例化的顺序缓存已经实例化的类
 ```
-private LinkedHashMap<String, S> providers = new LinkedHashMap<>();
+private LinkedHashMap`<`String, S`>` providers = new LinkedHashMap`<` `>`();
 
 ```
 
@@ -1819,7 +1819,7 @@ mysqlJDBC，会触发如下代码：
 **computeIfAbsent函数**
 
 
-比如，很多时候我们需要对数据进行分组，变成Map<Integer, List`<?` `>` `>`的形式，在java8之
+比如，很多时候我们需要对数据进行分组，变成Map`<`Integer, List`<?` `>` `>`的形式，在java8之
 前，一般如下实现：
 
 ```
@@ -1842,10 +1842,10 @@ paymentByTypeMap.get(payment.getPayTypeId())
 但如果使用java8提供的 **computeIfAbsent** 方法，代码则会简化很多，如下：
 
 ```
-List<Payment> payments = getPayments();
-Map<Integer, List<Payment>> paymentByTypeMap = new HashMap<>();
+List`<`Payment`>` payments = getPayments();
+Map`<`Integer, List`<`Payment`>` `>` paymentByTypeMap = new HashMap`<` `>`();
 for(Payment payment : payments){
-paymentByTypeMap.computeIfAbsent(payment.getPayTypeId(), k -> new ArrayList<>())
+paymentByTypeMap.computeIfAbsent(payment.getPayTypeId(), k -`>` new ArrayList`<` `>`())
 .add(payment);
 }
 

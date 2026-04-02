@@ -8174,7 +8174,7 @@ String os = System.getProperty("os.name");
 **当配置文件中`<`bean`>`的class属性配置的实现类是FactoryBean时，通过getBean()方法返回**
 **的不是FactoryBean本身，而是FactoryBean#getObject()方法所返回的对象，相当于**
 **FactoryBean#getObject()代理了getBean()方法。**
-**例：如果使用传统方式配置下面Car的`<`bean`>`时，Car的每个属性分别对应一个<property>**
+**例：如果使用传统方式配置下面Car的`<`bean`>`时，Car的每个属性分别对应一个`<`property`>`**
 **元素标签。**
 
 

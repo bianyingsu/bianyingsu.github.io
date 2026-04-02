@@ -3536,39 +3536,39 @@ _**`<!--`**_ **这个配置使全局的映射器** _**`(`**_ **二级缓存** _*
 **仍然有效**
 
 ```
--->
+--`>`
 
-<setting name="useGeneratedKeys" value="true"/>
+`<`setting name="useGeneratedKeys" value="true"/`>`
 ```
 
 _**`<!--`**_ **配置默认的执行器。** _**`SIMPLE`**_ **执行器没有什么特别之初。**
 _**`REUSE`**_ **执行器重用预处理语句。** _**`BATCH`**_ **执行器重用语句和批量更新** _**`-->`**_
 
 ```
-<setting name="defaultExecutorType" value="REUSE"/>
+`<`setting name="defaultExecutorType" value="REUSE"/`>`
 ```
 
 _**`<!--`**_ **设置超时时间，它决定驱动等待一个数据库相应时间** _**`-->`**_
 
 ```
-<setting name="defaultStatementTimeout" value="25000"/>
-</settings>
+`<`setting name="defaultStatementTimeout" value="25000"/`>`
+`<`/settings`>`
 ```
 
 _**`<!--`**_ **配置别名**
 ```
-<typeAliases>
-<typeAlias alias="Student" type="com.yihaomen.mybatis.model.Student"/>
-</typeAliases>-->
+`<`typeAliases`>`
+`<`typeAlias alias="Student" type="com.yihaomen.mybatis.model.Student"/`>`
+`<`/typeAliases`>`--`>`
 ```
 
 _**`<!--`**_ **指定映射器路径**
 
 ```
-<mappers>
-<mapper resource="com/yihaomen/mybatis/model/Student.xml"/>
-</mappers>-->
-</configuration>
+`<`mappers`>`
+`<`mapper resource="com/yihaomen/mybatis/model/Student.xml"/`>`
+`<`/mappers`>`--`>`
+`<`/configuration`>`
 
 ```
 
@@ -3632,14 +3632,14 @@ SqlSession session = sqlSessionFactory.openSession();
 
 StudentMapper mapper = session.getMapper( StudentMapper .class);
 
-List <Student> list = mapper.selectAllStudents();
+List `<`Student`>` list = mapper.selectAllStudents();
 System. out .println(list);
 ```
 
 **`System.`** _**`out`**_ **`.println("`** **第二次执行** **`");`**
 
 ```
-List <Student> list2 = mapper.selectAllStudents();
+List `<`Student`>` list2 = mapper.selectAllStudents();
 System. out .println(list2);
 session.commit();
 ```
@@ -3651,7 +3651,7 @@ SqlSession session2 = sqlSessionFactory.openSession();
 
 StudentMapper mapper2 = session2.getMapper( StudentMapper .class);
 
-List <Student> list3 = mapper2.selectAllStudents();
+List `<`Student`>` list3 = mapper2.selectAllStudents();
 System. out .println(list3);
 ```
 
