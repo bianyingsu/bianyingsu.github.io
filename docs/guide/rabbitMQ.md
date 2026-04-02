@@ -1,0 +1,1511 @@
+---
+aliases:
+  - rabbitMQ
+标题: rabbitMQ
+---
+**Kafka和RabbitMQ有哪些区别，各自适合什么场景？**
+
+
+**笔记本：** rabbitMQ
+
+
+**创建时间：** 2023/7/11 0:31 **更新时间：** 2023/7/11 0:34
+
+
+**Kafka和RabbitMQ有哪些区别，各自适合什么场景？**
+
+
+经常有人问我
+
+
+有个 xx 需求，我应该用 Kafka 还是 RabbitMQ ？
+
+
+这个问题很常见，而且很多人对二者的选择也把握不好。
+
+
+所以我决定写篇文章来详细说一下：Kafka 和 RabbitMQ 的区别，适用于什么场景？
+
+
+同时，这个问题在面试中也经常问到。
+
+
+下面我会通过 6 个场景，来对比分析一下 Kafka 和 RabbitMQ 的优劣。
+
+
+**一、消息的顺序**
+
+
+有这样一个需求：当订单状态变化的时候，把订单状态变化的消息发送给所有关心订单变
+化的系统。
+
+
+订单会有创建成功、待付款、已支付、已发货的状态，状态之间是单向流动的。
+
+
+好，现在我们把订单状态变化消息要发送给所有关心订单状态的系统上去，实现方式就是
+用消息队列。
+
+
+
+<img src="/img/rabbitMQ.pdf-0-0.png">0-0
+<img src="/img/rabbitMQ.pdf-1-0.png">1-0
+
+在这种业务下，我们最想要的是什么？
+
+
+1. 消息的顺序：对于同一笔订单来说，状态的变化都是有严格的先后顺序的。
+2. 吞吐量：像订单的业务，我们自然希望订单越多越好。订单越多，吞吐量就越大。
+
+
+在这种情况下，我们先看看 RabbitMQ 是怎么做的。
+
+
+首先，对于发消息，并广播给多个消费者这种情况，RabbitMQ 会为每个消费者建立一个
+对应的队列。也就是说，如果有 10 个消费者，RabbitMQ 会建立 10 个对应的队列。然
+后，当一条消息被发出后，RabbitMQ 会把这条消息复制 10 份放到这 10 个队列里。
+
+
+当 RabbitMQ 把消息放入到对应的队列后，我们紧接着面临的问题就是，我们应该在系
+统内部启动多少线程去从消息队列中获取消息。
+
+
+如果只是单线程去获取消息，那自然没有什么好说的。但是多线程情况，可能就会有问题
+了……
+
+
+RabbitMQ 有这么个特性，它在官方文档就声明了自己是不保证多线程消费同一个队列的
+消息，一定保证顺序的。而不保证的原因，是因为多线程时，当一个线程消费消息报错的
+时候，RabbitMQ 会把消费失败的消息再入队，此时就可能出现乱序的情况。
+
+
+
+<img src="/img/rabbitMQ.pdf-1-1.png">1-1
+<img src="/img/rabbitMQ.pdf-2-0.png">2-0
+
+T0 时刻，队列中有四条消息 A1、B1、B2、A2。其中 A1、A2 表示订单 A 的两个状态：
+待付款、已付款。B1、B2 也同理，是订单 B 的待付款、已付款。
+
+
+到了 T1 时刻，消息 A1 被线程 1 收到，消息 B1 被线程 2 收到。此时，一切都还正常。
+
+
+到了 T3 时刻，B1 消费出错了，同时呢，由于线程 1 处理速度快，又从消息队列中获取到
+了 B2。此时，问题开始出现。
+
+
+到了 T4 时刻，由于 RabbitMQ 线程消费出错，可以把消息重新入队的特性，此时 B1 会
+被重新放到队列头部。所以，如果不凑巧，线程 1 获取到了 B1，就出现了乱序情况，B2
+状态明明是 B1 的后续状态，却被提前处理了。
+
+
+所以，可以看到了，这个场景用 RabbitMQ，出现了三个问题：
+
+
+1. 为了实现发布订阅功能，从而使用的消息复制，会降低性能并耗费更多资源
+2. 多个消费者无法严格保证消息顺序
+
+
+3. 大量的订单集中在一个队列，吞吐量受到了限制
+
+
+那么 Kafka 怎么样呢？Kafka 正好在这三个问题上，表现的要比 RabbitMQ 要好得多。
+
+
+首先，Kafka 的发布订阅并不会复制消息，因为 Kafka 的发布订阅就是消费者直接去获取
+被 Kafka 保存在日志文件中的消息就好。无论是多少消费者，他们只需要主动去找到消息
+在文件中的位置即可。
+
+
+其次，Kafka 不会出现消费者出错后，把消息重新入队的现象。
+
+
+最后，Kafka 可以对订单进行分区，把不同订单分到多个分区中保存，这样，吞吐量能更
+好。
+
+
+所以，对于这个需求 Kafka 更合适。
+
+
+**二、消息的匹配**
+
+
+我曾经做过一套营销系统。这套系统中有个非常显著的特点，就是非常复杂非常灵活地匹
+配规则。
+
+
+比如，要根据推广内容去匹配不同的方式做宣传。又比如，要根据不同的活动去匹配不同
+的渠道去做分发。
+
+
+总之，数不清的匹配规则是这套系统中非常重要的一个特点。
+
+
+首先，先看看 RabbitMQ 的，你会发现 RabbitMQ 是允许在消息中添加 routing_key 或
+者自定义消息头，然后通过一些特殊的 Exchange，很简单的就实现了消息匹配分发。开
+发几乎不用成本。
+
+
+而 Kafka 呢？如果你要实现消息匹配，开发成本高多了。
+
+
+首先，通过简单的配置去自动匹配和分发到合适的消费者端这件事是不可能的。
+
+
+其次，消费者端必须先把所有消息不管需要不需要，都取出来。然后，再根据业务需求，
+自己去实现各种精准和模糊匹配。可能因为过度的复杂性，还要引入规则引擎。
+
+
+这个场景下 RabbitMQ 扳回一分。
+
+
+
+<img src="/img/rabbitMQ.pdf-3-0.png">3-0
+**三、消息的超时**
+
+
+在电商业务里，有个需求：下单之后，如果用户在 15 分钟内未支付，则自动取消订单。
+
+
+你可能奇怪，这种怎么也会用到消息队列的？
+
+
+我来先简单解释一下，在单一服务的系统，可以起个定时任务就搞定了。
+
+
+但是，在 SOA 或者微服务架构下，这样做就不行了。因为很多个服务都关心是否支付这
+件事，如果每种服务，都自己实现一套定时任务的逻辑，既重复，又难以维护。
+
+
+在这种情况下，我们往往会做一层抽象：把要执行的任务封装成消息。当时间到了，直接
+扔到消息队列里，消息的订阅者们获取到消息后，直接执行即可。
+
+
+希望把消息延迟一定时间再处理的，被称为延迟队列。
+
+
+对于订单取消的这种业务，我们就会在创建订单的时候，同时扔一个包含了执行任务信息
+的消息到延迟队列，指定15分钟后，让订阅这个队列的各个消费者，可以收到这个消息。
+随后，各个消费者所在的系统就可以去执行相关的扫描订单的任务了。
+
+
+RabbitMQ 和 Kafka 消息队列如何选？
+
+
+先看下 RabbitMQ 的。
+
+
+RabbitMQ 的消息自带手表，消息中有个 TTL 字段，可以设置消息在 RabbitMQ 中的存
+放的时间，超时了会被移送到一个叫死信队列的地方。
+
+
+所以，延迟队列 RabbitMQ 最简单的实现方式就是设置 TTL，然后一个消费者去监听死信
+队列。当消息超时了，监听死信队列的消费者就收到消息了。
+
+
+不过，这样做有个大问题：假设，我们先往队列放入一条过期时间是 10 秒的 A 消息，再
+放入一条过期时间是 5 秒的 B 消息。 那么问题来了，B 消息会先于 A 消息进入死信队列
+吗？
+
+
+答案是否定的。B 消息会优先遵守队列的先进先出规则，在 A 消息过期后，和其一起进入
+死信队列被消费者消费。
+
+
+在 RabbitMQ 的 3.5.8 版本以后，官方推荐的 rabbitmq delayed message exchange
+插件可以解决这个问题。
+
+
+用了这个插件，我们在发送消息的时候，把消息发往一个特殊的 Exchange。
+同时，在消息头里指定要延迟的时间。
+收到消息的 Exchange 并不会立即把消息放到队列里，而是在消息延迟时间到达
+后，才会把消息放入。
+
+
+
+<img src="/img/rabbitMQ.pdf-4-0.png">4-0
+<img src="/img/rabbitMQ.pdf-5-0.png">5-0
+
+再看下 Kafka 的：
+
+
+Kafka 要实现延迟队列就很麻烦了。
+
+
+你先需要把消息先放入一个临时的 topic。
+然后得自己开发一个做中转的消费者。让这个中间的消费者先去把消息从这个临时的
+topic 取出来。
+取出来，这消息还不能马上处理啊，因为没到时间呢。也没法保存在自己的内存里，
+怕崩溃了，消息没了。所以，就得把没有到时间的消息存入到数据库里。
+存入数据库中的消息需要在时间到了之后再放入到 Kafka 里，以便真正的消费者去
+执行真正的业务逻辑。
+
+……
+
+
+想想就已经头大了，这都快搞成调度平台了。再高级点，还要用时间轮算法才能更好更准
+确。
+
+
+这次，RabbitMQ 上那一条条戴手表的消息，才是最好的选择。
+
+
+**四、消息的保持**
+
+
+在微服务里，事件溯源模式是经常用到的。如果想用消息队列实现，一般是把事件当成消
+息，依次发送到消息队列中。
+
+
+事件溯源有个最经典的场景，就是事件的重放。简单来讲就是把系统中某段时间发生的事
+件依次取出来再处理。而且，根据业务场景不同，这些事件重放很可能不是一次，更可能
+是重复 N 次。
+
+
+假设，我们现在需要一批在线事件重放，去排查一些问题。
+
+
+
+<img src="/img/rabbitMQ.pdf-5-1.png">5-1
+RabbitMQ 此时就真的不行了，因为消息被人取出来就被删除了。想再次被重复消费？对
+不起。
+
+
+而 Kafka 呢，消息会被持久化一个专门的日志文件里。不会因为被消费了就被删除。
+
+
+所以，对消息不离不弃的 Kafka 相对用过就抛的 RabbitMQ，请选择 Kafka。
+
+
+**五、消息的错误处理**
+
+
+很多时候，在做记录数据相关业务的时候，Kafka 一般是不二选择。不过，有时候在记录
+数据吞吐量不大时，我自己倒是更喜欢用 RabbitMQ。
+
+
+原因就是 Kafka 有一个我很不喜欢的设计原则：
+
+
+当单个分区中的消息一旦出现消费失败，就只能停止而不是跳过这条失败的消息继续消费
+后面的消息。即不允许消息空洞。
+
+
+只要消息出现失败，不管是 Kafka 自身消息格式的损坏，还是消费者处理出现异常，是不
+允许跳过消费失败的消息继续往后消费的。
+
+
+所以，在 **数据统计不要求十分精确** 的场景下选了 Kafka，一旦出现了消息消费问题，就会
+发生项目不可用的情况。这真是徒增烦恼。
+
+
+而 RabbitMQ 呢，它由于会在消息出问题或者消费错误的时候，可以重新入队或者移动
+消息到死信队列，继续消费后面的，会省心很多。
+
+
+坏消息就像群众中的坏蛋那样，Kafka 处理这种坏蛋太过残暴，非得把坏蛋揪出来不行。
+相对来说，RabbitMQ 就温柔多了，群众是群众，坏蛋是坏蛋，分开处理嘛。
+
+
+**六、消息的吞吐量**
+
+
+Kafka 是每秒几十万条消息吞吐，而 RabbitMQ 的吞吐量是每秒几万条消息。
+
+
+其实，在一家公司内部，有必须用到 Kafka 那么大吞吐量的项目真的很少。大部分项目，
+像 RabbitMQ 那样每秒几万的消息吞吐，已经非常够了。
+
+
+在一些没那么大吞吐量的项目中引入 Kafka，我觉得就不如引入 RabbitMQ。
+
+
+为什么呢？
+
+
+因为 Kafka 为了更好的吞吐量，很大程度上增加了自己的复杂度。而这些复杂度对项目来
+说，就是麻烦，主要体现在两个方面：
+
+
+1、配置复杂、维护复杂
+
+
+Kafka 的参数配置相对 RabbitMQ 是很复杂的。比如：磁盘管理相关参数，集群管理相关
+参数，ZooKeeper 交互相关参数，Topic 级别相关参数等，都需要一些思考和调优。
+
+
+另外，Kafka 本身集群和参与管理集群的 ZooKeeper，这就带来了更多的维护成本。
+Kafka 要用好，你要考虑 JVM，消息持久化，集群本身交互，以及 ZooKeeper 本身和它
+与 Kafka 之间的可靠和效率。
+
+
+2、用好，用对存在门槛
+
+
+Kafka 的 Producer 和 Consumer 本身要用好用对也存在很高的门槛。
+
+
+比如，Producer 消息可靠性保障、幂等性、事务消息等，都需要对 KafkaProducer 有深
+入的了解。
+
+
+而 Consumer 更不用说了，光是一个日志偏移管理就让一大堆人掉了不少头发。
+
+
+相对来说，RabbitMQ 就简单得多。你可能都不用配置什么，直接启动起来就能很稳定可
+靠地使用了。就算配置，也是寥寥几个参数设置即可。
+
+
+所以，大家在项目中引入消息队列的时候，真的要好好考虑下，不要因为大家都鼓吹
+Kafka 好，就无脑引入。
+
+
+**总结**
+
+
+可以看到，如果我们要做消息队列选型，有两件事是必须要做好的：
+
+
+1. 列出业务最重要的几个特点
+2. 深入到消息队列的细节中去比较
+
+
+等我们对这些中间件的特点非常熟悉之后，甚至可以把业务分解成不同的子业务，再根据
+不同的子业务的特征，引入不同的消息队列，即消息队列混用。这样，我们就可能会最大
+化我们的获益，最小化我们的成本。
+
+
+说了这么多，其实还有很多 Kafka 和 RabbitMQ 的比较没有说，比如二者集群的区别，
+占用资源多少的比较等。以后有机会可以再提提。
+
+
+总之，期待大家看完这篇文章后，能对 Kafka 和 RabbitMQ 的区别有了更细节性的了
+解。
+
+
+最后，分享一个网上的比较全的对比图：
+
+
+
+<img src="/img/rabbitMQ.pdf-7-0.png">7-0
+<img src="/img/rabbitMQ.pdf-8-0.png">8-0
+
+<img src="/img/rabbitMQ.pdf-8-1.png">8-1
+**RabbitMQ，RocketMQ，Kafka，Pulsar 几种消息队列的对比**
+
+
+**笔记本：** rabbitMQ
+
+
+**创建时间：** 2023/7/11 0:25 **更新时间：** 2023/7/11 0:28
+
+
+**消息队列的作用：**
+
+
+1、应用耦合：多应用间通过消息队列对同一消息进行处理，避免调用接口失败导致整个
+过程失败；
+
+
+2、异步处理：多应用对消息队列中同一消息进行处理，应用间并发处理消息，相比串行
+处理，减少处理时间；
+
+
+3、限流削峰：广泛应用于秒杀或抢购活动中，避免流量过大导致应用系统挂掉的情况；
+
+
+4、消息驱动的系统：系统分为消息队列、消息生产者、消息消费者，生产者负责产生消
+息，消费者(可能有多个)负责对消息进行处理；
+
+
+首先选择消息队列要满足以下几个条件：
+
+
+1、开源
+
+
+2、流行
+
+
+3、兼容性强
+
+
+消息队列需要：
+
+
+1、消息的可靠传递：确保不丢消息；
+
+
+2、Cluster：支持集群，确保不会因为某个节点宕机导致服务不可用，当然也不能丢消
+息；
+
+
+3、性能：具备足够好的性能，能满足绝大多数场景的性能要求。
+
+
+**RabbitMQ**
+
+
+RabbitMQ 2007年发布，是一个在 AMQP (高级消息队列协议)基础上完成的，可复用的
+企业消息系统，是当前最主流的消息中间件之一。
+
+
+**优点**
+
+
+1、RabbitMQ 的特点 Messaging that just works，“开箱即用的消息队列”。
+RabbitMQ 是一个相对轻量的消息队列，非常容易部署和使用；
+
+
+2、多种协议的支持：支持多种消息队列协议，算得上是最流行的消息队列之一；
+
+
+3、灵活的路由配置，和其他消息队列不同的是，它在生产者 （Producer）和队列
+（Queue）之间增加了一个Exchange模块，你可以理解为交换机。这个Exchange模块的
+作用和交换机也非常相似，根据配置的路由规则将生产者发出的消息分发到不同的队 列
+中。路由的规则也非常灵活，甚至你可以自己来实现路由规则。
+
+
+4、健壮、稳定、易用、跨平台、支持多种语言、文档齐全，RabbitMQ的客户端支持的编
+程语言大概是所有消息队列中最多的；
+
+
+5、管理界面较丰富，在互联网公司也有较大规模的应用；
+
+
+6、社区比较活跃。
+
+
+**缺点**
+
+
+1、RabbitMQ 对消息堆积的处理不好，在它的设计理念里面，消息队列是一个管道，大
+量的消息积压是一种不正常的情况，应当尽量去避免。当大量消息积压的时候，会导致
+RabbitMQ的性能急剧下降；
+
+
+2、性能上有瓶颈，它大概每秒钟可以处理几万到十几万条消息，这个对于大多数场景足
+够使用了，如果对需求对性能要求非常高，那么就不太合适了。
+
+
+3、RabbitMQ 使用 Erlang。开发，Erlang 的学习成本还是很高的，如果后期进行二次开
+发，就不太容易了。
+
+
+**RocketMQ**
+
+
+RocketMQ出自阿里公司的开源产品，用 Java 语言实现，在设计时参考了 Kafka，并做
+出了自己的一些改进，消息可靠性上比 Kafka 更好。经历过多次双十一的考验，性能和稳
+定性还是值得信赖的，RocketMQ在阿里集团被广泛应用在订单，交易，充值，流计算，
+消息推送，日志流式处理，binglog分发等场景。
+
+
+**优点**
+
+
+1、单机吞吐量：十万级；
+
+
+2、可用性：非常高，分布式架构；
+
+
+3、消息可靠性：经过参数优化配置，消息可以做到0丢失，RocketMQ 的所有消息都是持
+久化的，先写入系统 PAGECACHE，然后刷盘，可以保证内存与磁盘都有一份数据；
+
+
+4、功能支持：MQ功能较为完善，还是分布式的，扩展性好；
+
+
+5、支持10亿级别的消息堆积，不会因为堆积导致性能下降；
+
+
+6、源码是java，我们可以自己阅读源码，定制自己公司的MQ，可以掌控。
+
+
+**缺点**
+
+
+1、支持的客户端语言不多，目前是 java 及 c++，其中 c++ 不成熟；
+
+
+2、社区活跃度一般，作为国产的消息队列，相比国外的比较流行的同类产品，在国际上
+还没有那么流行，与周边生态系统的集成和兼容程度要略逊一筹；
+
+
+3、没有在 mq 核心中去实现 JMS 等接口，有些系统要迁移需要修改大量代码。
+
+
+**Kafka**
+
+
+Apache Kafka是一个分布式消息发布订阅系统。它最初由LinkedIn公司基于独特的设计
+实现为一个分布式的提交日志系统( a distributed commit log)，之后成为Apache项目的
+一部分。
+
+
+这是一款为大数据而生的消息中间件，在数据采集、传输、存储的过程中发挥着举足轻重
+的作用。
+
+
+**优点**
+
+
+1、性能卓越，单机写入TPS约在百万条/秒，最大的优点，就是吞吐量高；
+
+
+2、性能卓越，单机写入TPS约在百万条/秒，消息大小10个字节；
+
+
+3、可用性：非常高，kafka是分布式的，一个数据多个副本，少数机器宕机，不会丢失数
+据，不会导致不可用；
+
+
+4、消费者采用Pull方式获取消息, 消息有序, 通过控制能够保证所有消息被消费且仅被消费
+一次;
+
+
+5、有优秀的第三方Kafka Web管理界面Kafka-Manager；
+
+
+6、在日志领域比较成熟，被多家公司和多个开源项目使用；
+
+
+7、功能支持：功能较为简单，主要支持简单的MQ功能，在大数据领域的实时计算以及日
+志采集被大规模使用
+
+
+**缺点**
+
+
+由于“攒一波再处理”导致延迟比较高
+
+
+**Pulsar**
+
+
+Pulsar 是一个用于服务器到服务器的消息系统，具有多租户、高性能等优势。 Pulsar 最
+初由 Yahoo 开发，目前由 Apache 软件基金会管理。
+
+
+**优点**
+
+
+1、更多功能：Pulsar Function、多租户、Schema registry、n 层存储、多种消费模式
+和持久性模式等；
+
+
+2、Pulsar 的单个实例原生支持多个集群，可跨机房在集群间无缝地完成消息复制；
+
+
+3、极低的发布延迟和端到端延迟；
+
+
+4、可无缝扩展到超过一百万个 topic；
+
+
+5、简单的客户端 API，支持 Java、Go、Python 和 C++。
+
+
+6、Pulsar 的单个实例原生支持多个集群，可跨机房在集群间无缝地完成消息复制。
+
+
+**缺点**
+
+
+正处于成长期，流行度和成熟度相对没有那么高
+
+
+**如何选择合适的消息队列**
+
+
+如果对于消息队列的功能和性能要求不是很高，那么RabbitMQ就够了，开箱即用。
+
+
+如果系统使用消息队列主要场景是处理在线业务，比如在交易系统中用消息队列传递订
+单，RocketMQ 的低延迟和金融级的稳定性就可以满足。
+
+
+要处理海量的消息，像收集日志、监控信息或是前端的埋点这类数据，或是你的应用场景
+大量使用 了大数据、流计算相关的开源产品，那 Kafka 就是最合适的了。
+
+
+如果数据量很大，同时不希望有 Kafka 的高延迟，刚好业务场景是金融场景。RocketMQ
+对 Topic 运营不太友好，特别是不支持按 Topic 删除失效消息，以及不具备宕机 Failover
+能力。那么 Pulsar 可能就是你的一个选择了。
+
+
+**Springboot 整合RabbitMq**
+
+
+**笔记本：** rabbitMQ
+
+
+**创建时间：** 2022/8/25 17:16 **更新时间：** 2022/8/26 9:45
+
+
+**作者：** 彼岸樱速
+
+
+该篇文章内容较多，包括有rabbitMq相关的一些简单理论介绍，provider消息推送实例，
+consumer消息消费实例，Direct、Topic、Fanout的使用，消息回调、手动确认等。
+（但是关于rabbitMq的安装，就不介绍了）
+
+
+在安装完rabbitMq后，输入http://ip:15672/ ，是可以看到一个简单后台管理界面的。
+
+
+在这个界面里面我们可以做些什么？
+可以手动创建虚拟host，创建用户，分配权限，创建交换机，创建队列等等，还有查看队
+列消息，消费效率，推送效率等等。
+
+
+以上这些管理界面的操作在这篇暂时不做扩展描述，我想着重介绍后面实例里会使用到
+的。
+
+
+首先先介绍一个简单的一个消息推送到接收的流程，提供一个简单的图：
+
+
+黄色的圈圈就是我们的消息推送服务，将消息推送到 中间方框里面也就是 rabbitMq的服
+务器，然后经过服务器里面的交换机、队列等各种关系（后面会详细讲）将数据处理入列
+后，最终右边的蓝色圈圈消费者获取对应监听的消息。
+
+
+常用的交换机有以下三种，因为消费者是从队列获取信息的，队列是绑定交换机的（一
+般），所以对应的消息推送/接收模式也会有以下几种：
+
+<img src="/img/rabbitMQ.pdf-12-2.png">12-2
+
+**Direct Exchange**
+
+
+
+<img src="/img/rabbitMQ.pdf-12-0.png">12-0
+
+<img src="/img/rabbitMQ.pdf-12-1.png">12-1
+<img src="/img/rabbitMQ.pdf-13-0.png">13-0
+
+
+
+**Fanout Exchange**
+
+
+
+
+
+**Topic Exchange**
+主题交换机，这个交换机其实跟直连交换机流程差不多，但是它的特点就是在它的路由键
+和绑定键之间是有规则的。
+简单地介绍下规则：
+
+
+*** (星号) 用来表示一个单词 (必须出现的)**
+**# (井号) 用来表示任意数量（零个或多个）单词**
+通配的绑定键是跟队列进行绑定的，举个小例子
+队列Q1 绑定键为 *.TT.*     队列Q2绑定键为 TT.#
+如果一条消息携带的路由键为 A.TT.B，那么队列Q1将会收到；
+如果一条消息携带的路由键为TT.AA.BB，那么队列Q2将会收到；
+
+
+**主题交换机是非常强大的，为啥这么膨胀？**
+当一个队列的绑定键为 "#"（井号） 的时候，这个队列将会无视消息的路由键，接收所有
+的消息。
+当 * (星号) 和 # (井号) 这两个特殊字符都未在绑定键中出现的时候，此时主题交换机就拥
+有的直连交换机的行为。
+所以主题交换机也就实现了扇形交换机的功能，和直连交换机的功能。
+
+
+另外还有 Header Exchange 头交换机 ，Default Exchange 默认交换机，Dead Letter
+Exchange 死信交换机，这几个该篇暂不做讲述。
+
+
+**好了，一些简单的介绍到这里为止， 接下来我们来一起编码。**
+本次实例教程需要创建2个springboot项目，一个 rabbitmq-provider （生产者），一个
+rabbitmq-consumer（消费者）。
+
+
+首先创建 rabbitmq-provider，
+
+
+pom.xml里用到的jar依赖：
+```
+<!--rabbitmq-->
+<dependency>
+<groupId>org.springframework.boot</groupId>
+<artifactId>spring-boot-starter-amqp</artifactId>
+</dependency>
+
+```
+
+`<!--web` 依赖 `-->`
+```
+<dependency>
+<groupId>org.springframework.boot</groupId>
+<artifactId>spring-boot-starter-web</artifactId>
+</dependency>
+
+```
+
+然后application.yml：
+```
+spring.rabbitmq.host=159.75.252.69
+spring.rabbitmq.port=5672
+spring.rabbitmq.username=guest
+spring.rabbitmq.password=guest
+```
+
+ps：里面的虚拟host配置项不是必须的，我自己在rabbitmq服务上创建了自己的虚拟
+host，所以我配置了；你们不创建，就不用加这个配置项。
+
+
+那么怎么建一个单独的host呢？ 假如我就是想给某个项目接入，使用一个单独host，顺便
+使用一个单独的账号，就好像我文中配置的 root 这样。
+
+
+其实也很简便：
+
+
+virtual-host的创建：
+
+
+<img src="/img/rabbitMQ.pdf-14-0.png">14-0
+
+账号user的创建：
+
+
+然后记得给账号分配权限，指定使用某个virtual host：
+
+
+其实还可以特定指定交换机使用权等等：
+
+
+
+<img src="/img/rabbitMQ.pdf-14-1.png">14-1
+
+<img src="/img/rabbitMQ.pdf-14-2.png">14-2
+<img src="/img/rabbitMQ.pdf-15-0.png">15-0
+
+回归正题，继续继续。
+
+
+接着我们先使用下direct exchange(直连型交换机),创建DirectRabbitConfig.java（对于
+队列和交换机持久化以及连接使用设置，在注释里有说明，后面的不同交换机的配置就不
+做同样说明了）：
+
+
+
+<img src="/img/rabbitMQ.pdf-15-1.png">15-1
+<img src="/img/rabbitMQ.pdf-16-0.png">16-0
+
+然后写个简单的接口进行消息推送（根据需求也可以改为定时任务等等，具体看需求），
+SendMessageController.java：
+
+
+把rabbitmq-provider项目运行，调用下接口:
+
+
+因为我们目前还没弄消费者 rabbitmq-consumer，消息没有被消费的，我们去rabbitMq
+管理页面看看，是否推送成功：
+
+
+
+<img src="/img/rabbitMQ.pdf-16-1.png">16-1
+
+<img src="/img/rabbitMQ.pdf-16-2.png">16-2
+
+<img src="/img/rabbitMQ.pdf-16-3.png">16-3
+再看看队列（界面上的各个英文项代表什么意思，可以自己查查哈，对理解还是有帮助
+的）：
+
+
+很好，消息已经推送到rabbitMq服务器上面了。
+
+
+然后是创建消息接收监听类，DirectReceiver.java：
+
+
+然后将rabbitmq-consumer项目运行起来，可以看到把之前推送的那条消息消费下来
+了：
+
+
+然后可以再继续调用rabbitmq-provider项目的推送消息接口，可以看到消费者即时消费
+消息：
+
+
+那么直连交换机既然是一对一，那如果咱们配置多台监听绑定到同一个直连交互的同一个
+队列，会怎么样？
+
+
+
+<img src="/img/rabbitMQ.pdf-17-0.png">17-0
+
+<img src="/img/rabbitMQ.pdf-17-1.png">17-1
+
+<img src="/img/rabbitMQ.pdf-17-2.png">17-2
+<img src="/img/rabbitMQ.pdf-18-0.png">18-0
+
+可以看到是实现了轮询的方式对消息进行消费，而且不存在重复消费。
+
+
+接着，我们使用Topic Exchange 主题交换机。
+
+<img src="/img/rabbitMQ.pdf-18-1.png">18-1
+
+在rabbitmq-provider项目里面创建TopicRabbitConfig.java：
+
+
+
+
+
+然后添加多2个接口，用于推送消息到主题交换机：
+
+
+
+<img src="/img/rabbitMQ.pdf-18-2.png">18-2
+<img src="/img/rabbitMQ.pdf-19-0.png">19-0
+
+生产者这边已经完事，先不急着运行，在rabbitmq-consumer项目上，创建
+
+<img src="/img/rabbitMQ.pdf-19-1.png">19-1
+TopicManReceiver.java：
+
+<img src="/img/rabbitMQ.pdf-19-2.png">19-2
+
+再创建一个TopicTotalReceiver.java：
+
+<img src="/img/rabbitMQ.pdf-19-3.png">19-3
+
+
+然后把先调用/sendTopicMessage1 接口：
+
+
+然后看消费者rabbitmq-consumer的控制台输出情况：
+
+
+TopicManReceiver监听队列1，绑定键为：topic.man
+TopicTotalReceiver监听队列2，绑定键为：topic.#
+而当前推送的消息，携带的路由键为：topic.man
+
+
+所以可以看到两个监听消费者receiver都成功消费到了消息，因为这两个recevier监听的队
+列的绑定键都能与这条消息携带的路由键匹配上。
+
+<img src="/img/rabbitMQ.pdf-20-0.png">20-0
+
+
+接下来调用接口/sendTopicMessage2:
+
+
+然后看消费者rabbitmq-consumer的控制台输出情况：
+TopicManReceiver监听队列1，绑定键为：topic.man
+TopicTotalReceiver监听队列2，绑定键为：topic.#
+而当前推送的消息，携带的路由键为：topic.woman
+
+
+所以可以看到两个监听消费者只有TopicTotalReceiver成功消费到了消息。
+
+
+接下来是使用Fanout Exchang 扇型交换机。
+
+
+同样地，先在rabbitmq-provider项目上创建FanoutRabbitConfig.java：
+
+
+
+<img src="/img/rabbitMQ.pdf-20-1.png">20-1
+<img src="/img/rabbitMQ.pdf-21-0.png">21-0
+
+然后是写一个接口用于推送消息，
+
+
+接着在rabbitmq-consumer项目里加上消息消费类，
+
+<img src="/img/rabbitMQ.pdf-21-2.png">21-2
+
+FanoutReceiverA.java：
+
+
+
+<img src="/img/rabbitMQ.pdf-21-1.png">21-1
+
+
+
+<img src="/img/rabbitMQ.pdf-21-3.png">21-3
+
+FanoutReceiverB.java：
+
+
+```
+}
+
+<img src="/img/rabbitMQ.pdf-22-0.png">22-0
+```
+
+FanoutReceiverC.java：
+
+
+
+
+
+<img src="/img/rabbitMQ.pdf-22-1.png">22-1
+
+最后将调用下接口/sendFanoutMessage ：
+
+
+然后看看rabbitmq-consumer项目的控制台情况：
+
+
+可以看到只要发送到 fanoutExchange 这个扇型交换机的消息， 三个队列都绑定这个交
+换机，所以三个消息接收类都监听到了这条消息。
+
+
+到了这里其实三个常用的交换机的使用我们已经完毕了，那么接下来我们继续讲讲消息的
+回调，其实就是消息确认（生产者推送消息成功，消费者接收消息成功）。
+
+
+在rabbitmq-provider项目的application.yml文件上，加上消息确认的配置项后：
+
+
+ps： 本篇文章使用springboot版本为 2.1.7.RELEASE ;
+如果你们在配置确认回调，测试发现无法触发回调函数，那么存在原因也许是因为版本导
+致的配置项不起效，
+
+
+
+<img src="/img/rabbitMQ.pdf-22-2.png">22-2
+
+
+```
+ publisher-returns: true
+
+<img src="/img/rabbitMQ.pdf-23-0.png">23-0
+```
+
+然后是配置相关的消息确认回调函数，RabbitConfig.java：
+
+
+到这里，生产者推送消息的消息确认调用回调函数已经完毕。
+可以看到上面写了两个回调函数，一个叫 ConfirmCallback ，一个叫 RetrunCallback；
+那么以上这两种回调函数都是在什么情况会触发呢？
+
+
+先从总体的情况分析，推送消息存在四种情况：
+
+
+①消息推送到server，但是在server里找不到交换机
+②消息推送到server，找到交换机了，但是没找到队列
+③消息推送到sever，交换机和队列啥都没找到
+④消息推送成功
+
+
+那么我先写几个接口来分别测试和认证下以上4种情况，消息确认触发回调函数的情况：
+
+
+**①消息推送到server，但是在server里找不到交换机**
+写个测试接口，把消息推送到名为‘non-existent-exchange’的交换机上（这个交换机
+是没有创建没有配置的）：
+
+
+调用接口，查看rabbitmq-provuder项目的控制台输出情况（原因里面有说，没有找到交
+换机'non-existent-exchange'）：
+
+
+
+<img src="/img/rabbitMQ.pdf-23-1.png">23-1
+
+<img src="/img/rabbitMQ.pdf-23-2.png">23-2
+
+
+<img src="/img/rabbitMQ.pdf-24-0.png">24-0
+
+
+
+结论： ①这种情况触发的是 ConfirmCallback 回调函数。
+
+
+**②消息推送到server，找到交换机了，但是没找到队列**
+这种情况就是需要新增一个交换机，但是不给这个交换机绑定队列，我来简单地在
+DirectRabitConfig里面新增一个直连交换机，名叫‘lonelyDirectExchange’，但没给
+它做任何绑定配置操作：
+
+```
+@Bean
+
+DirectExchange lonelyDirectExchange() {
+return new DirectExchange("lonelyDirectExchange");
+}
+```
+
+然后写个测试接口，把消息推送到名为‘lonelyDirectExchange’的交换机上（这个交换
+机是没有任何队列配置的）：
+
+<img src="/img/rabbitMQ.pdf-24-2.png">24-2
+
+调用接口，查看rabbitmq-provuder项目的控制台输出情况：
+
+
+
+<img src="/img/rabbitMQ.pdf-24-1.png">24-1
+
+
+
+
+
+可以看到这种情况，两个函数都被调用了；
+这种情况下，消息是推送成功到服务器了的，所以ConfirmCallback对消息确认情况是
+
+true；
+而在RetrunCallback回调函数的打印参数里面可以看到，消息是推送到了交换机成功了，
+但是在路由分发给队列的时候，找不到队列，所以报了错误 NO_ROUTE 。
+结论：②这种情况触发的是 ConfirmCallback和RetrunCallback两个回调函数。
+
+
+**③消息推送到sever，交换机和队列啥都没找到**
+这种情况其实一看就觉得跟①很像，没错 ，③和①情况回调是一致的，所以不做结果说明
+了。
+结论： ③这种情况触发的是 ConfirmCallback 回调函数。
+
+
+**④消息推送成功**
+那么测试下，按照正常调用之前消息推送的接口就行，就调用下 /sendFanoutMessage
+接口，可以看到控制台输出：
+
+
+
+
+
+结论： ④这种情况触发的是 ConfirmCallback 回调函数。
+
+
+以上是生产者推送消息的消息确认 回调函数的使用介绍（可以在回调函数根据需求做对应
+的扩展或者业务数据处理）。
+
+
+**接下来我们继续， 消费者接收到消息的消息确认机制。**
+
+
+和生产者的消息确认机制不同，因为消息接收本来就是在监听消息，符合条件的消息就会
+消费下来。
+所以，消息接收的确认机制主要存在三种模式：
+
+
+①自动确认， 这也是默认的消息确认情况。 AcknowledgeMode.NONE
+RabbitMQ成功将消息发出（即将消息成功写入TCP Socket）中立即认为本次投递已经被
+正确处理，不管消费者端是否成功处理本次投递。
+所以这种情况如果消费端消费逻辑抛出异常，也就是消费端没有处理成功这条消息，那么
+就相当于丢失了消息。
+一般这种情况我们都是使用try catch捕捉异常后，打印日志用于追踪数据，这样找出对应
+数据再做后续处理。
+② 根据情况确认， 这个不做介绍
+③ 手动确认 ， 这个比较关键，也是我们配置接收消息确认机制时，多数选择的模式。
+消费者收到消息后，手动调用basic.ack/basic.nack/basic.reject后，RabbitMQ收到这些
+消息后，才认为本次投递成功。
+basic.ack用于肯定确认
+basic.nack用于否定确认（注意：这是AMQP 0-9-1的RabbitMQ扩展）
+basic.reject用于否定确认，但与basic.nack相比有一个限制:一次只能拒绝单条消息
+
+
+消费者端以上的3个方法都表示消息已经被正确投递，但是basic.ack表示消息已经被正确
+处理。
+而basic.nack,basic.reject表示没有被正确处理：
+
+
+着重讲下reject，因为有时候一些场景是需要重新入列的。
+
+
+channel.basicReject(deliveryTag, true); 拒绝消费当前消息，如果第二参数传入true，
+就是将数据重新丢回队列里，那么下次还会消费这消息。设置false，就是告诉服务器，我
+已经知道这条消息数据了，因为一些原因拒绝它，而且服务器也把这个消息丢掉就行。 下
+次不想再消费这条消息了。
+
+
+使用拒绝后重新入列这个确认模式要谨慎，因为一般都是出现异常的时候，catch异常再
+拒绝入列，选择是否重入列。
+
+
+但是如果使用不当会导致一些每次都被你重入列的消息一直消费-入列-消费-入列这样循
+环，会导致消息积压。
+
+
+顺便也简单讲讲 nack，这个也是相当于设置不消费某条消息。
+
+
+channel.basicNack(deliveryTag, false, true);
+第一个参数依然是当前消息到的数据的唯一id;
+第二个参数是指是否针对多条消息；如果是true，也就是说一次性针对当前通道的消息的
+tagID小于当前这条消息的，都拒绝确认。
+第三个参数是指是否重新入列，也就是指不确认的消息是否重新丢回到队列里面去。
+
+
+同样使用不确认后重新入列这个确认模式要谨慎，因为这里也可能因为考虑不周出现消息
+一直被重新丢回去的情况，导致积压。
+
+
+**看了上面这么多介绍，接下来我们一起配置下，看看一般的消息接收 手动确认是怎么样**
+**的。**
+在消费者项目里，
+新建MessageListenerConfig.java上添加代码相关的配置代码：
+
+
+<img src="/img/rabbitMQ.pdf-26-0.png">26-0
+
+对应的手动确认消息监听类，MyAckReceiver.java（手动确认模式需要实现
+ChannelAwareMessageListener）：
+//之前的相关监听器可以先注释掉，以免造成多个同类型监听器都监听同一个队列。
+
+```
+@Component
+public class MyAckReceiver implements ChannelAwareMessageListener {
+
+```
+
+/**
+- 消费者接收到消息的消息确认机制。
+- 和生产者的消息确认机制不同，因为消息接收本来就是在监听消息，符合条件的消息就会消费下
+来。
+- 所以，消息接收的确认机制主要存在三种模式：
+- ①自动确认， 这也是默认的消息确认情况。 AcknowledgeMode.NONE
+
+
+<img src="/img/rabbitMQ.pdf-27-0.png">27-0
+
+
+
+
+这时，先调用接口/sendDirectMessage， 给直连交换机TestDirectExchange 的队列
+TestDirectQueue 推送一条消息，可以看到监听器正常消费了下来：
+
+
+**到这里，我们其实已经掌握了怎么去使用消息消费的手动确认了。**
+但是这个场景往往不够！ 因为很多伙伴之前给我评论反应，他们需要这个消费者项目里
+面，监听的好几个队列都想变成手动确认模式，而且处理的消息业务逻辑不一样。
+
+
+没有问题，接下来看代码
+
+
+场景： 除了直连交换机的队列TestDirectQueue需要变成手动确认以外，我们还需要将一
+个其他的队列
+
+
+或者多个队列也变成手动确认，而且不同队列实现不同的业务处理。
+
+<img src="/img/rabbitMQ.pdf-28-0.png">28-0
+
+
+那么我们需要做的第一步，往SimpleMessageListenerContainer里添加多个队列：
+
+
+然后我们的手动确认消息监听类，MyAckReceiver.java 就可以同时将上面设置到的队列
+的消息都消费下来。
+
+
+但是我们需要做不用的业务逻辑处理，那么只需要 根据消息来自的队列名进行区分处理
+即可，如：
+
+
+
+<img src="/img/rabbitMQ.pdf-28-1.png">28-1
+
+
+<img src="/img/rabbitMQ.pdf-29-0.png">29-0
+
+
+
+
+
+
+
+ok，这时候我们来分别往不同队列推送消息，看看效果：
+
+<img src="/img/rabbitMQ.pdf-29-1.png">29-1
+
+
+调用接口/sendDirectMessage 和 /sendFanoutMessage ，
+
+
+如果你还想新增其他的监听队列，也就是按照这种方式新增配置即可（或者完全可以分开
+多个消费者项目去监听处理）。
+
+
+**SpringBoot下RabbitMQ配置信息详解**
+
+
+**笔记本：** rabbitMQ
+
+
+**创建时间：** 2022/8/25 16:28 **更新时间：** 2022/8/25 16:29
+
+
+**作者：** 彼岸樱速
+
+
+# base
+spring.rabbitmq.host: 服务Host
+spring.rabbitmq.port: 服务端口
+spring.rabbitmq.username: 登陆用户名
+spring.rabbitmq.password: 登陆密码
+spring.rabbitmq.virtual-host: 连接到rabbitMQ的vhost
+spring.rabbitmq.addresses: 指定client连接到的server的地址，多个以逗号分隔(优先取
+addresses，然后再取host)
+spring.rabbitmq.requested-heartbeat: 指定心跳超时，单位秒，0为不指定；默认60s
+spring.rabbitmq.publisher-confirms: 是否启用【发布确认】
+spring.rabbitmq.publisher-returns: 是否启用【发布返回】
+spring.rabbitmq.connection-timeout: 连接超时，单位毫秒，0表示无穷大，不超时
+
+
+spring.rabbitmq.parsed-addresses:
+
+
+# ssl
+spring.rabbitmq.ssl.enabled: 是否支持ssl
+spring.rabbitmq.ssl.key-store: 指定持有SSL certificate的key store的路径
+spring.rabbitmq.ssl.key-store-password: 指定访问key store的密码
+spring.rabbitmq.ssl.trust-store: 指定持有SSL certificates的Trust store
+spring.rabbitmq.ssl.trust-store-password: 指定访问trust store的密码
+
+
+spring.rabbitmq.ssl.algorithm: ssl使用的算法，例如，TLSv1.1
+
+
+# cache
+spring.rabbitmq.cache.channel.size: 缓存中保持的channel数量
+spring.rabbitmq.cache.channel.checkout-timeout: 当缓存数量被设置时，从缓存中获
+取一个channel的超时时间，单位毫秒；如果为0，则总是创建一个新channel
+spring.rabbitmq.cache.connection.size: 缓存的连接数，只有是CONNECTION模式时
+生效
+
+
+spring.rabbitmq.cache.connection.mode: 连接工厂缓存模式：CHANNEL 和
+CONNECTION
+
+
+# listener
+spring.rabbitmq.listener.simple.auto-startup: 是否启动时自动启动容器
+spring.rabbitmq.listener.simple.acknowledge-mode: 表示消息确认方式，其有三种配
+置方式，分别是none、manual和auto；默认auto
+spring.rabbitmq.listener.simple.concurrency: 最小的消费者数量
+spring.rabbitmq.listener.simple.max-concurrency: 最大的消费者数量
+spring.rabbitmq.listener.simple.prefetch: 指定一个请求能处理多少个消息，如果有事务
+的话，必须大于等于transaction数量.
+spring.rabbitmq.listener.simple.transaction-size: 指定一个事务处理的消息数量，最好
+是小于等于prefetch的数量.
+spring.rabbitmq.listener.simple.default-requeue-rejected: 决定被拒绝的消息是否重新
+入队；默认是true（与参数acknowledge-mode有关系）
+
+
+spring.rabbitmq.listener.simple.idle-event-interval: 多少长时间发布空闲容器时间，单
+位毫秒
+
+
+spring.rabbitmq.listener.simple.retry.enabled: 监听重试是否可用
+spring.rabbitmq.listener.simple.retry.max-attempts: 最大重试次数
+
+
+spring.rabbitmq.listener.simple.retry.initial-interval: 第一次和第二次尝试发布或传递
+消息之间的间隔
+spring.rabbitmq.listener.simple.retry.multiplier: 应用于上一重试间隔的乘数
+spring.rabbitmq.listener.simple.retry.max-interval: 最大重试时间间隔
+
+
+spring.rabbitmq.listener.simple.retry.stateless: 重试是有状态or无状态
+
+
+# template
+spring.rabbitmq.template.mandatory: 启用强制信息；默认false
+spring.rabbitmq.template.receive-timeout: receive() 操作的超时时间
+spring.rabbitmq.template.reply-timeout: sendAndReceive() 操作的超时时间
+spring.rabbitmq.template.retry.enabled: 发送重试是否可用
+spring.rabbitmq.template.retry.max-attempts: 最大重试次数
+spring.rabbitmq.template.retry.initial-interval: 第一次和第二次尝试发布或传递消息之
+间的间隔
+spring.rabbitmq.template.retry.multiplier: 应用于上一重试间隔的乘数
+
+
+spring.rabbitmq.template.retry.max-interval: 最大重试时间间隔
+
+
+**Linux安装RabbitMQ详细教程**
+
+
+**笔记本：** rabbitMQ
+
+
+**创建时间：** 2022/8/16 17:32 **更新时间：** 2022/8/16 17:47
+
+
+**作者：** 彼岸樱速
+
+
+**一、环境准备**
+
+**1、RabbitMQ版本 和 Erlang 版本兼容性关系**
+
+
+
+
+
+**2、官方安装包下载地址**
+
+
+
+<img src="/img/rabbitMQ.pdf-32-1.png">32-1
+
+
+
+**3、安装包中说明，请下载对应的安装包**
+
+
+
+
+
+**二、安装操作步骤**
+
+**1、安装C++依赖环境**
+
+
+
+
+
+**2、准备安装包**
+【我这里选择目前最新版本，具体根据自己需要选择对应的版本】
+
+
+
+
+
+**3、在【/opt】路径下，创建【rabbitmq】文件夹**
+
+
+
+
+
+**4、将安装包上传到【rabbitmq】文件夹下**
+
+
+
+
+
+**5、安装Erlang**
+
+
+
+
+
+**6、检查Erlang是否安装成功**
+
+
+
+
+
+**7、安装socat**
+
+
+
+
+
+<img src="/img/rabbitMQ.pdf-32-10.png">32-10
+
+**8、安装rabbitmq**
+
+
+
+
+**9、开启管理界面**
+
+
+
+
+
+**10、添加配置文件，解决只能localhost访问的问题**
+
+
+
+<img src="/img/rabbitMQ.pdf-33-1.png">33-1
+
+
+
+**11、在rabbitmq.config文件中写入下面的命令，不要忘了后面的点**
+
+
+
+
+
+<img src="/img/rabbitMQ.pdf-33-3.png">33-3
+
+**12、启动rabbitmq**
+
+
+
+
+
+<img src="/img/rabbitMQ.pdf-33-4.png">33-4
+
+**13、停止rabbitmq**
+
+
+
+
+
+<img src="/img/rabbitMQ.pdf-33-5.png">33-5
+
+**14、重启rabbitmq**
+
+
+
+
+
+**15、开放端口**
+
+
+
+<img src="/img/rabbitMQ.pdf-33-6.png">33-6
+
+
+
+**16、登录管理界面**
+
+
+
+
+
+**三、卸载操作步骤**
+**1、卸载rabbitmq相关文件**
+**1.1、卸载前先停止rabbitmq服务**
+
+
+
+
+
+**1.2、查看rabbitmq安装的相关列表**
+
+
+
+
+
+**1.3、卸载rabbitmq-server.noarch**
+
+
+
+
+
+**2、卸载erlang**
+**2.1、查看erlang安装的相关列表**
+
+
+
+
+**2.2、卸载erlang已安装的相关内容**
+
+
+
+
+
+**3、删除有关的所有文件**
+
+
+
+<img src="/img/rabbitMQ.pdf-34-1.png">34-1
+
+
