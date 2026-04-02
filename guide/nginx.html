@@ -1,0 +1,845 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="generator" content="VuePress 2.0.0-rc.20" />
+    <style>
+      :root {
+        --vp-c-bg: #fff;
+      }
+
+      [data-theme='dark'] {
+        --vp-c-bg: #1b1b1f;
+      }
+
+      html,
+      body {
+        background-color: var(--vp-c-bg);
+      }
+    </style>
+    <script>
+      const useChoice = localStorage.getItem('vuepress-color-scheme')
+      const systemStatus =
+        'matchMedia' in window
+          ? window.matchMedia('(prefers-color-scheme: dark)').matches
+          : false
+
+      if (useChoice === 'light') {
+        document.documentElement.dataset.theme = 'light'
+      } else if (useChoice === 'dark' || systemStatus) {
+        document.documentElement.dataset.theme = 'dark'
+      }
+    </script>
+    <title>'$status $body_bytes_sent "$http_referer" ' | 彼岸樱速</title><meta name="description" content="欢迎来到bays的笔记文档空间">
+    <link rel="stylesheet" href="/assets/css/styles.f7307751.css">
+    <link rel="preload" href="/assets/js/runtime~app.f4595dd2.js" as="script"><link rel="preload" href="/assets/css/styles.f7307751.css" as="style"><link rel="preload" href="/assets/js/80.d657ec11.js" as="script"><link rel="preload" href="/assets/js/app.b924a461.js" as="script">
+    <link rel="prefetch" href="/assets/js/guide_java-base.html.33446a78.js" as="script"><link rel="prefetch" href="/assets/js/guide_mysql.html.5a26388b.js" as="script"><link rel="prefetch" href="/assets/js/guide_spring.html.3826e71e.js" as="script"><link rel="prefetch" href="/assets/js/guide_Thread.html.04caf3bc.js" as="script"><link rel="prefetch" href="/assets/js/guide_设计模式.html.bfc41cea.js" as="script"><link rel="prefetch" href="/assets/js/guide_集合框架.html.a43849c4.js" as="script"><link rel="prefetch" href="/assets/js/guide_JVM.html.706d52d4.js" as="script"><link rel="prefetch" href="/assets/js/guide_Sort.html.cc3498ab.js" as="script"><link rel="prefetch" href="/assets/js/guide_Java工具.html.178ce3c5.js" as="script"><link rel="prefetch" href="/assets/js/guide_redis.html.2a57d709.js" as="script"><link rel="prefetch" href="/assets/js/guide_maven.html.3f0f8833.js" as="script"><link rel="prefetch" href="/assets/js/guide_dubbo.html.cd8cd49b.js" as="script"><link rel="prefetch" href="/assets/js/guide_docker.html.7f6df417.js" as="script"><link rel="prefetch" href="/assets/js/guide_mybatis.html.fc6fdcc2.js" as="script"><link rel="prefetch" href="/assets/js/guide_K8S.html.bd12d84a.js" as="script"><link rel="prefetch" href="/assets/js/guide_activeMQ.html.d6c0a304.js" as="script"><link rel="prefetch" href="/assets/js/guide_Java面试.html.4935681b.js" as="script"><link rel="prefetch" href="/assets/js/guide_nginx.html.3e27a0bf.js" as="script"><link rel="prefetch" href="/assets/js/guide_hibernate.html.767c4102.js" as="script"><link rel="prefetch" href="/assets/js/guide_IO.html.cd2ba7dc.js" as="script"><link rel="prefetch" href="/assets/js/guide_SpringCloud.html.d8c3faac.js" as="script"><link rel="prefetch" href="/assets/js/guide_锁机制.html.f2744de7.js" as="script"><link rel="prefetch" href="/assets/js/guide_etcd.html.94d74e02.js" as="script"><link rel="prefetch" href="/assets/js/guide_rabbitMQ.html.6b9b3f41.js" as="script"><link rel="prefetch" href="/assets/js/guide_信息安全.html.9ced2e06.js" as="script"><link rel="prefetch" href="/assets/js/guide_分库分表.html.53da8892.js" as="script"><link rel="prefetch" href="/assets/js/guide_各种框架.html.1708222d.js" as="script"><link rel="prefetch" href="/assets/js/guide_excel.html.556d5808.js" as="script"><link rel="prefetch" href="/assets/js/guide_linux.html.ab90c6fb.js" as="script"><link rel="prefetch" href="/assets/js/guide_科目一.html.d539d5bd.js" as="script"><link rel="prefetch" href="/assets/js/guide_算法.html.692f3570.js" as="script"><link rel="prefetch" href="/assets/js/guide_rocketMQ.html.79f7babe.js" as="script"><link rel="prefetch" href="/assets/js/guide_协议.html.9f38044a.js" as="script"><link rel="prefetch" href="/assets/js/guide_nacos.html.2286d70e.js" as="script"><link rel="prefetch" href="/assets/js/guide_kafka.html.fefd1df8.js" as="script"><link rel="prefetch" href="/assets/js/guide_awt.html.0afacf5e.js" as="script"><link rel="prefetch" href="/assets/js/guide_智力题.html.5c7f1473.js" as="script"><link rel="prefetch" href="/assets/js/guide_xxl-job.html.a1f849ec.js" as="script"><link rel="prefetch" href="/assets/js/guide_idea.html.3ad8a07d.js" as="script"><link rel="prefetch" href="/assets/js/guide_吉他.html.6ebfb331.js" as="script"><link rel="prefetch" href="/assets/js/guide_计算机网络.html.5bb300e3.js" as="script"><link rel="prefetch" href="/assets/js/guide_git.html.0fdf80ae.js" as="script"><link rel="prefetch" href="/assets/js/guide_elasticsearch.html.e3b40bc3.js" as="script"><link rel="prefetch" href="/assets/js/guide_jenkins.html.e58e80c0.js" as="script"><link rel="prefetch" href="/assets/js/guide_tomcat.html.f4e3bd63.js" as="script"><link rel="prefetch" href="/assets/js/guide_类型转换.html.321f7adf.js" as="script"><link rel="prefetch" href="/assets/js/guide_Struts.html.bde4caf7.js" as="script"><link rel="prefetch" href="/assets/js/guide_arthas.html.92acb166.js" as="script"><link rel="prefetch" href="/assets/js/get-started.html.e7471dde.js" as="script"><link rel="prefetch" href="/assets/js/guide_memcache.html.cd5209cb.js" as="script"><link rel="prefetch" href="/assets/js/index.html.8014296c.js" as="script"><link rel="prefetch" href="/assets/js/guide_zookeeper.html.91a69f82.js" as="script"><link rel="prefetch" href="/assets/js/posts_sticky2.html.06cf9799.js" as="script"><link rel="prefetch" href="/assets/js/posts_archive2.html.93e2049d.js" as="script"><link rel="prefetch" href="/assets/js/posts_archive1.html.9a92ab7c.js" as="script"><link rel="prefetch" href="/assets/js/posts_article10.html.60db36a1.js" as="script"><link rel="prefetch" href="/assets/js/posts_article12.html.4e86dc7a.js" as="script"><link rel="prefetch" href="/assets/js/posts_article11.html.06296013.js" as="script"><link rel="prefetch" href="/assets/js/posts_article4.html.487528dc.js" as="script"><link rel="prefetch" href="/assets/js/posts_article5.html.46fa9dfb.js" as="script"><link rel="prefetch" href="/assets/js/posts_article6.html.263fd3df.js" as="script"><link rel="prefetch" href="/assets/js/posts_article7.html.6d94c194.js" as="script"><link rel="prefetch" href="/assets/js/posts_article8.html.85e9d135.js" as="script"><link rel="prefetch" href="/assets/js/posts_article3.html.116fece1.js" as="script"><link rel="prefetch" href="/assets/js/posts_article9.html.c42c4aee.js" as="script"><link rel="prefetch" href="/assets/js/posts_article1.html.09b6dc04.js" as="script"><link rel="prefetch" href="/assets/js/posts_article2.html.ac4fcdc4.js" as="script"><link rel="prefetch" href="/assets/js/posts_sticky.html.62f7b06e.js" as="script"><link rel="prefetch" href="/assets/js/category_category-a_index.html.3d5a3d97.js" as="script"><link rel="prefetch" href="/assets/js/category_category-b_index.html.f800411b.js" as="script"><link rel="prefetch" href="/assets/js/category_category-c_index.html.54705752.js" as="script"><link rel="prefetch" href="/assets/js/category_history_index.html.8d52ff6c.js" as="script"><link rel="prefetch" href="/assets/js/tag_tag-a_index.html.4ca30b34.js" as="script"><link rel="prefetch" href="/assets/js/tag_tag-c_index.html.99b6d7a2.js" as="script"><link rel="prefetch" href="/assets/js/tag_tag-d_index.html.48d011d2.js" as="script"><link rel="prefetch" href="/assets/js/tag_tag-e_index.html.1a0f4615.js" as="script"><link rel="prefetch" href="/assets/js/tag_tag-b_index.html.efaa4391.js" as="script"><link rel="prefetch" href="/assets/js/category_index.html.e07b1653.js" as="script"><link rel="prefetch" href="/assets/js/tag_wwii_index.html.a6641410.js" as="script"><link rel="prefetch" href="/assets/js/tag_wwi_index.html.14ce07dc.js" as="script"><link rel="prefetch" href="/assets/js/404.html.cec7b627.js" as="script"><link rel="prefetch" href="/assets/js/timeline_index.html.3d78620e.js" as="script"><link rel="prefetch" href="/assets/js/article_index.html.88ed4921.js" as="script"><link rel="prefetch" href="/assets/js/tag_index.html.1febec96.js" as="script">
+  </head>
+  <body>
+    <div id="app"><!--[--><div class="vp-theme-container external-link-icon" vp-container><!--[--><header class="vp-navbar" vp-navbar><div class="vp-toggle-sidebar-button" title="toggle sidebar" aria-expanded="false" role="button" tabindex="0"><div class="icon" aria-hidden="true"><span></span><span></span><span></span></div></div><span><a class="route-link" href="/"><img class="vp-site-logo" src="/logo.png" alt="彼岸樱速"><span class="vp-site-name vp-hide-mobile" aria-hidden="true">彼岸樱速</span></a></span><div class="vp-navbar-items-wrapper" style=""><!--[--><!--]--><nav class="vp-navbar-items vp-hide-mobile" aria-label="site navigation"><!--[--><div class="vp-navbar-item"><a class="route-link auto-link" href="/" aria-label="Home"><!--[--><!--[--><!--]--><!--]-->Home<!--[--><!--[--><!--]--><!--]--></a></div><div class="vp-navbar-item"><a class="auto-link external-link" href="https://bianyingsu.github.io" aria-label="梦起" rel="noopener noreferrer" target="_blank"><!--[--><!--[--><!--]--><!--]-->梦起<!--[--><!--[--><!--]--><!--]--></a></div><div class="vp-navbar-item"><a class="route-link auto-link" href="/guide/activeMQ.html" aria-label="activeMQ"><!--[--><!--[--><!--]--><!--]-->activeMQ<!--[--><!--[--><!--]--><!--]--></a></div><div class="vp-navbar-item"><a class="route-link auto-link" href="/article/" aria-label="Article"><!--[--><!--[--><!--]--><!--]-->Article<!--[--><!--[--><!--]--><!--]--></a></div><div class="vp-navbar-item"><a class="route-link auto-link" href="/category/" aria-label="Category"><!--[--><!--[--><!--]--><!--]-->Category<!--[--><!--[--><!--]--><!--]--></a></div><div class="vp-navbar-item"><a class="route-link auto-link" href="/tag/" aria-label="Tag"><!--[--><!--[--><!--]--><!--]-->Tag<!--[--><!--[--><!--]--><!--]--></a></div><div class="vp-navbar-item"><a class="route-link auto-link" href="/timeline/" aria-label="Timeline"><!--[--><!--[--><!--]--><!--]-->Timeline<!--[--><!--[--><!--]--><!--]--></a></div><!--]--></nav><!--[--><!--]--><button type="button" class="vp-toggle-color-mode-button" title="toggle color mode"><svg class="light-icon" viewbox="0 0 32 32" style=""><path d="M16 12.005a4 4 0 1 1-4 4a4.005 4.005 0 0 1 4-4m0-2a6 6 0 1 0 6 6a6 6 0 0 0-6-6z" fill="currentColor"></path><path d="M5.394 6.813l1.414-1.415l3.506 3.506L8.9 10.318z" fill="currentColor"></path><path d="M2 15.005h5v2H2z" fill="currentColor"></path><path d="M5.394 25.197L8.9 21.691l1.414 1.415l-3.506 3.505z" fill="currentColor"></path><path d="M15 25.005h2v5h-2z" fill="currentColor"></path><path d="M21.687 23.106l1.414-1.415l3.506 3.506l-1.414 1.414z" fill="currentColor"></path><path d="M25 15.005h5v2h-5z" fill="currentColor"></path><path d="M21.687 8.904l3.506-3.506l1.414 1.415l-3.506 3.505z" fill="currentColor"></path><path d="M15 2.005h2v5h-2z" fill="currentColor"></path></svg><svg class="dark-icon" viewbox="0 0 32 32" style="display:none;"><path d="M13.502 5.414a15.075 15.075 0 0 0 11.594 18.194a11.113 11.113 0 0 1-7.975 3.39c-.138 0-.278.005-.418 0a11.094 11.094 0 0 1-3.2-21.584M14.98 3a1.002 1.002 0 0 0-.175.016a13.096 13.096 0 0 0 1.825 25.981c.164.006.328 0 .49 0a13.072 13.072 0 0 0 10.703-5.555a1.01 1.01 0 0 0-.783-1.565A13.08 13.08 0 0 1 15.89 4.38A1.015 1.015 0 0 0 14.98 3z" fill="currentColor"></path></svg></button><!----></div></header><!--]--><div class="vp-sidebar-mask"></div><!--[--><aside class="vp-sidebar" vp-sidebar><nav class="vp-navbar-items" aria-label="site navigation"><!--[--><div class="vp-navbar-item"><a class="route-link auto-link" href="/" aria-label="Home"><!--[--><!--[--><!--]--><!--]-->Home<!--[--><!--[--><!--]--><!--]--></a></div><div class="vp-navbar-item"><a class="auto-link external-link" href="https://bianyingsu.github.io" aria-label="梦起" rel="noopener noreferrer" target="_blank"><!--[--><!--[--><!--]--><!--]-->梦起<!--[--><!--[--><!--]--><!--]--></a></div><div class="vp-navbar-item"><a class="route-link auto-link" href="/guide/activeMQ.html" aria-label="activeMQ"><!--[--><!--[--><!--]--><!--]-->activeMQ<!--[--><!--[--><!--]--><!--]--></a></div><div class="vp-navbar-item"><a class="route-link auto-link" href="/article/" aria-label="Article"><!--[--><!--[--><!--]--><!--]-->Article<!--[--><!--[--><!--]--><!--]--></a></div><div class="vp-navbar-item"><a class="route-link auto-link" href="/category/" aria-label="Category"><!--[--><!--[--><!--]--><!--]-->Category<!--[--><!--[--><!--]--><!--]--></a></div><div class="vp-navbar-item"><a class="route-link auto-link" href="/tag/" aria-label="Tag"><!--[--><!--[--><!--]--><!--]-->Tag<!--[--><!--[--><!--]--><!--]--></a></div><div class="vp-navbar-item"><a class="route-link auto-link" href="/timeline/" aria-label="Timeline"><!--[--><!--[--><!--]--><!--]-->Timeline<!--[--><!--[--><!--]--><!--]--></a></div><!--]--></nav><!--[--><!--]--><ul class="vp-sidebar-items"><!--[--><li><a class="route-link auto-link vp-sidebar-item vp-sidebar-heading" href="/guide/activeMQ.html" aria-label="/guide/activeMQ.html"><!--[--><!--[--><!--]--><!--]-->/guide/activeMQ.html<!--[--><!--[--><!--]--><!--]--></a><!----></li><li><a class="route-link auto-link vp-sidebar-item vp-sidebar-heading" href="/guide/Arthas.html" aria-label="/guide/Arthas.html"><!--[--><!--[--><!--]--><!--]-->/guide/Arthas.html<!--[--><!--[--><!--]--><!--]--></a><!----></li><li><a class="route-link auto-link vp-sidebar-item vp-sidebar-heading" href="/guide/awt.html" aria-label="AWT &amp;&amp; Swing"><!--[--><!--[--><!--]--><!--]-->AWT &amp;&amp; Swing<!--[--><!--[--><!--]--><!--]--></a><!----></li><li><a class="route-link auto-link vp-sidebar-item vp-sidebar-heading" href="/guide/docker.html" aria-label="Docker"><!--[--><!--[--><!--]--><!--]-->Docker<!--[--><!--[--><!--]--><!--]--></a><!----></li><li><a class="route-link auto-link vp-sidebar-item vp-sidebar-heading" href="/guide/dubbo.html" aria-label="Dubbo"><!--[--><!--[--><!--]--><!--]-->Dubbo<!--[--><!--[--><!--]--><!--]--></a><!----></li><li><a class="route-link auto-link vp-sidebar-item vp-sidebar-heading" href="/guide/elasticsearch.html" aria-label="ElasticSearch"><!--[--><!--[--><!--]--><!--]-->ElasticSearch<!--[--><!--[--><!--]--><!--]--></a><!----></li><li><a class="route-link auto-link vp-sidebar-item vp-sidebar-heading" href="/guide/etcd.html" aria-label="Etcd"><!--[--><!--[--><!--]--><!--]-->Etcd<!--[--><!--[--><!--]--><!--]--></a><!----></li><li><a class="route-link auto-link vp-sidebar-item vp-sidebar-heading" href="/guide/excel.html" aria-label="Excel"><!--[--><!--[--><!--]--><!--]-->Excel<!--[--><!--[--><!--]--><!--]--></a><!----></li><li><a class="route-link auto-link vp-sidebar-item vp-sidebar-heading" href="/guide/git.html" aria-label="Git"><!--[--><!--[--><!--]--><!--]-->Git<!--[--><!--[--><!--]--><!--]--></a><!----></li><li><a class="route-link auto-link vp-sidebar-item vp-sidebar-heading" href="/guide/Sort.html" aria-label="Sort"><!--[--><!--[--><!--]--><!--]-->Sort<!--[--><!--[--><!--]--><!--]--></a><!----></li><!--]--></ul><!--[--><!--]--></aside><!--]--><!--[--><main class="vp-page"><!--[--><!--]--><div vp-content><!--[--><!--]--><div><p><strong>CentOS8安装Nginx</strong></p><p><strong>笔记本：</strong> nginx</p><p><strong>创建时间：</strong> 2024/4/2 20:55 <strong>更新时间：</strong> 2024/4/2 21:38</p><h2 id="centos8安装nginx" tabindex="-1"><a class="header-anchor" href="#centos8安装nginx"><span><strong>CentOS8安装Nginx</strong></span></a></h2><p><strong>前言：</strong></p><p>Nginx（engine x）是一个高性能的HTTP和反向代理web服务器，它同时提供了</p><p>IMAP/POP3/SMTP服务，Nginx是由伊戈尔·赛索耶夫为俄罗斯访问量第二的Rambler.ru站点</p><p>（俄文：Рамблер）开发的。</p><p>Nginx是一款轻量级的Web服务器 / 反向代理服务器以及电子邮件（IMAP/POP3）代理服务器。</p><p>在BSK-like 协议下发行。其特点是占有内存少、并发能力强。</p><p>nginx的并发能力在同类型的网页服务器中表现较好。</p><p>由于在CentOS8中安装nginx比较简单，接下来直接进入主题</p><p>1、安装必要的插件</p><p>1.1、安装gcc</p><p>GCC（GNU Compiler Collection，GNU编译器套件）是由GNU开发的编程语言编译器。它可以</p><p>编译 C、C++、ada、object-c、java、Go等语言。</p><p>一般来说 CentOS8中都自带有gcc，可以使用命令：gcc -v 来查看gcc是否安装</p><p>如果gcc没有安装，可使用命令：yum install gcc -y 来进行安装</p><p>1.2、安装pcre pcre-devel</p><p>pcre是一个 perl 库，它包括了 perl 兼容的正则表达式库，nginx中的http模块需要使用 pcre 来解 析正则表达式，所以，安装 pcre 库是必须的。</p><p>命令：yum install pcre pcre-devel -y</p><p><img src="/img/nginx.pdf-0-0.png">0-0 <img src="/img/nginx.pdf-1-0.png">1-0</p><p><img src="/img/nginx.pdf-1-1.png">1-1</p><p>1.3、安装zlib zlib-devel</p><p>zlib库提供了很多种压缩和解压缩的方式，nginx需要使用zlib库来对http包的内容进行gzip，所以</p><p>zlib插件也必须要安装。</p><p>命令：yum install zlib zlib-devel -y</p><p>1.4、安装openssl openssl-devel</p><p><img src="/img/nginx.pdf-1-2.png">1-2 openssl是web安全通信的基石，如果没有spenssl，我们的所有信息都相当于是在裸奔，会全部</p><p>暴露出来，其重要程度可想而知，所以也必须要安装。</p><p>命令：yum install openssl openssl-devel -y</p><p>2、安装nginx</p><p>2.1、安装nginx，首页进入 src目录，然后创建一个nginx文件夹，进入nginx目录后再使用命令</p><p>安装nginx。当然安装目录可以自行选择。</p><p>命令：</p><p>cd usr/local/src</p><p>mkdir nginx</p><p>cd nginx</p><p>2.1、使用下列命令下载nginx安装包</p><p>命令：wget http://nginx.org/download/nginx-1.18.0.tar.gz</p><p><img src="/img/nginx.pdf-2-0.png">2-0</p><p><img src="/img/nginx.pdf-2-1.png">2-1</p><p><img src="/img/nginx.pdf-2-2.png">2-2 2.2、使用下列命令将nginx安装包进行解压，将解压后的nginx文件重命名，然后删除原装安装</p><p>包。</p><p>2.3 进入nginx-1.18.0目录，然后执行下列命令</p><p>--prefix=/usr/local/src/nginx 是指指定路径安装</p><p>执行命令： make 进行编译</p><p><img src="/img/nginx.pdf-3-2.png">3-2</p><p><img src="/img/nginx.pdf-3-3.png">3-3</p><p><img src="/img/nginx.pdf-3-4.png">3-4 <img src="/img/nginx.pdf-4-0.png">4-0</p><p>执行命令：make install 进行安装</p><p>2.4、安装完成后，进入conf目录，执行命令：vim nginx.conf 查看端口</p><p><img src="/img/nginx.pdf-4-1.png">4-1</p><p><img src="/img/nginx.pdf-4-2.png">4-2 <img src="/img/nginx.pdf-5-0.png">5-0</p><p>2.5、启动nginx</p><p>切换到下图中的路径</p><p>然后进入sbin目录执行命令：./nginx 启动nginx，然后执行命令：ps -ef | grep nginx 查看nginx</p><p>是否启动成功。</p><p>然后在虚拟机的浏览器中输入地址：http://localhost:80访问nginx。</p><p><img src="/img/nginx.pdf-5-1.png">5-1 <img src="/img/nginx.pdf-6-0.png">6-0</p><p>3、如果想要在外部主机访问nginx，需要关闭服务器防火墙或者开放nginx服务端口，nginx的</p><p>服务端口为nginx.conf中配置的端口。</p><p>命令：systemctl stop firewalld.service #关闭防火墙</p><p>最后在外部主机的浏览器输入nginx地址就可以访问了。</p><p>4、扩展</p><p>4.1、nginx.conf解释说明：</p><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line"> #user nobody;</span>
+<span class="line"> worker_processes 1; #工作进程：数目。根据硬件调整，通常等于cpu数量或者2倍cpu数量。</span>
+<span class="line"> #错误日志存放路径</span>
+<span class="line"> #error_log logs/error.log;</span>
+<span class="line"> #error_log logs/error.log notice;</span>
+<span class="line"> #error_log logs/error.log info;</span>
+<span class="line"> #pid    logs/nginx.pid; # nginx进程pid存放路径</span>
+<span class="line"> events {</span>
+<span class="line"> worker_connections 1024; # 工作进程的最大连接数量</span>
+<span class="line"> }</span>
+<span class="line"></span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><img src="/img/nginx.pdf-6-1.png">6-1 <img src="/img/nginx.pdf-7-0.png">7-0</p><p>make过程如果出现报错，解决方法如下</p><p><strong>第一个，报错</strong></p><p><img src="/img/nginx.pdf-8-0.png">8-0</p><p>分析原因： 是将警告当成了错误处理，打开 nginx的安装目录/objs/Makefile， <code>去掉CFLAGS中的-Werror，再</code></p><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line">重新make</span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div></div></div><p>-Wall 表示打开gcc的所有警告</p><p>-Werror，它要求gcc将所有的警告当成错误进行处理</p><p><strong>第二个，make出现的错误</strong></p><p><img src="/img/nginx.pdf-8-1.png">8-1</p><p>这里提示我们struct crypt_data’没有名为‘current_salt’的成员：cd.current_salt[0] = ~salt[0]； 最好的办法是换一个版本，因为条件限制，我们就进到源码里把这行直接注释掉好了。 <code># vim</code></p><p><code>src/os/unix/ngx_user.c</code> 进入里面注释掉36行</p><p><strong>第三个错误openssl版本错误</strong></p><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line">    src/event/ngx_event_openssl.c: In function ‘ngx_ssl_dhparam’:</span>
+<span class="line"></span>
+<span class="line">    src/event/ngx_event_openssl.c:954:11: error: dereferencing pointer to i</span>
+<span class="line"></span>
+<span class="line">    dh-&gt;p = BN_bin2bn(dh1024_p, sizeof(dh1024_p), NULL);^~</span>
+<span class="line"></span>
+<span class="line">    src/event/ngx_event_openssl.c: In function ‘ngx_ssl_connection_error’:</span>
+<span class="line"></span>
+<span class="line">    src/event/ngx_event_openssl.c:1941:21: error: ‘SSL_R_NO_CIPHERS_PASSED</span>
+<span class="line"></span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><img src="/img/nginx.pdf-8-2.png">8-2 <img src="/img/nginx.pdf-9-0.png">9-0</p><p>解决： 直接安装openssl1.0版本</p><p><code>wget http://www.openssl.org/source/openssl-1.1.0e.tar.gz</code> //下载openssl</p><p>[root@iZgt88z6l1kvd7Z ~]# <code>tar -zxvf openssl-1.1.0e.tar.gz</code> //解压</p><p>[root@iZgt88z6l1kvd7Z ~]# <code>cd openssl-1.1.0e/ &amp;&amp;./config shared zlib --</code></p><p><code>prefix=/usr/local/openssl &amp;&amp; make &amp;&amp; make install</code> 进入目录把openssl编译安装到 /usr/local/openssl 下</p><p>[root@iZgt88z6l1kvd7Z openssl-1.1.0e]# <code>./config -t</code></p><p>[root@iZgt88z6l1kvd7Z openssl-1.1.0e]# <code>make depend</code> <a href="https://so.csdn.net/so/search?q=makefile&amp;spm=1001.2101.3001.7020" target="_blank" rel="noopener noreferrer">//一种度makefile的规则，通过扫描</a> 仪个目录下的所有C/C++ 代码，从而判专断出文件之间的依赖关系，如a.cc文件中调用了 b.h(如以形势include&lt;b.h&gt;)，如果之后a.cc文件被改动，那 么只需要重新编属译a.cc文件，不 需要编译b.h文件。否则所有的文件都需要重新编译。</p><p>[root@localhost openssl-1.1.0e]# <code>cd /usr/local</code></p><p>[root@iZgt88z6l1kvd7Z local]# <code>ln -s openssl ssl</code></p><p>[root@iZgt88z6l1kvd7Z local]# <code>echo &quot;/usr/local/openssl/lib&quot; &gt;&gt;/etc/ld.so.conf</code></p><p>[root@iZgt88z6l1kvd7Z local]# <code>cd /root/openssl-1.1.0e</code> 注意每个人的目录都是不一样 的，我这里是root下的openssl，至于其他人看自己情况，切换目录</p><p>[root@iZgt88z6l1kvd7Z openssl-1.1.0e]# <code>ldconfig</code></p><p>[root@iZgt88z6l1kvd7Z openssl-1.1.0e]# <code>echo $?</code></p><p>0</p><p>[root@iZgt88z6l1kvd7Z openssl-1.1.0e]# <code>echo &quot;PATH=$PATH:/usr/local/openssl/bin&quot;</code></p><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line">&gt;&gt; /etc/profile &amp;&amp; source /etc/profile</span>
+<span class="line"></span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div></div></div><p>然后重新进入nginx-1.9.9执行[root@iZwz967a5gqt3aqi2g3pbkZ nginx-1.9.9]# <code>./configure --</code></p><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line">prefix=/usr/local/nginx --add-module=/root/nginx-1.9.9/headers-more-nginx```</span>
+<span class="line"></span>
+<span class="line">`module-0.33 --with-http_stub_status_module --with-http_ssl_module` 注意，我这里的</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">是这条命令，至于你们的 `./configure……` 就看你们自身情况</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">重新 `make` 一下哎</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**在 windows 下调试 nginx 配置时，暂时关闭后台运行模式**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**笔记本：** nginx</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**创建时间：** 2024/3/26 17:45 **更新时间：** 2024/3/26 17:46</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/nginx.pdf-10-0.png&quot;&gt;10-0</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**关于nginx反向代理的最好解释**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**笔记本：** nginx</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**创建时间：** 2022/4/2 14:20 **更新时间：** 2022/4/2 14:34</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**作者：** 彼岸樱速</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**正向代理**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**什么是正向代理？** 是一个位于客户端和原始服务器(origin server)之间的服务器，为了从原始服</span>
+<span class="line">务器取得内容，客户端向代理发送一个请求并指定目标(原始服务器)，</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">然后代理向原始服务器转交请求并将获得的内容返回给客户端（ **目的是为了保护客户端用户** ），</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">比如客户端使用的是内网，正常情况下，是无法访问外网的网址的，此时需要一个代理服务器，</span>
+<span class="line">客户端请求代理服务器，然后转发到目标服务器，获取的结果再返回到客户端。</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**反向代理**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**什么是反向代理？** 在客户端和服务器端的一个代理服务器，但是这个代理服务器的 **目的是用来**</span>
+<span class="line">**保护服务器端** 的，</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">总之就是，现在网络技术爆炸的时代，黑客那么多，为了保护你的服务器或者你的服务端信息，</span>
+<span class="line">nginx做了一层代理，你表面上看到的ip地址，还有端口之类的，根本就不是真正的信息，真正</span>
+<span class="line">的信息已经被nginx隐藏起来了。</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**正向代理保护的是客户端用户，反向代理保护的是服务端的服务，保护的目标是刚好相反的**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">当外网客户端来访问我们的服务器时为了避免暴露应用服务器的实际ip地址，</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">我们会让客端访问代理服务器，然后代理服务器再根据客户端的请求去实际的应用服务器获取响</span>
+<span class="line">应内容并返回客户端。也就是说客户端访问的是反向代理服务器的ip地址，然后通过特定的匹配</span>
+<span class="line">去转发到目标服务器上，客户端是不知道目标服务器的地址。</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/nginx.pdf-11-1.png&quot;&gt;11-1</span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/nginx.pdf-11-2.png&quot;&gt;11-2</span>
+<span class="line">nginx反向代理配置文件的修改（主要修改server_name和proxy_pass） **server_name** ：主机</span>
+<span class="line">名，这里填写反向代理服务器的地址 **proxy_pass** ：nginx 代理到的地址</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**nginx 的启动、停止与重启**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**笔记本：** nginx</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**创建时间：** 2022/1/28 16:43 **更新时间：** 2022/1/28 16:45</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**作者：** 彼岸樱速</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**nginx 的启动、停止与重启**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**详解**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/nginx.pdf-13-0.png&quot;&gt;13-0</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**停止**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">查看进程号：</span>
+<span class="line"></span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>$ ps -ef|grep nginx</p><p>root 5747 1 0 May23 ? 00:00:00 nginx: master process /usr/local/nginx/sbin/nginx</p><p>500 12037 7886 0 10:00 pts/1 00:00:00 grep nginx</p><p>nobody 25581 5747 0 Sep27 ? 00:01:16 nginx: worker process</p><p>nobody 25582 5747 0 Sep27 ? 00:01:25 nginx: worker process</p><p>nobody 25583 5747 0 Sep27 ? 00:02:59 nginx: worker process</p><p>nobody 25584 5747 0 Sep27 ? 00:02:05 nginx: worker process</p><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line"></span>
+<span class="line">杀死进程：</span>
+<span class="line"></span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>$ kill -9 5747</p><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line"></span>
+<span class="line">**重启**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**1. 验证nginx配置文件是否正确**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">进入nginx安装目录sbin下，输入命令：</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">看到如上显示，说明配置文件正确！</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**2. 重启nginx服务**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">进入nginx安装目录sbin下，输入命令：</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**upstream模块介绍**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**笔记本：** nginx</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**创建时间：** 2021/10/11 12:37 **更新时间：** 2021/10/11 12:49</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**作者：** 彼岸樱速</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**upstream模块介绍**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">Nginx的负载均衡功能来自于其模块ngx_http_upstream_module模块，该模块支持的代理方</span>
+<span class="line">式有：</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/nginx.pdf-15-0.png&quot;&gt;15-0</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">ngx_http_upstream_module模块允许Nginx定义一组或多组节点服务器，使用时可以通过</span>
+<span class="line">proxy_pass代理方式，把用户请求发送到事先定于好的upstream组中。具体写法就是</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**完整的upstream配置案例**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/nginx.pdf-15-1.png&quot;&gt;15-1</span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/nginx.pdf-15-2.png&quot;&gt;15-2</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**使用域名及socket的upstream配置**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/nginx.pdf-15-3.png&quot;&gt;15-3</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**upstream参数**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**upstream模块调度算法**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">【rr轮询调度算法】</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**【wrr权重轮询】**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/nginx.pdf-15-4.png&quot;&gt;15-4</span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/nginx.pdf-15-5.png&quot;&gt;15-5</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/nginx.pdf-16-0.png&quot;&gt;16-0</span>
+<span class="line"></span>
+<span class="line">**【ip_hash】**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/nginx.pdf-16-1.png&quot;&gt;16-1</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**【fail】**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">该算法根据后端服务器节点的响应时间来分配，响应时间短的优先分配。nginx本身不支持fail</span>
+<span class="line">形式，如果要支持该算法，必须下载nginx的upstream模块。</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/nginx.pdf-16-2.png&quot;&gt;16-2</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**【least_conn】**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**【url_hash】**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">需要单独安装hash模块</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/nginx.pdf-16-4.png&quot;&gt;16-4</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**proxy_pass指令**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**案例1**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**案例2**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/nginx.pdf-16-5.png&quot;&gt;16-5</span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/nginx.pdf-16-6.png&quot;&gt;16-6</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**proxy_pass参数**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">|参数|作用解释|</span>
+<span class="line">|---|---|</span>
+<span class="line">|proxy_set_header|设置反向代理向后端发送的http请求头信息，如添加host主机头&lt;br&gt;部字段，让后端服务器能够获取到真是客户端的IP信息等。|</span>
+<span class="line">|client_body_buffer_size|指定客户端请求主体缓冲区大小|</span>
+<span class="line">|||</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">|proxy connect timeout&lt;br&gt;_ _|反向代理和后端节点连接的超时时间 也是建立握手后等待响应&lt;br&gt;，&lt;br&gt;的时间|</span>
+<span class="line">|---|---|</span>
+<span class="line">|proxy_send_timeout|表示代理后端服务器的数据回传时间，在规定时间内后端若数据&lt;br&gt;未传完，nginx会断开连接|</span>
+<span class="line">|proxy_read_timeout|设置nginx从代理服务器获取数据的超时时间|</span>
+<span class="line">|proxy_buffer|设置缓冲区的数量大小|</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**Nginx 配置详解**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**笔记本：** nginx</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**创建时间：** 2021/10/11 12:27 **更新时间：** 2021/10/11 12:35</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**作者：** 彼岸樱速</span>
+<span class="line"></span>
+<span class="line"># **序言**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">Nginx是lgor Sysoev为俄罗斯访问量第二的rambler.ru站点设计开发的。从2004年发布至今，凭借开源的力</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">量，已经接近成熟与完善。</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">Nginx功能丰富，可作为HTTP服务器，也可作为反向代理服务器，邮件服务器。支持FastCGI、SSL、Virtual</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">Host、URL Rewrite、Gzip等功能。并且支持很多第三方的模块扩展。</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">Nginx的稳定性、功能集、示例配置文件和低系统资源的消耗让他后来居上，在全球活跃的网站中有12.18%的</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">使用比率，大约为2220万个网站。</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">牛逼吹的差不多啦，如果你还不过瘾，你可以百度百科或者一些书上找到这样的夸耀，比比皆是。</span>
+<span class="line"></span>
+<span class="line"># **Nginx常用功能**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">1、Http代理，反向代理：作为web服务器最常用的功能之一，尤其是反向代理。</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">这里我给来2张图，对正向代理与反向代理做个诠释，具体细节，大家可以翻阅下资料。</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">Nginx在做反向代理时，提供性能稳定，并且能够提供配置灵活的转发功能。Nginx可以根据不同的正则匹</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">配，采取不同的转发策略，比如图片文件结尾的走文件服务器，动态页面走web服务器，只要你正则写的没问</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">题，又有相对应的服务器解决方案，你就可以随心所欲的玩。并且Nginx对返回结果进行错误页跳转，异常判</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">断等。如果被分发的服务器存在异常，他可以将请求重新转发给另外一台服务器，然后自动去除异常服务器。</span>
+<span class="line"></span>
+<span class="line"># **2** **、负载均衡**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">Nginx提供的负载均衡策略有2种：内置策略和扩展策略。内置策略为轮询，加权轮询，Ip hash。扩展策略，</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">就天马行空，只有你想不到的没有他做不到的啦，你可以参照所有的负载均衡算法，给他一一找出来做下实</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">现。</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">上3个图，理解这三种负载均衡算法的实现</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">Ip hash算法，对客户端请求的ip进行hash操作，然后根据hash结果将同一个客户端ip的请求分发给同一台服</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">务器进行处理，可以解决session不共享的问题。</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/nginx.pdf-18-0.png&quot;&gt;18-0</span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/nginx.pdf-18-1.png&quot;&gt;18-1</span>
+<span class="line">&lt;img src=&quot;/img/nginx.pdf-19-0.png&quot;&gt;19-0</span>
+<span class="line"># **3 web** **、 缓存**</span>
+<span class="line"></span>
+<span class="line">Nginx可以对不同的文件做不同的缓存处理，配置灵活，并且支持FastCGI_Cache，主要用于对FastCGI的动</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">态程序进行缓存。配合着第三方的ngx_cache_purge，对制定的URL缓存内容可以的进行增删管理。</span>
+<span class="line"></span>
+<span class="line"># **4** **、Nginx相关地址**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">源码： [https://trac.nginx.org/nginx/browser](https://trac.nginx.org/nginx/browser)</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">官网： [http://www.nginx.org/](http://www.nginx.org/)</span>
+<span class="line"></span>
+<span class="line"># **Nginx配置文件结构**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">如果你下载好啦，你的安装文件，不妨打开conf文件夹的nginx.conf文件，Nginx服务器的基础配置，默认的</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">配置也存放在此。</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">在 nginx.conf 的注释符号为： **`#`**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">默认的 nginx 配置文件 nginx.conf 内容如下：</span>
+<span class="line"></span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>#user nobody;</p><p>worker_processes 1;</p><p>#error_log logs/error.log;#error_log logs/error.log notice;#error_log logs/error.log info;</p><p>#pid logs/nginx.pid;</p><p>events {</p><p>worker_connections 1024;</p><p>}</p><p>http {</p><p>include mime.types;</p><p>default_type application/octet-stream;</p><p>#log_format main &#39;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &#39;</p><h1 id="status-body-bytes-sent-http-referer" tabindex="-1"><a class="header-anchor" href="#status-body-bytes-sent-http-referer"><span>&#39;$status $body_bytes_sent &quot;$http_referer&quot; &#39;</span></a></h1><h1 id="http-user-agent-http-x-forwarded-for" tabindex="-1"><a class="header-anchor" href="#http-user-agent-http-x-forwarded-for"><span>&#39;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#39;;</span></a></h1><p>#access_log logs/access.log main;</p><p>sendfile on;</p><p>#tcp_nopush on;</p><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line"></span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div></div></div><p>#keepalive_timeout 0;</p><p>keepalive_timeout 65;</p><p>#gzip on;</p><p>server {</p><p>listen 80;</p><p>server_name localhost;</p><p>#charset koi8-r;</p><p>#access_log logs/host.access.log main;</p><p>location / {</p><p>root html;</p><p>index index.html index.htm;</p><p>}</p><p>#error_page 404 /404.html;</p><h1 id="redirect-server-error-pages-to-the-static-page-50x-html" tabindex="-1"><a class="header-anchor" href="#redirect-server-error-pages-to-the-static-page-50x-html"><span>redirect server error pages to the static page /50x.html</span></a></h1><h1 id="" tabindex="-1"><a class="header-anchor" href="#"><span></span></a></h1><p>error_page 500 502 503 504 /50x.html;</p><p>location = /50x.html {</p><p>root html;</p><p>}</p><h1 id="proxy-the-php-scripts-to-apache-listening-on-127-0-0-1-80" tabindex="-1"><a class="header-anchor" href="#proxy-the-php-scripts-to-apache-listening-on-127-0-0-1-80"><span>proxy the PHP scripts to Apache listening on 127.0.0.1:80</span></a></h1><h1 id="-1" tabindex="-1"><a class="header-anchor" href="#-1"><span></span></a></h1><p>#location ~ /.php$ {</p><h1 id="proxy-pass-http-127-0-0-1" tabindex="-1"><a class="header-anchor" href="#proxy-pass-http-127-0-0-1"><span>proxy_pass http://127.0.0.1;</span></a></h1><p>#}</p><h1 id="pass-the-php-scripts-to-fastcgi-server-listening-on-127-0-0-1-9000" tabindex="-1"><a class="header-anchor" href="#pass-the-php-scripts-to-fastcgi-server-listening-on-127-0-0-1-9000"><span>pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000</span></a></h1><h1 id="-2" tabindex="-1"><a class="header-anchor" href="#-2"><span></span></a></h1><p>#location ~ /.php$ {</p><h1 id="root-html" tabindex="-1"><a class="header-anchor" href="#root-html"><span>root html;</span></a></h1><h1 id="fastcgi-pass-127-0-0-1-9000" tabindex="-1"><a class="header-anchor" href="#fastcgi-pass-127-0-0-1-9000"><span>fastcgi_pass 127.0.0.1:9000;</span></a></h1><h1 id="fastcgi-index-index-php" tabindex="-1"><a class="header-anchor" href="#fastcgi-index-index-php"><span>fastcgi_index index.php;</span></a></h1><h1 id="fastcgi-param-script-filename-scripts-fastcgi-script-name" tabindex="-1"><a class="header-anchor" href="#fastcgi-param-script-filename-scripts-fastcgi-script-name"><span>fastcgi_param SCRIPT_FILENAME /scripts$fastcgi_script_name;</span></a></h1><h1 id="include-fastcgi-params" tabindex="-1"><a class="header-anchor" href="#include-fastcgi-params"><span>include fastcgi_params;</span></a></h1><p>#}</p><h1 id="deny-access-to-htaccess-files-if-apache-s-document-root" tabindex="-1"><a class="header-anchor" href="#deny-access-to-htaccess-files-if-apache-s-document-root"><span>deny access to .htaccess files, if Apache&#39;s document root</span></a></h1><h1 id="concurs-with-nginx-s-one" tabindex="-1"><a class="header-anchor" href="#concurs-with-nginx-s-one"><span>concurs with nginx&#39;s one</span></a></h1><h1 id="-3" tabindex="-1"><a class="header-anchor" href="#-3"><span></span></a></h1><p>#location ~ //.ht {</p><h1 id="deny-all" tabindex="-1"><a class="header-anchor" href="#deny-all"><span>deny all;</span></a></h1><p>#}</p><p>}</p><h1 id="another-virtual-host-using-mix-of-ip-name-and-port-based-configuration" tabindex="-1"><a class="header-anchor" href="#another-virtual-host-using-mix-of-ip-name-and-port-based-configuration"><span>another virtual host using mix of IP-, name-, and port-based configuration</span></a></h1><h1 id="-4" tabindex="-1"><a class="header-anchor" href="#-4"><span></span></a></h1><p>#server {</p><h1 id="listen-8000" tabindex="-1"><a class="header-anchor" href="#listen-8000"><span>listen 8000;</span></a></h1><h1 id="listen-somename-8080" tabindex="-1"><a class="header-anchor" href="#listen-somename-8080"><span>listen somename:8080;</span></a></h1><h1 id="server-name-somename-alias-another-alias" tabindex="-1"><a class="header-anchor" href="#server-name-somename-alias-another-alias"><span>server_name somename alias another.alias;</span></a></h1><h1 id="location" tabindex="-1"><a class="header-anchor" href="#location"><span>location / {</span></a></h1><h1 id="root-html-1" tabindex="-1"><a class="header-anchor" href="#root-html-1"><span>root html;</span></a></h1><h1 id="index-index-html-index-htm" tabindex="-1"><a class="header-anchor" href="#index-index-html-index-htm"><span>index index.html index.htm;</span></a></h1><h1 id="-5" tabindex="-1"><a class="header-anchor" href="#-5"><span>}</span></a></h1><p>#}</p><h1 id="https-server" tabindex="-1"><a class="header-anchor" href="#https-server"><span>HTTPS server</span></a></h1><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line"></span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div></div></div><h1 id="-6" tabindex="-1"><a class="header-anchor" href="#-6"><span></span></a></h1><p>#server {</p><h1 id="listen-443-ssl" tabindex="-1"><a class="header-anchor" href="#listen-443-ssl"><span>listen 443 ssl;</span></a></h1><h1 id="server-name-localhost" tabindex="-1"><a class="header-anchor" href="#server-name-localhost"><span>server_name localhost;</span></a></h1><h1 id="ssl-certificate-cert-pem" tabindex="-1"><a class="header-anchor" href="#ssl-certificate-cert-pem"><span>ssl_certificate cert.pem;</span></a></h1><h1 id="ssl-certificate-key-cert-key" tabindex="-1"><a class="header-anchor" href="#ssl-certificate-key-cert-key"><span>ssl_certificate_key cert.key;</span></a></h1><h1 id="ssl-session-cache-shared-ssl-1m" tabindex="-1"><a class="header-anchor" href="#ssl-session-cache-shared-ssl-1m"><span>ssl_session_cache shared:SSL:1m;</span></a></h1><h1 id="ssl-session-timeout-5m" tabindex="-1"><a class="header-anchor" href="#ssl-session-timeout-5m"><span>ssl_session_timeout 5m;</span></a></h1><h1 id="ssl-ciphers-high-anull-md5" tabindex="-1"><a class="header-anchor" href="#ssl-ciphers-high-anull-md5"><span>ssl_ciphers HIGH:!aNULL:!MD5;</span></a></h1><h1 id="ssl-prefer-server-ciphers-on" tabindex="-1"><a class="header-anchor" href="#ssl-prefer-server-ciphers-on"><span>ssl_prefer_server_ciphers on;</span></a></h1><h1 id="location-1" tabindex="-1"><a class="header-anchor" href="#location-1"><span>location / {</span></a></h1><h1 id="root-html-2" tabindex="-1"><a class="header-anchor" href="#root-html-2"><span>root html;</span></a></h1><h1 id="index-index-html-index-htm-1" tabindex="-1"><a class="header-anchor" href="#index-index-html-index-htm-1"><span>index index.html index.htm;</span></a></h1><h1 id="-7" tabindex="-1"><a class="header-anchor" href="#-7"><span>}</span></a></h1><p>#}</p><p>}</p><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line"></span>
+<span class="line">**nginx 文件结构**</span>
+<span class="line"></span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>... # 全局块</p><p>events { #events 块</p><p>...</p><p>}</p><p>http #http 块</p><p>{</p><p>... #http 全局块</p><p>server #server 块</p><p>{</p><p>... #server 全局块</p><p>location [PATTERN] #location 块</p><p>{</p><p>...</p><p>}</p><p>location [PATTERN]</p><p>{</p><p>...</p><p>}</p><p>}</p><p>server</p><p>{</p><p>...</p><p>}</p><p>... #http 全局块</p><p>}</p><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line"></span>
+<span class="line">1、 **全局块** ：配置影响nginx全局的指令。一般有运行nginx服务器的用户组，nginx进程pid存放路径，</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">日志存放路径，配置文件引入，允许生成worker process数等。</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">2、 **events块** ：配置影响nginx服务器或与用户的网络连接。有每个进程的最大连接数，选取哪种事件</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">驱动模型处理连接请求，是否允许同时接受多个网路连接，开启多个网络连接序列化等。</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">3、 **http块** ：可以嵌套多个server，配置代理，缓存，日志定义等绝大多数功能和第三方模块的配置。</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">如文件引入，mime-type定义，日志自定义，是否使用sendfile传输文件，连接超时时间，单连接请求</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">数等。</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">4、 **server块** ：配置虚拟主机的相关参数，一个http中可以有多个server。</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">5、 **location块** ：配置请求的路由，以及各种页面的处理情况。</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">下面给大家上一个配置文件，作为理解。</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/nginx.pdf-22-0.png&quot;&gt;22-0</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">上面是nginx的基本配置，需要注意的有以下几点：</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">1、几个常见配置项：</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/nginx.pdf-22-1.png&quot;&gt;22-1</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">2、惊群现象：一个网路连接到来，多个睡眠的进程被同时叫醒，但只有一个进程能获得链接，这样会影响系</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">统性能。</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">3、每个指令必须有分号结束。</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**Nginx反向代理中proxy_set_header参数说明**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**笔记本：** nginx</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**创建时间：** 2021/10/11 12:18 **更新时间：** 2021/10/11 12:23</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**作者：** 彼岸樱速</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">如果启用缓存，来自之前请求的头字段“If-Modified-Since”, “If-Unmodified-Since”, “If</span>
+<span class="line">None-Match”, “If-Match”, “Range”, 和 “If-Range” 将不会被代理服务器传递。</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">一个不会变化的“Host”头请求字段可通过如下方式被传递：</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">然后，当字段不在请求头中就无法传递了，在这种情况下，可通过设置Host变量，将需传递值赋给Host变量</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">此外，服务器名称和端口一起通过代理服务器传递</span>
+<span class="line"></span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>1 proxy_set_header Host $host:$proxy_port;</p><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line"></span>
+<span class="line">如果请求头的存在空的字段将不会通过代理服务器传递出去</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>1 ）如下测试，不设置 proxy_set_header</p><p>Nginx 配置：</p><p>upstream test {</p><p>server 192.168.1.123:9099;</p><p>server 192.168.1.123:58080;</p><p>}</p><p>server {</p><p>listen 5800;</p><p>server_name 192.168.1.123;</p><p>root /usr/share/nginx/html;</p><p>include /etc/nginx/default.d/*.conf;</p><p>location / {</p><p>proxy_pass http://test;</p><p>}</p><p>测试 jsp 想获取客户端 IP 、客户端 port 、代理服务器 IP 、代理服务器 port</p><p>&lt;%@page contentType=&quot;text/html; charset=UTF-8&quot; trimDirectiveWhitespaces=&quot;true&quot;%&gt;</p><p>&lt;%</p><p>String scheme = request.getScheme();</p><p>String serverName = request.getServerName();</p><p>String remoteName = request.getRemoteAddr();</p><p>String realIP = request.getHeader(&quot;X-Forwarded-For&quot;);</p><p>String realIP2 = request.getHeader(&quot;X-Real-IP&quot;);</p><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line"></span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div></div></div><p>26</p><p>27</p><p>28</p><p>29</p><p>30</p><p>31</p><p>32</p><p>33</p><p>34</p><p>35</p><p>36</p><p>37</p><p>38</p><p>39</p><p>40</p><p>41</p><p>42</p><p>43</p><p>44</p><p>45</p><p>46</p><p>47</p><p>48</p><p>49</p><p>50</p><p>51</p><p>52</p><p>53</p><p>54</p><p>55</p><p>56</p><p>57</p><p>58</p><p>59</p><p>60</p><p>61</p><p>62</p><p>63</p><p>64</p><p>65</p><p>66</p><p>67</p><p>68</p><p>69</p><p>70</p><p>71</p><p>72</p><p>73</p><p>74</p><p>75</p><p>76</p><p>77</p><p>78</p><p>79</p><p>80</p><p>81</p><p>82</p><p>83</p><p>84</p><p>85</p><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line"></span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div></div></div><p>String Host = request.getHeader(&quot;Host&quot;);</p><p>int port = request.getServerPort();</p><p>int portR = request.getRemotePort();</p><p>String requestURIC1 = scheme+&quot;😕/&quot;+realIP+&quot;:&quot;+portR;</p><p>String requestURIC2 = scheme+&quot;😕/&quot;+realIP2+&quot;:&quot;+portR;</p><p>String requestURIC3 = scheme+&quot;😕/&quot;+remoteName+&quot;:&quot;+portR;</p><p>String requestURI = scheme+&quot;😕/&quot;+serverName+&quot;:&quot;+port;</p><p>%&gt;</p><p>其中：</p><p>客户端地址 1:&lt;%=requestURIC1 %&gt;</p><p>客户端地址 2:&lt;%=requestURIC2 %&gt;</p><p>客户端地址 3:&lt;%=requestURIC3%&gt;</p><p>服务器地址 1:&lt;%=requestURI%&gt;</p><p>服务器地址 2:&lt;%=Host%&gt;</p><p>测试结果</p><p>客户端地址 1:http://null:58828</p><p>客户端地址 2:http://null:58828</p><p>客户端地址 3:http://192.168.1.123:58828</p><p>服务器地址 1:http://test:80</p><p>服务器地址 2:test</p><p>Nginx 日志</p><p>192.168.1.177 -20508---5800 [25/Aug/2016:16:34:13 +0800] &quot;GET /docs/test.jsp HTTP/1.1&quot; 200 223 &quot;</p><p>其中客户端 IP 不能获取到，而通过 request.getRemoteAddr();</p><p>获取的 IP 是代理服务器 IP ，而不是客户端 IP ，而在 nginx 中 $remote_addr 变量的值是客户端的 IP ，可见 remoteaddr 没有传递。</p><p>而 server_port 值也不对，当前值为 5800 ，当前打印出的是 80 。</p><p>而当前代理为 http://test 所有通过 host 得到的是 test 。</p><p>客户端 port 也获取不到值为 20508 ，可传给应用的是 58828</p><hr><p>2 ）如下测试，设置 proxy_set_header</p><p>Nginx 配置：</p><p>upstream test {</p><p>server 192.168.1.123:9099;</p><p>server 192.168.1.123:58080;</p><p>}</p><p>server {</p><p>listen 5800;</p><p>server_name 192.168.1.123;</p><p>root /usr/share/nginx/html;</p><p>include /etc/nginx/default.d/*.conf;</p><p>location / {</p><p>proxy_pass http://test;</p><p>proxy_set_header Host $host:$server_port;</p><p>proxy_set_header X-Real-IP $remote_addr;</p><p>proxy_set_header X-Real-PORT $remote_port;</p><p>proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</p><p>}</p><p>测试页面改成：</p><p>&lt;%@page contentType=&quot;text/html; charset=UTF-8&quot; trimDirectiveWhitespaces=&quot;true&quot;%&gt;</p><p>&lt;%</p><p>String scheme = request.getScheme();</p><p>String serverName = request.getServerName();</p><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line"></span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div></div></div><p>86</p><p>87</p><p>88</p><p>89</p><p>90</p><p>91</p><p>92</p><p>93</p><p>94</p><p>95</p><p>96</p><p>97</p><p>98</p><p>99</p><p>100</p><p>101</p><p>102</p><p>103</p><p>104</p><p>105</p><p>106</p><p>107</p><p>108</p><p>109</p><p>110</p><p>111</p><p>112</p><p>113</p><p>114</p><p>115</p><p>116</p><p>117</p><p>118</p><p>119</p><p>120</p><p>121</p><p>122</p><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line"></span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div></div></div><p>String remoteName = request.getRemoteAddr();</p><p>String realIP = request.getHeader(&quot;X-Forwarded-For&quot;);</p><p>String realIP2 = request.getHeader(&quot;X-Real-IP&quot;);</p><p>String Host = request.getHeader(&quot;Host&quot;);</p><p>int port = request.getServerPort();</p><p>int portR = request.getRemotePort();</p><p>String portR2 = request.getHeader(&quot;X-Real-Port&quot;);</p><p>String requestURIC1 = scheme+&quot;😕/&quot;+realIP+&quot;:&quot;+portR;</p><p>String requestURIC2 = scheme+&quot;😕/&quot;+realIP2+&quot;:&quot;+portR;</p><p>String requestURIC3 = scheme+&quot;😕/&quot;+remoteName+&quot;:&quot;+portR;</p><p>String requestURI = scheme+&quot;😕/&quot;+serverName+&quot;:&quot;+port;</p><p>%&gt;</p><p>其中：</p><p>客户端地址 1:&lt;%=requestURIC1 %&gt;</p><p>客户端地址 2:&lt;%=requestURIC2 %&gt;</p><p>客户端地址 3:&lt;%=requestURIC3%&gt;</p><p>服务器地址 1:&lt;%=requestURI%&gt;</p><p>服务器地址 2:&lt;%=Host%&gt;</p><p>客户端 port2:&lt;%=portR2%&gt;</p><p>客户端地址 1:http://192.168.1.177:21548</p><p>客户端地址 2:http://192.168.1.177:21548</p><p>客户端地址 3:http://192.168.1.123:21548</p><p>服务器地址 1:http://192.168.1.123:5800</p><p>服务器地址 2:192.168.1.123:5800</p><p>客户端 port2:20604</p><p>nginx 日志：</p><p>192.168.1.177 -20604---5800 [25/Aug/2016:16:38:42 +0800] &quot;GET /docs/test.jsp HTTP/1.1&quot; 200 275 &quot;-&quot; &quot;Mozill</p><p>除 request.getRemoteAddr(); 获取的值不对外，其他值都是对的。</p><p>getRemoteAddr 获取的是代理的请求地址。</p><p>因重定义了 host, 所以 test 值被改写成代理服务器 IP 。</p><p>因重定义了 X-Real-PORT- 并传递 $remote_port ，客户端 port 也获取正确了。</p><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>nginx 反向代理中经常碰过的一个 &quot; 坑 &quot; ： proxy_set_header 自定义 header 头无效的问题</p><p>解决办法：</p><p>nginx underscores_in_headers 默认 off</p><p>可以用减号 - 替代下划线符号 _ ，避免这种变态问题。 nginx 默认忽略掉下划线可能有些原因。</p><p>upstream os-8080 {</p><p>ip_hash;</p><p>server 192.168.1.20:8080 max_fails=3 fail_timeout=15s;</p><p>server 192.168.1.21:8080 max_fails=3 fail_timeout=15s;</p><p>}</p><p>server {</p><p>listen 80;</p><p>server_name bpm.wangshibo.com;</p><p>access_log /data/nginx/logs/bpm.wangshibo.com-access.log main;</p><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line"></span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div></div></div><p>error_log /data/nginx/logs/bpm.wangshibo.com-error.log;</p><p>nginx underscores_in_headers on;</p><p>location / {</p><p>proxy_pass http://os-8080;</p><p>proxy_redirect off ;</p><p>proxy_set_header Host $host;</p><p>proxy_set_header X-Real-IP $remote_addr;</p><p>proxy_set_header REMOTE-HOST $remote_addr;</p><p>proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</p><p>proxy_connect_timeout 300;</p><p>proxy_send_timeout 300;</p><p>proxy_read_timeout 600;</p><p>proxy_buffer_size 512k;</p><p>proxy_buffers 8 512k;</p><p>proxy_busy_buffers_size 512k;</p><p>proxy_temp_file_write_size 512k;</p><p>proxy_next_upstream error timeout invalid_header http_500 http_502 http_503 http_504 http_404;</p><p>proxy_max_temp_file_size 128m;</p><p>}</p><p>error_page 500 502 503 504 /50x.html;</p><p>location = /50x.html {</p><p>root html;</p><p>}</p><p>}</p><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/nginx.pdf-26-2.png&quot;&gt;26-2</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">==================不妨看一个proxy_set_header配置实例==================</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>windows 客户端（请求 web 服务）： 192.168.1.1</p><p>nginx 作为反向代理服务器： 192.168.1.136</p><p>nginx 作为后端 web 服务器： 192.168.1.137</p><p>前提条件：配置 nginx 转发到后端服务器</p><p>server {</p><p>listen 8080;</p><p>server_name 192.168.1.136;</p><p>location / {</p><p>root &quot;/www/html&quot;;</p><p>index index.html;</p><p>#auth_basic &quot;required auth&quot;;</p><p>#auth_basic_user_file &quot;/usr/local/nginx/users/.htpasswd&quot;;</p><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>error_page 404 /404.html;</p><p>}</p><p>location /images/ {</p><p>root &quot;/www&quot;;</p><p>rewrite ^/images/bbs/(.*/.jpeg)$ /images/$1 break;</p><p>rewrite ^/images/www/(.*)$ http://192.168.1.136/$1 redirect;</p><p>}</p><p>location /basic_status {</p><p>stub_status;</p><p>}</p><p>location ^~/proxy_path/ {</p><p>root &quot;/www/html&quot;;</p><p>index index.html;</p><p>proxy_pass http://192.168.1.137/;</p><p>proxy_set_header Host $host;</p><p>proxy_set_header X-Real-IP $remote_addr;</p><p>#proxy_set_header X-Forwarded-For $remote_addr;</p><p>proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</p><p>}</p><p>location ^~/proxy_path/ {</p><p>root &quot;/www/html&quot;;</p><p>index index.html;</p><p>proxy_pass http://192.168.1.137/;</p><p>}</p><p>}</p><p>将左侧匹配到的 /proxy_path/ 开头的 url 全部转发到后端服务器 192.168.223.137</p><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line"></span>
+<span class="line"></span>
+<span class="line">**下面将一一测试各个proxy_set_header设置的变量的内容：**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/nginx.pdf-27-1.png&quot;&gt;27-1</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">如果将后端服务器关闭了，则会出现502网管错误：</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/nginx.pdf-27-2.png&quot;&gt;27-2</span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/nginx.pdf-27-3.png&quot;&gt;27-3</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>1</p><p>2</p><p>3</p><p>4</p><p>5</p><p>6</p><p>7</p><p>8</p><p>9</p><p>10</p><p>11</p><p>12</p><p>13</p><p>14</p><p>15</p><p>16</p><p>17</p><p>18</p><p>19</p><p>20</p><p>21</p><p>22</p><p>23</p><p>24</p><p>25</p><p>26</p><p>27</p><p>28</p><p>29</p><p>30</p><p>31</p><p>32</p><p>33</p><p>34</p><p>35</p><p>36</p><p>37</p><p>38</p><p>39</p><p>40</p><p>41</p><p>42</p><p>43</p><p>44</p><p>45</p><p>46</p><p>47</p><p>48</p><p>49</p><p>50</p><p>51</p><p>52</p><p>53</p><p>54</p><p>55</p><p>56</p><p>57</p><p>58</p><p>59</p><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line"></span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div></div></div><p>2 ） proxy_set_header Host $proxy_host;</p><p>将设置修改为上述 proxy_host 然后重启 ngxin 代理服务器 136</p><p>[root@wadeson nginx]# sbin/nginx -s reload</p><p>重新请求代理页面： http://192.168.1.136:8080/proxy_path/index.html ，然后日志如下：</p><p>首先查看 136 代理服务器的日志：</p><p>192.168.1.1 - - [18/Jul/2017:10:30:12 +0800] &quot;GET /proxy_path/index.html HTTP/1.1&quot; 192.168.1.136:8080 304</p><p>(Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36&quot;</p><p>因为 windows 是 136 的客户端，请求的 host 为 192.168.223.136:8080 ，而 nginx 代理服务器作为 137 后端服务器的客户端，将请求的</p><p>将 proxy_host 封装为请求的 host</p><p>那么 137 上面日志请求的 host 就是其自身， proxy_host 就是代理服务器请求的 host 也就是后端服务器 137</p><p>192.168.1.136 &quot;192.168.1.1&quot; - - [18/Jul/2017:10:30:12 +0800] &quot;GET /index.html HTTP/1.0&quot; &quot;192.168.1.137&quot; 30</p><p>(Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36&quot;</p><p>3 ） proxy_set_header Host $host:$proxy_port;</p><p>了解了上面的知识，那么此处对应的 host 就知道代表的啥了， $host 代表转发服务器， $proxy_port 代表 136 转发服务器请求后端服务</p><p>于是观察 136 、 137 的日志进行验证：</p><p>192.168.1.1 - - [18/Jul/2017:10:38:38 +0800] &quot;GET /proxy_path/index.html HTTP/1.1&quot; 192.168.1.136:8080 304</p><p>(Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36&quot;</p><p>192.168.1.136 &quot;192.168.1.1&quot; - - [18/Jul/2017:10:38:38 +0800] &quot;GET /index.html HTTP/1.0&quot; &quot;192.168.1.136:80</p><p>(Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36&quot;</p><p>4 ） proxy_set_header X-Real-IP $remote_addr;</p><p>将 $remote_addr 的值放进变量 X-Real-IP 中，此变量名可变， $remote_addr 的值为客户端的 ip</p><p>nginx 转发 136 服务器日志格式为：</p><p>log_format main &#39;$remote_addr - $remote_user [$time_local] &quot;$request&quot; $http_host &#39;</p><p>&#39;$status $body_bytes_sent &quot;$http_referer&quot; &#39;</p><p>&#39;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#39;;</p><p>nginx 后端 137 服务器的日志格式：</p><p>log_format main &#39;$remote_addr &quot;$http_x_real_ip&quot; - $remote_user [$time_local] &quot;$request&quot; &quot;$http_host&quot; &#39;</p><p>&#39;$status $body_bytes_sent &quot;$http_referer&quot; &#39;</p><p>&#39;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#39;;</p><p>两者区别在于 &quot;$http_x_real_ip&quot; ，添加了这个变量的值</p><p>重新请求需要访问的地址 http://192.168.1.136:8080/proxy_path/index.html</p><p>136 的日志：</p><p>192.168.1.1 - - [18/Jul/2017:10:45:07 +0800] &quot;GET /proxy_path/index.html HTTP/1.1&quot; 192.168.1.136:8080 304</p><p>(Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36&quot;</p><p>137 的日志：</p><p>192.168.1.136 &quot;192.168.1.1&quot; - - [18/Jul/2017:10:45:07 +0800] &quot;GET /index.html HTTP/1.0&quot; &quot;192.168.1.136:80</p><p>(Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36&quot;</p><p>红色标记的就是 &quot;$http_x_real_ip&quot; 的值，即可以看见用户真实的 ip ，也就是客户端的真实 ip</p><p>5 ） proxy_set_header X-Forwarded-For $remote_addr;</p><p>理解了上面的含义那么这个封装报文的意思也就请求了</p><p>首先还是比对 136 和 137 的日志格式：</p><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line"></span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div></div></div><p>60</p><p>61</p><p>62</p><p>63</p><p>64</p><p>65</p><p>66</p><p>67</p><p>68</p><p>69</p><p>70</p><p>71</p><p>72</p><p>73</p><p>74</p><p>75</p><p>76</p><p>77</p><p>78</p><p>79</p><p>80</p><p>81</p><p>82</p><p>83</p><p>84</p><p>85</p><p>86</p><p>87</p><p>88</p><p>89</p><p>90</p><p>91</p><p>92</p><p>93</p><p>94</p><p>95</p><p>96</p><p>97</p><p>98</p><p>99</p><p>100</p><p>101</p><p>102</p><p>103</p><p>104</p><p>105</p><p>106</p><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line"></span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div></div></div><p>136 代理服务器的日志格式：</p><p>log_format main &#39;$remote_addr - $remote_user [$time_local] &quot;$request&quot; $http_host &#39;</p><p>&#39;$status $body_bytes_sent &quot;$http_referer&quot; &#39;</p><p>&#39;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#39;;</p><p>137 后端服务器的日志格式：</p><p>log_format main &#39;$remote_addr &quot;$http_x_real_ip&quot; - $remote_user [$time_local] &quot;$request&quot; &quot;$http_host&quot; &#39;</p><p>&#39;$status $body_bytes_sent &quot;$http_referer&quot; &#39;</p><p>&#39;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#39;;</p><p>重新请求需要访问的地址 http://192.168.1.136:8080/proxy_path/index.html</p><p>136 的日志显示：</p><p>192.168.1.1 - - [18/Jul/2017:10:51:25 +0800] &quot;GET /proxy_path/index.html HTTP/1.1&quot; 192.168.1.136:8080 304</p><p>(Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36&quot;</p><p>&quot;$http_x_forwarded_for&quot; 对应的为空值</p><p>137 的日志显示：</p><p>192.168.1.136 &quot;192.168.1.1&quot; - - [18/Jul/2017:10:51:25 +0800] &quot;GET /index.html HTTP/1.0&quot; &quot;192.168.1.136:80</p><p>(Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36&quot;</p><p>可以看出 137 后端服务器成功的显示了真实客户端的 ip</p><p>6 ） proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</p><p>5 、 6 两者的区别：</p><p>在只有一个代理服务器的转发的情况下，两者的效果貌似差不多，都可以真实的显示出客户端原始 ip</p><p>但是区别在于：</p><p>$proxy_add_x_forwarded_for 变量包含客户端请求头中的 &quot;X-Forwarded-For&quot; ，与 $remote_addr 两部分，他们之间用逗号分开。</p><p>##########################################################################################################</p><p>举个例子，有一个 web 应用，在它之前通过了两个 nginx 转发， www.kevin.com 即用户访问该 web 通过两台 nginx 。</p><p>在第一台 nginx 中, 使用</p><p>proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</p><p>现在的 $proxy_add_x_forwarded_for 变量的 &quot;X-Forwarded-For&quot; 部分是空的，所以只有 $remote_addr ，而 $remote_addr 的值是</p><p>X-Forwarded-For 变量的值就是用户的真实的 ip 地址了。</p><p>到了第二台 nginx ，使用</p><p>proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</p><p>现在的 $proxy_add_x_forwarded_for 变量， X-Forwarded-For 部分包含的是用户的真实 ip ， $remote_addr 部分的值是上一台 ngi</p><p>于是通过这个赋值以后现在的 X-Forwarded-For 的值就变成了 &quot; 用户的真实 ip ，第一台 nginx 的 ip&quot; ，这样就清楚了吧。</p><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line"></span>
+<span class="line"></span>
+<span class="line">**######  Nginx反向代理Tomcat访问报错400问题  #######**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">线上用nginx反向代理tomcat访问，配置完成后，直接访问tomcat完全正常，但是只要在</span>
+<span class="line">nginx添加反向代理tomcat，访问nginx就会报错400。</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**原因和解决办法：**</span>
+<span class="line">1）后端服务器设置有类似防盗链或者根据http请求头中的host字段来进行路由或判断功能的</span>
+<span class="line">话， **如果nginx代理层不重写请求头中的host字段，将会导致请求失败** ，报400错误。</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">解决办法：</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">2） **nginx配置中header头部信息的host不能被配置重了** 。tomcat没有对headers中的host进</span>
+<span class="line">行唯一校验。</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">解决办法（下面两个要去掉一个）：</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**nginx后端服务器返回给nginx502、504、404、执行超时等错误状态的解决方法**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**笔记本：** nginx</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**创建时间：** 2021/10/11 12:13 **更新时间：** 2021/10/11 12:18</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**作者：** 彼岸樱速</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">今天公司的网站访问的时候全部变成404页面，查看网站的文件没有问题，来检查nginx的配置</span>
+<span class="line">的时候，</span>
+<span class="line">发现后端的一台服务器不可用，直接访问那台后台的服务器的时候，返回的是404页面，</span>
+<span class="line">因为upstream 里面设置了ip_hash。所以导致我怎么刷新都是404页面。</span>
+<span class="line">由此想到了nginx的一个功能，就是当后端的服务器返回给nginx 502、504、404、执行超时等</span>
+<span class="line">错误状态的时候，</span>
+<span class="line">nginx会自动再把这个请求转发到upstream里面别的服务器上面，从而给网站用户提供更稳定的</span>
+<span class="line">服务。</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">配置如下：</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/nginx.pdf-31-0.png&quot;&gt;31-0</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">这样的话，也算是保障了后端服务器的一个高可用性，不得不说，nginx还是很强大的。</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**Nginx 细说proxy_set_header $remote_addr和X-Forwarded-For**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**笔记本：** nginx</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**创建时间：** 2021/10/11 11:46 **更新时间：** 2021/10/11 12:12</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**作者：** 彼岸樱速</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**先来看下proxy_set_header的语法**</span>
+<span class="line"></span>
+<span class="line">|语法|proxy set headerfieldvalue;&lt;br&gt;_ _|</span>
+<span class="line">|---|---|</span>
+<span class="line">|**默认值**|**proxy_set_header Host $proxy_host;**&lt;br&gt;**proxy_set_header Connection close;**|</span>
+<span class="line">|**上下文**|**http, server, location**|</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**允许重新定义或者添加发往后端服务器的请求头。value可以包含文本、变量或者它们的组合。**</span>
+<span class="line">**当且仅当当前配置级别中没有定义proxy_set_header指令时，会从上面的级别继承配置。 默**</span>
+<span class="line">**认情况下，只有两个请求头会被重新定义：**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">proxy_set_header也可以自定义参数，如：proxy_set_header test paroxy_test;</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">如果想要支持下划线的话，需要增加如下配置：</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">可以加到http或者server中</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">语法：underscores_in_headers on|off</span>
+<span class="line">默认值：off</span>
+<span class="line">使用字段：http, server</span>
+<span class="line">是否允许在header的字段中带下划线</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/nginx.pdf-32-2.png&quot;&gt;32-2</span>
+<span class="line"></span>
+<span class="line">**使用Nginx后如何在web应用中获取用户ip及原理解释**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**问题背景：**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">在实际应用中，我们可能需要获取用户的ip地址，比如做异地登陆的判断，或者统计ip访问次数等，通常</span>
+<span class="line">情况下我们使用 **request.getRemoteAddr()** 就可以获取到客户端ip，但是当我们使用了 **nginx作为反向**</span>
+<span class="line">**代理后** ，使用request.getRemoteAddr() **获取到的就一直是nginx服务器的ip的地址** ，那这时应该怎么</span>
+<span class="line">办？</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**part1：解决方案1 X-real-ip $remote_addr;**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/nginx.pdf-32-3.png&quot;&gt;32-3</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">其中这个 **X-real-ip** 是一个 **自定义的变量名，名字可以随意取** ，这样做完之后，用户的真实ip就</span>
+<span class="line">被放在X-real-ip这个变量里了，然后，在web端可以这样获取： **request.getAttribute(&quot;X-**</span>
+<span class="line">**real-ip&quot;)** ，这样就明白了吧。</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">当一个请求通过多个代理服务器时，用户的IP将会被代理服务器IP覆盖</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**part2：解决方案2 X-Forwarded-For $proxy_add_x_forwarded_for**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">上面说到，这句就可以在web服务器端获得用户的真实ip，但是，实际上要获得用户的真实ip，</span>
+<span class="line">不是只有这一个方法，下面我们继续看。</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**$http_x_forwarded_for** ：</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/nginx.pdf-33-2.png&quot;&gt;33-2</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**X-Forwarded-For $proxy_add_x_forwarded_for** ：</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/nginx.pdf-33-3.png&quot;&gt;33-3</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">$proxy_add_x_forwarded_for变量包含客户端请求头中的&quot;X-Forwarded-For&quot;，与</span>
+<span class="line">$remote_addr两部分，他们之间用逗号分开。</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**举个例子，有一个web应用，在它之前通过了两个nginx转发， 即用户访问该web通过两台**</span>
+<span class="line">**nginx。**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">在 **第一台nginx** 中,使用</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">现在的$proxy_add_x_forwarded_for变量的&quot;X-Forwarded-For&quot;部分是空的，所以 **只有**</span>
+<span class="line">**$remote_addr** ，而$remote_addr的值是用户的ip，于是赋值以后，X-Forwarded-For变量的</span>
+<span class="line">值就是 **用户的真实的ip地址** 了。（总结就是获得了客户端的IP）</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">到了 **第二台nginx** ，使用</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">现在的$proxy_add_x_forwarded_for变量，X-Forwarded-For部分包含的是用户的真实ip，</span>
+<span class="line">$remote_addr部分的值是上一台nginx的ip地址，于是通过这个赋值以后现在的 **X-**</span>
+<span class="line">**Forwarded-For的值** 就变成了 **“用户的真实ip，第一台nginx的ip“** 。（总结就是第二台获取</span>
+<span class="line">到了第一台IP和客户端的IP）</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">举个例子说明</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/nginx.pdf-34-0.png&quot;&gt;34-0</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/nginx.pdf-34-1.png&quot;&gt;34-1</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/nginx.pdf-34-2.png&quot;&gt;34-2</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**可以看到获取客户端的IP地址**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**不仅可以通过proxy_set_header  X-real-ip $remote_addr;获取到**</span>
+<span class="line">**也可以通过proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></div><!--[--><!--]--></div><footer class="vp-page-meta"><!----><div class="vp-meta-item git-info"><div class="vp-meta-item last-updated"><span class="meta-item-label">最近更新：: </span><time class="meta-item-info" datetime="2026-04-02T09:59:18.000Z" data-allow-mismatch>2026/4/2 09:59</time></div><div class="vp-meta-item contributors"><span class="meta-item-label">Contributors: </span><span class="meta-item-info"><!--[--><!--[--><span class="contributor" title="email: wuyuying@foresee.com.cn">wuyuying</span><!----><!--]--><!--]--></span></div></div></footer><!----><!--[--><!--]--></main><!--]--></div><!--[--><!----><!--]--><!--]--></div>
+    <script src="/assets/js/runtime~app.f4595dd2.js" defer></script><script src="/assets/js/80.d657ec11.js" defer></script><script src="/assets/js/app.b924a461.js" defer></script>
+  </body>
+</html>

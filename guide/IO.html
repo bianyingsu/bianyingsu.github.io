@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="generator" content="VuePress 2.0.0-rc.20" />
+    <style>
+      :root {
+        --vp-c-bg: #fff;
+      }
+
+      [data-theme='dark'] {
+        --vp-c-bg: #1b1b1f;
+      }
+
+      html,
+      body {
+        background-color: var(--vp-c-bg);
+      }
+    </style>
+    <script>
+      const useChoice = localStorage.getItem('vuepress-color-scheme')
+      const systemStatus =
+        'matchMedia' in window
+          ? window.matchMedia('(prefers-color-scheme: dark)').matches
+          : false
+
+      if (useChoice === 'light') {
+        document.documentElement.dataset.theme = 'light'
+      } else if (useChoice === 'dark' || systemStatus) {
+        document.documentElement.dataset.theme = 'dark'
+      }
+    </script>
+    <title>Java Blob 转为 MultipartFile 发送请求 | 彼岸樱速</title><meta name="description" content="欢迎来到bays的笔记文档空间">
+    <link rel="stylesheet" href="/assets/css/styles.f7307751.css">
+    <link rel="preload" href="/assets/js/runtime~app.f4595dd2.js" as="script"><link rel="preload" href="/assets/css/styles.f7307751.css" as="style"><link rel="preload" href="/assets/js/80.d657ec11.js" as="script"><link rel="preload" href="/assets/js/app.b924a461.js" as="script">
+    <link rel="prefetch" href="/assets/js/guide_java-base.html.33446a78.js" as="script"><link rel="prefetch" href="/assets/js/guide_mysql.html.5a26388b.js" as="script"><link rel="prefetch" href="/assets/js/guide_spring.html.3826e71e.js" as="script"><link rel="prefetch" href="/assets/js/guide_Thread.html.04caf3bc.js" as="script"><link rel="prefetch" href="/assets/js/guide_设计模式.html.bfc41cea.js" as="script"><link rel="prefetch" href="/assets/js/guide_集合框架.html.a43849c4.js" as="script"><link rel="prefetch" href="/assets/js/guide_JVM.html.706d52d4.js" as="script"><link rel="prefetch" href="/assets/js/guide_Sort.html.cc3498ab.js" as="script"><link rel="prefetch" href="/assets/js/guide_Java工具.html.178ce3c5.js" as="script"><link rel="prefetch" href="/assets/js/guide_redis.html.2a57d709.js" as="script"><link rel="prefetch" href="/assets/js/guide_maven.html.3f0f8833.js" as="script"><link rel="prefetch" href="/assets/js/guide_dubbo.html.cd8cd49b.js" as="script"><link rel="prefetch" href="/assets/js/guide_docker.html.7f6df417.js" as="script"><link rel="prefetch" href="/assets/js/guide_mybatis.html.fc6fdcc2.js" as="script"><link rel="prefetch" href="/assets/js/guide_K8S.html.bd12d84a.js" as="script"><link rel="prefetch" href="/assets/js/guide_activeMQ.html.d6c0a304.js" as="script"><link rel="prefetch" href="/assets/js/guide_Java面试.html.4935681b.js" as="script"><link rel="prefetch" href="/assets/js/guide_nginx.html.3e27a0bf.js" as="script"><link rel="prefetch" href="/assets/js/guide_hibernate.html.767c4102.js" as="script"><link rel="prefetch" href="/assets/js/guide_IO.html.cd2ba7dc.js" as="script"><link rel="prefetch" href="/assets/js/guide_SpringCloud.html.d8c3faac.js" as="script"><link rel="prefetch" href="/assets/js/guide_锁机制.html.f2744de7.js" as="script"><link rel="prefetch" href="/assets/js/guide_etcd.html.94d74e02.js" as="script"><link rel="prefetch" href="/assets/js/guide_rabbitMQ.html.6b9b3f41.js" as="script"><link rel="prefetch" href="/assets/js/guide_信息安全.html.9ced2e06.js" as="script"><link rel="prefetch" href="/assets/js/guide_分库分表.html.53da8892.js" as="script"><link rel="prefetch" href="/assets/js/guide_各种框架.html.1708222d.js" as="script"><link rel="prefetch" href="/assets/js/guide_excel.html.556d5808.js" as="script"><link rel="prefetch" href="/assets/js/guide_linux.html.ab90c6fb.js" as="script"><link rel="prefetch" href="/assets/js/guide_科目一.html.d539d5bd.js" as="script"><link rel="prefetch" href="/assets/js/guide_算法.html.692f3570.js" as="script"><link rel="prefetch" href="/assets/js/guide_rocketMQ.html.79f7babe.js" as="script"><link rel="prefetch" href="/assets/js/guide_协议.html.9f38044a.js" as="script"><link rel="prefetch" href="/assets/js/guide_nacos.html.2286d70e.js" as="script"><link rel="prefetch" href="/assets/js/guide_kafka.html.fefd1df8.js" as="script"><link rel="prefetch" href="/assets/js/guide_awt.html.0afacf5e.js" as="script"><link rel="prefetch" href="/assets/js/guide_智力题.html.5c7f1473.js" as="script"><link rel="prefetch" href="/assets/js/guide_xxl-job.html.a1f849ec.js" as="script"><link rel="prefetch" href="/assets/js/guide_idea.html.3ad8a07d.js" as="script"><link rel="prefetch" href="/assets/js/guide_吉他.html.6ebfb331.js" as="script"><link rel="prefetch" href="/assets/js/guide_计算机网络.html.5bb300e3.js" as="script"><link rel="prefetch" href="/assets/js/guide_git.html.0fdf80ae.js" as="script"><link rel="prefetch" href="/assets/js/guide_elasticsearch.html.e3b40bc3.js" as="script"><link rel="prefetch" href="/assets/js/guide_jenkins.html.e58e80c0.js" as="script"><link rel="prefetch" href="/assets/js/guide_tomcat.html.f4e3bd63.js" as="script"><link rel="prefetch" href="/assets/js/guide_类型转换.html.321f7adf.js" as="script"><link rel="prefetch" href="/assets/js/guide_Struts.html.bde4caf7.js" as="script"><link rel="prefetch" href="/assets/js/guide_arthas.html.92acb166.js" as="script"><link rel="prefetch" href="/assets/js/get-started.html.e7471dde.js" as="script"><link rel="prefetch" href="/assets/js/guide_memcache.html.cd5209cb.js" as="script"><link rel="prefetch" href="/assets/js/index.html.8014296c.js" as="script"><link rel="prefetch" href="/assets/js/guide_zookeeper.html.91a69f82.js" as="script"><link rel="prefetch" href="/assets/js/posts_sticky2.html.06cf9799.js" as="script"><link rel="prefetch" href="/assets/js/posts_archive2.html.93e2049d.js" as="script"><link rel="prefetch" href="/assets/js/posts_archive1.html.9a92ab7c.js" as="script"><link rel="prefetch" href="/assets/js/posts_article10.html.60db36a1.js" as="script"><link rel="prefetch" href="/assets/js/posts_article12.html.4e86dc7a.js" as="script"><link rel="prefetch" href="/assets/js/posts_article11.html.06296013.js" as="script"><link rel="prefetch" href="/assets/js/posts_article4.html.487528dc.js" as="script"><link rel="prefetch" href="/assets/js/posts_article5.html.46fa9dfb.js" as="script"><link rel="prefetch" href="/assets/js/posts_article6.html.263fd3df.js" as="script"><link rel="prefetch" href="/assets/js/posts_article7.html.6d94c194.js" as="script"><link rel="prefetch" href="/assets/js/posts_article8.html.85e9d135.js" as="script"><link rel="prefetch" href="/assets/js/posts_article3.html.116fece1.js" as="script"><link rel="prefetch" href="/assets/js/posts_article9.html.c42c4aee.js" as="script"><link rel="prefetch" href="/assets/js/posts_article1.html.09b6dc04.js" as="script"><link rel="prefetch" href="/assets/js/posts_article2.html.ac4fcdc4.js" as="script"><link rel="prefetch" href="/assets/js/posts_sticky.html.62f7b06e.js" as="script"><link rel="prefetch" href="/assets/js/category_category-a_index.html.3d5a3d97.js" as="script"><link rel="prefetch" href="/assets/js/category_category-b_index.html.f800411b.js" as="script"><link rel="prefetch" href="/assets/js/category_category-c_index.html.54705752.js" as="script"><link rel="prefetch" href="/assets/js/category_history_index.html.8d52ff6c.js" as="script"><link rel="prefetch" href="/assets/js/tag_tag-a_index.html.4ca30b34.js" as="script"><link rel="prefetch" href="/assets/js/tag_tag-c_index.html.99b6d7a2.js" as="script"><link rel="prefetch" href="/assets/js/tag_tag-d_index.html.48d011d2.js" as="script"><link rel="prefetch" href="/assets/js/tag_tag-e_index.html.1a0f4615.js" as="script"><link rel="prefetch" href="/assets/js/tag_tag-b_index.html.efaa4391.js" as="script"><link rel="prefetch" href="/assets/js/category_index.html.e07b1653.js" as="script"><link rel="prefetch" href="/assets/js/tag_wwii_index.html.a6641410.js" as="script"><link rel="prefetch" href="/assets/js/tag_wwi_index.html.14ce07dc.js" as="script"><link rel="prefetch" href="/assets/js/404.html.cec7b627.js" as="script"><link rel="prefetch" href="/assets/js/timeline_index.html.3d78620e.js" as="script"><link rel="prefetch" href="/assets/js/article_index.html.88ed4921.js" as="script"><link rel="prefetch" href="/assets/js/tag_index.html.1febec96.js" as="script">
+  </head>
+  <body>
+    <div id="app"><!--[--><div class="vp-theme-container external-link-icon" vp-container><!--[--><header class="vp-navbar" vp-navbar><div class="vp-toggle-sidebar-button" title="toggle sidebar" aria-expanded="false" role="button" tabindex="0"><div class="icon" aria-hidden="true"><span></span><span></span><span></span></div></div><span><a class="route-link" href="/"><img class="vp-site-logo" src="/logo.png" alt="彼岸樱速"><span class="vp-site-name vp-hide-mobile" aria-hidden="true">彼岸樱速</span></a></span><div class="vp-navbar-items-wrapper" style=""><!--[--><!--]--><nav class="vp-navbar-items vp-hide-mobile" aria-label="site navigation"><!--[--><div class="vp-navbar-item"><a class="route-link auto-link" href="/" aria-label="Home"><!--[--><!--[--><!--]--><!--]-->Home<!--[--><!--[--><!--]--><!--]--></a></div><div class="vp-navbar-item"><a class="auto-link external-link" href="https://bianyingsu.github.io" aria-label="梦起" rel="noopener noreferrer" target="_blank"><!--[--><!--[--><!--]--><!--]-->梦起<!--[--><!--[--><!--]--><!--]--></a></div><div class="vp-navbar-item"><a class="route-link auto-link" href="/guide/activeMQ.html" aria-label="activeMQ"><!--[--><!--[--><!--]--><!--]-->activeMQ<!--[--><!--[--><!--]--><!--]--></a></div><div class="vp-navbar-item"><a class="route-link auto-link" href="/article/" aria-label="Article"><!--[--><!--[--><!--]--><!--]-->Article<!--[--><!--[--><!--]--><!--]--></a></div><div class="vp-navbar-item"><a class="route-link auto-link" href="/category/" aria-label="Category"><!--[--><!--[--><!--]--><!--]-->Category<!--[--><!--[--><!--]--><!--]--></a></div><div class="vp-navbar-item"><a class="route-link auto-link" href="/tag/" aria-label="Tag"><!--[--><!--[--><!--]--><!--]-->Tag<!--[--><!--[--><!--]--><!--]--></a></div><div class="vp-navbar-item"><a class="route-link auto-link" href="/timeline/" aria-label="Timeline"><!--[--><!--[--><!--]--><!--]-->Timeline<!--[--><!--[--><!--]--><!--]--></a></div><!--]--></nav><!--[--><!--]--><button type="button" class="vp-toggle-color-mode-button" title="toggle color mode"><svg class="light-icon" viewbox="0 0 32 32" style=""><path d="M16 12.005a4 4 0 1 1-4 4a4.005 4.005 0 0 1 4-4m0-2a6 6 0 1 0 6 6a6 6 0 0 0-6-6z" fill="currentColor"></path><path d="M5.394 6.813l1.414-1.415l3.506 3.506L8.9 10.318z" fill="currentColor"></path><path d="M2 15.005h5v2H2z" fill="currentColor"></path><path d="M5.394 25.197L8.9 21.691l1.414 1.415l-3.506 3.505z" fill="currentColor"></path><path d="M15 25.005h2v5h-2z" fill="currentColor"></path><path d="M21.687 23.106l1.414-1.415l3.506 3.506l-1.414 1.414z" fill="currentColor"></path><path d="M25 15.005h5v2h-5z" fill="currentColor"></path><path d="M21.687 8.904l3.506-3.506l1.414 1.415l-3.506 3.505z" fill="currentColor"></path><path d="M15 2.005h2v5h-2z" fill="currentColor"></path></svg><svg class="dark-icon" viewbox="0 0 32 32" style="display:none;"><path d="M13.502 5.414a15.075 15.075 0 0 0 11.594 18.194a11.113 11.113 0 0 1-7.975 3.39c-.138 0-.278.005-.418 0a11.094 11.094 0 0 1-3.2-21.584M14.98 3a1.002 1.002 0 0 0-.175.016a13.096 13.096 0 0 0 1.825 25.981c.164.006.328 0 .49 0a13.072 13.072 0 0 0 10.703-5.555a1.01 1.01 0 0 0-.783-1.565A13.08 13.08 0 0 1 15.89 4.38A1.015 1.015 0 0 0 14.98 3z" fill="currentColor"></path></svg></button><!----></div></header><!--]--><div class="vp-sidebar-mask"></div><!--[--><aside class="vp-sidebar" vp-sidebar><nav class="vp-navbar-items" aria-label="site navigation"><!--[--><div class="vp-navbar-item"><a class="route-link auto-link" href="/" aria-label="Home"><!--[--><!--[--><!--]--><!--]-->Home<!--[--><!--[--><!--]--><!--]--></a></div><div class="vp-navbar-item"><a class="auto-link external-link" href="https://bianyingsu.github.io" aria-label="梦起" rel="noopener noreferrer" target="_blank"><!--[--><!--[--><!--]--><!--]-->梦起<!--[--><!--[--><!--]--><!--]--></a></div><div class="vp-navbar-item"><a class="route-link auto-link" href="/guide/activeMQ.html" aria-label="activeMQ"><!--[--><!--[--><!--]--><!--]-->activeMQ<!--[--><!--[--><!--]--><!--]--></a></div><div class="vp-navbar-item"><a class="route-link auto-link" href="/article/" aria-label="Article"><!--[--><!--[--><!--]--><!--]-->Article<!--[--><!--[--><!--]--><!--]--></a></div><div class="vp-navbar-item"><a class="route-link auto-link" href="/category/" aria-label="Category"><!--[--><!--[--><!--]--><!--]-->Category<!--[--><!--[--><!--]--><!--]--></a></div><div class="vp-navbar-item"><a class="route-link auto-link" href="/tag/" aria-label="Tag"><!--[--><!--[--><!--]--><!--]-->Tag<!--[--><!--[--><!--]--><!--]--></a></div><div class="vp-navbar-item"><a class="route-link auto-link" href="/timeline/" aria-label="Timeline"><!--[--><!--[--><!--]--><!--]-->Timeline<!--[--><!--[--><!--]--><!--]--></a></div><!--]--></nav><!--[--><!--]--><ul class="vp-sidebar-items"><!--[--><li><a class="route-link auto-link vp-sidebar-item vp-sidebar-heading" href="/guide/activeMQ.html" aria-label="/guide/activeMQ.html"><!--[--><!--[--><!--]--><!--]-->/guide/activeMQ.html<!--[--><!--[--><!--]--><!--]--></a><!----></li><li><a class="route-link auto-link vp-sidebar-item vp-sidebar-heading" href="/guide/Arthas.html" aria-label="/guide/Arthas.html"><!--[--><!--[--><!--]--><!--]-->/guide/Arthas.html<!--[--><!--[--><!--]--><!--]--></a><!----></li><li><a class="route-link auto-link vp-sidebar-item vp-sidebar-heading" href="/guide/awt.html" aria-label="AWT &amp;&amp; Swing"><!--[--><!--[--><!--]--><!--]-->AWT &amp;&amp; Swing<!--[--><!--[--><!--]--><!--]--></a><!----></li><li><a class="route-link auto-link vp-sidebar-item vp-sidebar-heading" href="/guide/docker.html" aria-label="Docker"><!--[--><!--[--><!--]--><!--]-->Docker<!--[--><!--[--><!--]--><!--]--></a><!----></li><li><a class="route-link auto-link vp-sidebar-item vp-sidebar-heading" href="/guide/dubbo.html" aria-label="Dubbo"><!--[--><!--[--><!--]--><!--]-->Dubbo<!--[--><!--[--><!--]--><!--]--></a><!----></li><li><a class="route-link auto-link vp-sidebar-item vp-sidebar-heading" href="/guide/elasticsearch.html" aria-label="ElasticSearch"><!--[--><!--[--><!--]--><!--]-->ElasticSearch<!--[--><!--[--><!--]--><!--]--></a><!----></li><li><a class="route-link auto-link vp-sidebar-item vp-sidebar-heading" href="/guide/etcd.html" aria-label="Etcd"><!--[--><!--[--><!--]--><!--]-->Etcd<!--[--><!--[--><!--]--><!--]--></a><!----></li><li><a class="route-link auto-link vp-sidebar-item vp-sidebar-heading" href="/guide/excel.html" aria-label="Excel"><!--[--><!--[--><!--]--><!--]-->Excel<!--[--><!--[--><!--]--><!--]--></a><!----></li><li><a class="route-link auto-link vp-sidebar-item vp-sidebar-heading" href="/guide/git.html" aria-label="Git"><!--[--><!--[--><!--]--><!--]-->Git<!--[--><!--[--><!--]--><!--]--></a><!----></li><li><a class="route-link auto-link vp-sidebar-item vp-sidebar-heading" href="/guide/Sort.html" aria-label="Sort"><!--[--><!--[--><!--]--><!--]-->Sort<!--[--><!--[--><!--]--><!--]--></a><!----></li><!--]--></ul><!--[--><!--]--></aside><!--]--><!--[--><main class="vp-page"><!--[--><!--]--><div vp-content><!--[--><!--]--><div><p><strong>前端js以application/octet-stream方式上传文件</strong></p><p><strong>笔记本：</strong> IO</p><p><strong>创建时间：</strong> 2024/3/1 18:30 <strong>更新时间：</strong> 2024/3/1 18:32</p><h2 id="前端js以application-octet-stream方式上传文件" tabindex="-1"><a class="header-anchor" href="#前端js以application-octet-stream方式上传文件"><span><strong>前端js以application/octet-stream方式上传文件</strong></span></a></h2><p>今天又学会了一种上传文件的文件流方法。 本人后端采用了CXF框架实现的</p><p><strong>api层</strong></p><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line"> package com inspur gs tax tbs utils. . . . . ;</span>
+<span class="line"></span>
+<span class="line"> import org glassfish jersey media multipart. . . . .FormDataParam;</span>
+<span class="line"> import javax activation. .DataHandler;</span>
+<span class="line"> import javax jws. .WebParam;</span>
+<span class="line"> import javax ws rs. . .*;</span>
+<span class="line"> import javax ws rs core. . . .MediaType;</span>
+<span class="line"> import javax xml bind annotation. . . .XmlMimeType;</span>
+<span class="line"> import java awt. .*;</span>
+<span class="line"> import java io. .InputStream;</span>
+<span class="line"> /**</span>
+<span class="line"> * @author Guangpei Xia</span>
+<span class="line"> * @create 2021-08-29-10:51</span>
+<span class="line"> */</span>
+<span class="line"> @Consumes(MediaType. APPLICATION_OCTET_STREAM )</span>
+<span class="line"> @Produces(MediaType. APPLICATION_JSON )</span>
+<span class="line"> public interface ITaxImport {</span>
+<span class="line"> @Path(&quot;/importexcel&quot;)</span>
+<span class="line"> @POST</span>
+<span class="line"> String importexcel(@XmlMimeType(&quot;application/octet-stream&quot;) DataHandler dataHandler,</span>
+<span class="line"> @QueryParam(&quot;endpoint&quot;)String endpoint,</span>
+<span class="line"> @QueryParam(&quot;method&quot;)String method );</span>
+<span class="line"> }</span>
+<span class="line"></span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><strong>前端js</strong></p><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line"> function confirmUpload() {</span>
+<span class="line">   var theFile = $(&quot;#uploadFile&quot;);</span>
+<span class="line"></span>
+<span class="line">   var file = theFile [0]. files [0];</span>
+<span class="line">   var reader = new FileReader();</span>
+<span class="line"></span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><code>reader</code> <code>.readAsArrayBuffer(</code> <code>file</code> <code>);</code> <em><code>//</code></em> 这个读法是异步的</p><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line"> reader .onloadend = function(){</span>
+<span class="line"></span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div></div></div><p><em><code>//</code></em> 这个事件在读取结束后，无论成功或者失败都会触发</p><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line">    if ( reader . error ) {</span>
+<span class="line"></span>
+<span class="line">            &quot; &quot;</span>
+<span class="line"> idp .error( 文件读取失败 );</span>
+<span class="line">    } else {</span>
+<span class="line"></span>
+<span class="line">      upload( url, reader . result, sucess, error );</span>
+<span class="line">    }</span>
+<span class="line"></span>
+<span class="line">   }</span>
+<span class="line"> }</span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><em><code>//</code></em> 文件上传</p><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line">    function upload(url,binary,successCallback, errorCallback){</span>
+<span class="line">      var xhr = new XMLHttpRequest();</span>
+<span class="line"> xhr .open(&quot;POST&quot;, url );</span>
+<span class="line"> xhr .overrideMimeType(&quot;application/octet-stream&quot;);</span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><em><code>//</code></em> 直接发送二进制数据</p><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line">      if( xhr . sendAsBinary ){</span>
+<span class="line"></span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div></div></div><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line"> xhr .sendAsBinary( binary );</span>
+<span class="line">      }else{</span>
+<span class="line"> xhr .send( binary );</span>
+<span class="line"></span>
+<span class="line">      }</span>
+<span class="line"></span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><em><code>//</code></em> 监听变化</p><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line"> xhr .onreadystatechange = function(event){</span>
+<span class="line">        if( xhr . readyState ===4){</span>
+<span class="line"></span>
+<span class="line">          if( xhr . status ===200){</span>
+<span class="line"></span>
+<span class="line">            var jqXHR = event . target ;</span>
+<span class="line"></span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><em><code>//</code></em> 响应成功</p><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line">            if ( successCallback ) {</span>
+<span class="line"></span>
+<span class="line">              successCallback( jqXHR . responseText );</span>
+<span class="line">            }</span>
+<span class="line"></span>
+<span class="line">          }else{</span>
+<span class="line">            if ( errorCallback ) {</span>
+<span class="line"></span>
+<span class="line">              errorCallback( jqXHR . responseText );</span>
+<span class="line">            }</span>
+<span class="line"></span>
+<span class="line">          }</span>
+<span class="line">        }</span>
+<span class="line"></span>
+<span class="line">      }</span>
+<span class="line">    }</span>
+<span class="line"></span>
+<span class="line">   }</span>
+<span class="line"></span>
+<span class="line"> function sucess(data) {</span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><em><code>//</code></em> 成功之后执行的方法</p><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line"> var res = JSON.parse( data );</span>
+<span class="line"> }</span>
+<span class="line"></span>
+<span class="line"> function error(data) {</span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><em><code>//</code></em> 异常执行的方法</p><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line"> var res = JSON.parse( data );</span>
+<span class="line"></span>
+<span class="line"> onError &amp;&amp; onError( res );</span>
+<span class="line"> }</span>
+<span class="line"></span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><strong>附上以form方式上传文件的方式</strong></p><p><em><code>// Form</code></em> 请求上传文件</p><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line">    function importFileWithAjax(serverUrl, formData, successCallback, errorCallback) {</span>
+<span class="line"> $ .ajax({</span>
+<span class="line"> url : serverUrl, //Server script to process data</span>
+<span class="line"></span>
+<span class="line"> type : &#39;POST&#39;,</span>
+<span class="line">        success: function completeHandler(data, textStatus, jqXHR) {</span>
+<span class="line">          if ( successCallback ) {</span>
+<span class="line">            successCallback( jqXHR . responseText );</span>
+<span class="line"></span>
+<span class="line">          }</span>
+<span class="line">        },</span>
+<span class="line"></span>
+<span class="line">        error: function errorHandler(jqXHR, textStatus, errorThrown) {</span>
+<span class="line">          if ( errorCallback ) {</span>
+<span class="line"></span>
+<span class="line">            errorCallback( errorThrown );</span>
+<span class="line">          }</span>
+<span class="line"></span>
+<span class="line">        },</span>
+<span class="line"> data : formData, // Form data</span>
+<span class="line"></span>
+<span class="line"> cache : false,</span>
+<span class="line"> contentType : false,</span>
+<span class="line"></span>
+<span class="line"> processData : false,</span>
+<span class="line"> headers : { //Options to tell server return data with specified type</span>
+<span class="line">          &quot;Accept&quot;: &quot;application/json&quot;</span>
+<span class="line">        }</span>
+<span class="line"></span>
+<span class="line">      });</span>
+<span class="line">    }</span>
+<span class="line"></span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><strong>Java Blob 转为 MultipartFile 发送请求</strong></p><p><strong>笔记本：</strong> IO</p><p><strong>创建时间：</strong> 2024/3/1 18:24 <strong>更新时间：</strong> 2024/3/1 18:28</p><h1 id="java-blob-转为-multipartfile-发送请求" tabindex="-1"><a class="header-anchor" href="#java-blob-转为-multipartfile-发送请求"><span><strong>Java Blob 转为 MultipartFile 发送请求</strong></span></a></h1><p>在开发Web应用程序时，我们经常需要上传文件到服务器。而在Java中，常用的文件上传方式 是使用 <code>MultipartFile</code> 对象。但是有时候我们可能会遇到需要将 <code>Blob</code> 对象转换为 <code>MultipartFile</code> 对象的 情况，这篇文章将向您介绍如何进行这个转换并发送请求。</p><p><strong>Blob对象和MultipartFile对象</strong></p><p>在开始之前，我们先来了解一下 <code>Blob</code> 对象和 <code>MultipartFile</code> 对象。</p><p><strong>Blob对象</strong></p><p><code>Blob</code> 对象是二进制大对象（Binary Large Object）的缩写，它表示一个不可变的、原始数据的 有序集合。在Web开发中， <code>Blob</code> 对象通常用于表示文件数据。</p><p><strong>MultipartFile对象</strong></p><p><code>MultipartFile</code> 对象是Spring框架中用于处理文件上传的接口，它提供了一系列方法来获取文件的 名称、大小、内容等信息。</p><p><strong>Java中Blob转为MultipartFile的方法</strong></p><p>在Java中，要将 <code>Blob</code> 对象转换为 <code>MultipartFile</code> 对象，我们需要通过以下步骤来实现：</p><ol><li>创建一个临时文件。我们可以使用 <code>File.createTempFile()</code> 方法来创建一个临时文件。</li><li>将 <code>Blob</code> 对象的数据写入临时文件。我们可以通过 <code>Blob</code> 对象的 <code>getBinaryStream()</code> 方法获取输入</li></ol><p>流，然后使用 <code>FileOutputStream</code> 将数据写入临时文件。 3. 创建一个 <code>MultipartFile</code> 对象。我们可以使用 <code>MockMultipartFile</code> 类或者自己实现 <code>MultipartFile</code> 接</p><p>口的实现类来创建一个 <code>MultipartFile</code> 对象。 4. 发送请求。我们可以使用Spring的 <code>RestTemplate</code> 类或者其他网络请求库来发送包含</p><p><code>MultipartFile</code> 对象的请求。</p><p>下面是一个完整的示例代码，演示了如何将Blob转换为MultipartFile并发送请求：</p><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line"> // 引用所需的类</span>
+<span class="line"> import org.springframework.mock.web.MockMultipartFile;</span>
+<span class="line"> import org.springframework.web.multipart.MultipartFile;</span>
+<span class="line"></span>
+<span class="line"> import java.io.File;</span>
+<span class="line"> import java.io.FileOutputStream;</span>
+<span class="line"> import java.io.InputStream;</span>
+<span class="line"> import java.sql.Blob;</span>
+<span class="line"></span>
+<span class="line"> public class BlobToMultipartFileExample {</span>
+<span class="line"></span>
+<span class="line"> public static MultipartFile convertBlobToMultipartFile(Blob blob) throws Exception {</span>
+<span class="line"> // 创建临时文件</span>
+<span class="line"> File tempFile = File.createTempFile(&quot;temp&quot;, null);</span>
+<span class="line"></span>
+<span class="line"> try (InputStream inputStream = blob.getBinaryStream();</span>
+<span class="line"> FileOutputStream outputStream = new FileOutputStream(tempFile)) {</span>
+<span class="line"></span>
+<span class="line"> // 将 Blob 对象的数据写入临时文件</span>
+<span class="line"> byte[] buffer = new byte[1024];</span>
+<span class="line"> int bytesRead;</span>
+<span class="line"> while ((bytesRead = inputStream.read(buffer)) != -1) {</span>
+<span class="line"> outputStream.write(buffer, 0, bytesRead);</span>
+<span class="line"> }</span>
+<span class="line"> }</span>
+<span class="line"></span>
+<span class="line"> // 创建 MultipartFile 对象</span>
+<span class="line"> return new MockMultipartFile(&quot;file&quot;, tempFile.getName(), null, new</span>
+<span class="line"> FileInputStream(tempFile));</span>
+<span class="line"> }</span>
+<span class="line"></span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line"> public static void main(String[] args) throws Exception {</span>
+<span class="line"> // 创建 Blob 对象，这里仅作为示例</span>
+<span class="line"> Blob blob = getBlobFromDatabase();</span>
+<span class="line"></span>
+<span class="line"> // 将 Blob 对象转换为 MultipartFile 对象</span>
+<span class="line"> MultipartFile multipartFile = convertBlobToMultipartFile(blob);</span>
+<span class="line"></span>
+<span class="line"> // 发送请求</span>
+<span class="line"> sendRequest(multipartFile);</span>
+<span class="line"> }</span>
+<span class="line"></span>
+<span class="line"> private static Blob getBlobFromDatabase() {</span>
+<span class="line"> // 从数据库中获取 Blob 对象，这里仅作为示例</span>
+<span class="line"> return null;</span>
+<span class="line"> }</span>
+<span class="line"></span>
+<span class="line"> private static void sendRequest(MultipartFile multipartFile) {</span>
+<span class="line"> // 发送包含 MultipartFile 对象的请求，这里仅作为示例</span>
+<span class="line"> }</span>
+<span class="line"> }</span>
+<span class="line"></span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>在上面的代码中，我们首先创建了一个临时文件 <code>tempFile</code> ，然后使用 <code>getBinaryStream()</code> 方法获取 <code>Blob</code> 对象的输入流，并使用 <code>FileOutputStream</code> 将输入流的数据写入临时文件。接下来，我们使用</p><p><code>MockMultipartFile</code> 类创建了一个 <code>MultipartFile</code> 对象，并将临时文件作为文件内容传入。最后，我们 可以通过 <code>sendRequest()</code> 方法发送请求，传递 <code>MultipartFile</code> 对象。</p><p><strong>总结</strong></p><p>本文介绍了如何将Java中的Blob对象转换为MultipartFile对象，并发送包含MultipartFile对象 的请求。通过以上步骤，我们可以轻松地处理Blob对象，并使用Spring框架提供的功能来处理 文件上传。</p><p>当然，除了上述示例中使用的 <code>MockMultipartFile</code> 类外，您也可以自己实现MultipartFile接口的实 现类来创建 <code>MultipartFile</code> 对象。</p><p><strong>大文件分片上传前后端实现</strong></p><p><strong>笔记本：</strong> IO</p><p><strong>创建时间：</strong> 2024/3/1 15:34 <strong>更新时间：</strong> 2024/3/1 18:08</p><p><strong>URL：</strong> https://blog.csdn.net/qq_32099833/article/details/109630499</p><h2 id="大文件分片上传前后端实现-最近在做公司的视频业务-涉及到大视频的上传。" tabindex="-1"><a class="header-anchor" href="#大文件分片上传前后端实现-最近在做公司的视频业务-涉及到大视频的上传。"><span><strong>大文件分片上传前后端实现</strong> <strong>最近在做公司的视频业务，涉及到大视频的上传。</strong></span></a></h2><p>之前的图片、Excel等上传做的很简单，直接表单提交后端用MultipartFile接收保存到磁盘就行了。 但是针对大文件的上传，需要做额外的处理，否则可能会遇到如下问题：</p><ol><li><p>文件过大，超出服务端的请求大小限制(如SpringMVC，默认文件上传最大1MB)。</p></li><li><p>请求的时间过长，请求超时。</p></li><li><p>客户端网络不好的话，容易传输中断，必须整个文件重传。</p></li></ol><p>为了解决这些问题，笔者研究了一下，发现可以用分片上传的方式来解决。</p><p><strong>前端处理</strong></p><p>大文件分片上传，是需要前端和后端配合操作的。</p><p>整体流程是：前端将大文件进行分片，例如一个50MB的文件，分成10片，每个片5MB。</p><p>然后发10个HTTP请求，将这10个分片数据发送给后端，后端根据分片的下标和Size来往磁盘文件的不同位置写</p><p>10个分片全部写完后即得到一个完整的文件。</p><p><strong>前端的处理流程如下：</strong></p><p><strong>前端实战代码如下：</strong></p><img src="/img/IO.pdf-4-0.png"> ``` <html lang="en"><head><meta charset="UTF-8"><title> Title </title></head><body><input type="file" name="file" id="file"><button id="upload" onClick="upload()"> upload </button></body></html><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line"></span>
+<span class="line">[笔者这里写了一个比较粗糙的前端例子，市面上有很多优秀的分片上传插件，例如：webuploader。](http://fex.baidu.com/webuploader/)</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**后端处理**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">后端接收到分片数据后，要根据分片的下标和分片的大小来往文件的指定位置写入分片数据。</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">例如：分片大小为1MB，第一个分片就要往文件的第0个字节开始，写入1048576字节的数据。第二个分片就要</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">据，以此类推。待所有的分片数据全部写入完成后，即得到一个完整的文件。</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**后端处理流程如下：**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-6-0.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line">**RandomAccessFile**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">分片数据的写入，需要对文件进行定位，移动访问指针。</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">JDK提供了 `java.io.RandomAccessFile` 类，支持对文件进行随机的读写操作。</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">在Linux平台上，所有打开的文件都有一个文件描述符(FD)，文件描述符自身维护了一个文件偏移量(current file</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">通过 `lseek` 函数可以移动文件的读写指针，RandomAccessFile的 `seek()` 方法就是调用了Linux的 `lseek` 系统函数来实</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**通过RandomAccessFile.seek()移动访问指针，然后写入分片数据。**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**后端处理代码如下：**</span>
+<span class="line"></span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>@RestController public class FileController {</p><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line"></span>
+<span class="line">_`//`_ 存放文件的临时目录</span>
+<span class="line"></span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>private static final String DATA_DIR = System .getProperty(&quot;user.dir&quot;) + &quot;/temp/&quot;;</p><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line"></span>
+<span class="line">_`//`_ 文件 _`MD5`_ 的缓存容器</span>
+<span class="line"></span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>private static final ConcurrentMap &lt;String, File&gt; MD5_CACHE = new ConcurrentHashMap&lt;&gt;();</p><p>/**</p><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line"></span>
+<span class="line">_`*`_ 大文件分片上传</span>
+<span class="line">_`* @param name`_ 文件名</span>
+<span class="line">_`* @param md5`_ 文件 _`MD5`_ 值</span>
+<span class="line">_`* @param size`_ 文件大小</span>
+<span class="line">_`* @param chunks`_ 总的分片数</span>
+<span class="line">_`* @param chunk`_ 当前分片数</span>
+<span class="line">_`* @param multipartFile`_ 分片流</span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><ul><li>@throws IOException */ @PostMapping(&quot;/chunk/upload&quot;) public void chunkUpload( String name,</li></ul><p>String md5,</p><p>Long size,</p><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-7-0.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**重复读取inputStream**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**笔记本：** IO</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**创建时间：** 2023/12/11 19:25 **更新时间：** 2023/12/11 19:28</span>
+<span class="line"></span>
+<span class="line">## **重复读取inputStream**</span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>inputstream 只能读取一次，再次读取则无法获取到内容。 这是因为 inputStream 的内部有个 pos 指针，当读取的时候指针会不断的移动, 当移动到末尾的时候, 就无法再次读取了。</p><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line"></span>
+<span class="line">**问题解决：**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**方法一：**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">使用 **ByteArrayOutputStream** 将字节缓存，每次读取都从 **ByteArrayOutputStream** 里面获取。</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">获取ByteArrayOutputStream：</span>
+<span class="line"></span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>public static ByteArrayOutputStream readInputStream(InputStream inputStream) throws IOEx</p><p>ByteArrayOutputStream outputStream = new ByteArrayOutputStream();</p><p>byte[] buffer = new byte[1024];</p><p>int len;</p><p>while ((len = inputStream.read(buffer)) &gt; -1) {</p><p>outputStream.write(buffer, 0, len);</p><p>}</p><p>outputStream.flush();</p><p>return outputStream;</p><p>}</p><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line"></span>
+<span class="line">我们将inputStream中的数据读取到 **outputStream** 之中，然后需要使用Inputstream的时候字节将outputst</span>
+<span class="line"></span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>InputStream inputStream1 = new ByteArrayInputStream(outputStream.toByteArray());</p><p>InputStream inputStream2 = new ByteArrayInputStream(outputStream.toByteArray());</p><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line"></span>
+<span class="line">缺点是如果读取的Inputstream内容很大，使用时会造成很大的内存消耗。</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**方法二：**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">使用 **inputStream** 中操作指针的方法 **mark** 和 **reset** ，两个方法分别为标记和重置，</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">在使用 **inputstream** 之前我们使用mark标记一下指针的位置，读取完成后使用reset重置指针的位置。</span>
+<span class="line"></span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>String text = &quot;测试inputStream内容&quot;;</p><p>InputStream rawInputStream = new ByteArrayInputStream(text.getBytes());</p><p>byte[] readArray = new byte[1024];</p><p>rawInputStream.mark(0);</p><p>System.out.println(DigestUtils.md5Hex(rawInputStream));</p><p>rawInputStream.reset();</p><p>int readCount2 = rawInputStream.read(readArray);</p><p>System.out.println(&quot;读取了&quot; + readCount2 + &quot;个字节&quot;);</p><div class="language-text line-numbers-mode" data-highlighter="prismjs" data-ext="text"><pre><code><span class="line"></span>
+<span class="line">这样就可以重复使用inputStream的内容了</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**漫画图解java开发之IO阻塞、非阻塞、同步、异步**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**笔记本：** IO</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**创建时间：** 2021/8/10 17:44 **更新时间：** 2021/8/10 18:05</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**作者：** 彼岸樱速</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-9-0.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-9-1.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-9-2.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-9-3.png&quot;&gt;</span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-10-0.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-10-1.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-10-2.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line">**同步、异步、阻塞、非阻塞都是和IO（输入输出）有关的概念。最简单的文件读取就是IO操作。**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**而在文件读取这件事儿上，可以有多种方式。**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-10-3.png&quot;&gt;</span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-11-0.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line">**什么是同步和异步**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-11-1.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-11-2.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-11-3.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line">**什么是阻塞和非阻塞**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-11-4.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-12-0.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line">**阻塞、非阻塞和同步、异步的区别**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-12-1.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-12-2.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-12-3.png&quot;&gt;</span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-13-0.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-13-1.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-13-2.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line">**Java中的三种IO模型**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-13-3.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-13-4.png&quot;&gt;</span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-14-0.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-14-1.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-14-2.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-14-3.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-14-4.png&quot;&gt;</span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-15-0.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-15-1.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line">滴滴滴滴，这时候水壶响了，打断了女朋友的发问。女朋友去拿来烧好的热水，给我泡了一杯咖啡。</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-15-2.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-15-3.png&quot;&gt;</span>
+<span class="line">**Java BIO&amp;NIO&amp;AIO**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**笔记本：** IO</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**创建时间：** 2021/8/10 17:01 **更新时间：** 2021/8/10 17:37</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**作者：** 彼岸樱速</span>
+<span class="line"></span>
+<span class="line"># **漫话：什么是BIO、NIO和AIO？**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-16-0.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-16-1.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-16-2.png&quot;&gt;</span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-17-0.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-17-2.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-17-3.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-17-4.png&quot;&gt;</span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-18-0.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-18-4.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-18-7.png&quot;&gt;</span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-19-0.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-19-1.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-19-2.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**首先，我们站在宏观的角度，重新画一下重点：**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**BIO （Blocking I/O）：同步阻塞I/O模式。**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**NIO （New I/O）：同步非阻塞模式。**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**AIO （Asynchronous I/O）：异步非阻塞I/O模型。**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**那么，同步阻塞、同步非阻塞、异步非阻塞都是怎么回事呢？关于这部分内容也可以查看《漫话：如何给女朋友解**</span>
+<span class="line">**[释什么是IO中的阻塞、非阻塞、同步、异步？》。](https://link.juejin.im/?target=http://mp.weixin.qq.com/s?__biz=Mzg3MjA4MTExMw==&amp;mid=2247484751&amp;idx=1&amp;sn=e9c24082baeeea4df363af0a788d7fc2&amp;chksm=cef5f6f9f9827fef26458b6ea7d794e4fd10b2596f271e986da708e267e7957440bc56663340&amp;scene=21%23wechat_redirect)**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**同步阻塞模式：这种模式下，我们的工作模式是先来到厨房，开始烧水，并坐在水壶面前一直等着水烧开。**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**同步非阻塞模式：这种模式下，我们的工作模式是先来到厨房，开始烧水，但是我们不一直坐在水壶前面等，而是**</span>
+<span class="line">**回到客厅看电视，然后每隔几分钟到厨房看一下水有没有烧开。**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**异步非阻塞I/O模型：这种模式下，我们的工作模式是先来到厨房，开始烧水，我们不一一直坐在水壶前面等，也**</span>
+<span class="line">**不隔一段时间去看一下，而是在客厅看电视，水壶上面有个开关，水烧开之后他会通知我。**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**阻塞VS非阻塞：人是否坐在水壶前面一直等。**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**同步VS异步：水壶是不是在水烧开之后主动通知人。**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-20-0.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-20-1.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-20-2.png&quot;&gt;</span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-21-0.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-21-2.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-21-3.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-21-4.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**使用BIO实现文件的读取和写入。**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**public class** **Test** **{**</span>
+<span class="line">**public static voidmain(String[] args) {**</span>
+<span class="line">**//Initializes The Object**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**User user =** **new** **User();**</span>
+<span class="line">**user.setName(&quot;hollis&quot;);**</span>
+<span class="line">**user.setAge(23);**</span>
+<span class="line">**System.out.println(user);**</span>
+<span class="line"></span>
+<span class="line">**//Write Obj to File**</span>
+<span class="line">**ObjectOutputStream oos =** **null;**</span>
+<span class="line">**try** **{**</span>
+<span class="line">**oos =** **new** **ObjectOutputStream(new** **FileOutputStream(&quot;tempFile&quot;));**</span>
+<span class="line">**oos.writeObject(user);**</span>
+<span class="line">**}** **catch(IOException** **e) {**</span>
+<span class="line">**e.printStackTrace();**</span>
+<span class="line">**}** **finally** **{**</span>
+<span class="line">**IOUtils.closeQuietly(oos);**</span>
+<span class="line">**}**</span>
+<span class="line"></span>
+<span class="line">**//Read Obj from File**</span>
+<span class="line">**File file =** **new** **File(&quot;tempFile&quot;);**</span>
+<span class="line">**ObjectInputStream ois =** **null;**</span>
+<span class="line">**try** **{**</span>
+<span class="line">**ois =** **new** **ObjectInputStream(new** **FileInputStream(file));**</span>
+<span class="line">**User newUser =** **(User) ois.readObject();**</span>
+<span class="line">**System.out.println(newUser);**</span>
+<span class="line">**}** **catch(IOException** **e) {**</span>
+<span class="line">**e.printStackTrace();**</span>
+<span class="line">**}** **catch(ClassNotFoundException** **e) {**</span>
+<span class="line">**e.printStackTrace();**</span>
+<span class="line">**}** **finally** **{**</span>
+<span class="line">**IOUtils.closeQuietly(ois);**</span>
+<span class="line">**try** **{**</span>
+<span class="line">**FileUtils.forceDelete(file);**</span>
+<span class="line">**}** **catch(IOException** **e) {**</span>
+<span class="line">**e.printStackTrace();**</span>
+<span class="line">**}**</span>
+<span class="line">**}**</span>
+<span class="line">**}**</span>
+<span class="line">**}**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**使用NIO实现文件的读取和写入。**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-22-0.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-23-0.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line">**使用AIO实现文件的读取和写入**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**public class** **ReadFromFile** **{**</span>
+<span class="line">**public static voidmain(String[] args)** **throws** **Exception** **{**</span>
+<span class="line">**Path file =** **Paths.get(&quot;/usr/a.txt&quot;);**</span>
+<span class="line">**AsynchronousFileChannel channel =** **AsynchronousFileChannel.open(file);**</span>
+<span class="line"></span>
+<span class="line">**ByteBuffer buffer =** **ByteBuffer.allocate(100_000);**</span>
+<span class="line">**Future&lt;Integer&gt; result = channel.read(buffer,** **0);**</span>
+<span class="line"></span>
+<span class="line">**while** **(!result.isDone()) {**</span>
+<span class="line">**ProfitCalculator.calculateTax();**</span>
+<span class="line">**}**</span>
+<span class="line">**Integer bytesRead = result.get();**</span>
+<span class="line">**System.out.println(&quot;Bytes read [&quot;** **+ bytesRead +** **&quot;]&quot;);**</span>
+<span class="line">**}**</span>
+<span class="line">**}**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**class** **ProfitCalculator** **{**</span>
+<span class="line">**public** **ProfitCalculator() {**</span>
+<span class="line">**}**</span>
+<span class="line"></span>
+<span class="line">**public static voidcalculateTax() {**</span>
+<span class="line">**}**</span>
+<span class="line">**}**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**public class** **WriteToFile** **{**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**public static voidmain(String[] args)** **throws** **Exception** **{**</span>
+<span class="line">**AsynchronousFileChannel fileChannel =** **AsynchronousFileChannel.open(**</span>
+<span class="line">**Paths.get(&quot;/asynchronous.txt&quot;),** **StandardOpenOption.READ,**</span>
+<span class="line">**StandardOpenOption.WRITE,** **StandardOpenOption.CREATE);**</span>
+<span class="line">**CompletionHandler&lt;Integer,** **Object&gt; handler =** **new** **CompletionHandler&lt;Integer,** **Object&gt;() {**</span>
+<span class="line"></span>
+<span class="line">**@Override**</span>
+<span class="line">**public voidcompleted(Integer** **result,** **Object** **attachment) {**</span>
+<span class="line">**System.out.println(&quot;Attachment: &quot;** **+** **attachment** **+** **&quot; &quot;** **+** **result**</span>
+<span class="line">**+** **&quot; bytes written&quot;);**</span>
+<span class="line">**System.out.println(&quot;CompletionHandler Thread ID: &quot;**</span>
+<span class="line">**+** **Thread.currentThread().getId());**</span>
+<span class="line">**}**</span>
+<span class="line"></span>
+<span class="line">**@Override**</span>
+<span class="line">**public voidfailed(Throwable** **e,** **Object** **attachment) {**</span>
+<span class="line">**System.err.println(&quot;Attachment: &quot;** **+** **attachment** **+** **&quot; failed with:&quot;);**</span>
+<span class="line">**e.printStackTrace();**</span>
+<span class="line">**}**</span>
+<span class="line">**};**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">**System.out.println(&quot;Main Thread ID: &quot;** **+** **Thread.currentThread().getId());**</span>
+<span class="line">**fileChannel.write(ByteBuffer.wrap(&quot;Sample&quot;.getBytes()),** **0,** **&quot;First Write&quot;,**</span>
+<span class="line">**handler);**</span>
+<span class="line">**fileChannel.write(ByteBuffer.wrap(&quot;Box&quot;.getBytes()),** **0,** **&quot;Second Write&quot;,**</span>
+<span class="line">**handler);**</span>
+<span class="line"></span>
+<span class="line">**}**</span>
+<span class="line">**}**</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-24-0.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-24-1.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-24-2.png&quot;&gt;</span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-25-0.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line">滴滴滴，水开了。</span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-25-1.png&quot;&gt;</span>
+<span class="line"></span>
+<span class="line">&lt;img src=&quot;/img/IO.pdf-25-2.png&quot;&gt;</span>
+<span class="line"></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div></div><!--[--><!--]--></div><footer class="vp-page-meta"><!----><div class="vp-meta-item git-info"><div class="vp-meta-item last-updated"><span class="meta-item-label">最近更新：: </span><time class="meta-item-info" datetime="2026-04-02T10:22:59.000Z" data-allow-mismatch>2026/4/2 10:22</time></div><div class="vp-meta-item contributors"><span class="meta-item-label">Contributors: </span><span class="meta-item-info"><!--[--><!--[--><span class="contributor" title="email: wuyuying@foresee.com.cn">wuyuying</span><!----><!--]--><!--]--></span></div></div></footer><!----><!--[--><!--]--></main><!--]--></div><!--[--><!----><!--]--><!--]--></div>
+    <script src="/assets/js/runtime~app.f4595dd2.js" defer></script><script src="/assets/js/80.d657ec11.js" defer></script><script src="/assets/js/app.b924a461.js" defer></script>
+  </body>
+</html>
