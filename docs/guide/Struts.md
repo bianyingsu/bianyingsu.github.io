@@ -1,3 +1,4 @@
+# Struts
 ---
 aliases:
   - Struts

@@ -1,3 +1,4 @@
+# Thread
 ---
 aliases:
   - Thread

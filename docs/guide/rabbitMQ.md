@@ -1,3 +1,4 @@
+# RabbitMQ
 ---
 aliases:
   - rabbitMQ

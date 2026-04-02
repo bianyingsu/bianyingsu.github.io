@@ -1,3 +1,4 @@
+# Java工具
 ---
 aliases:
   - Java工具

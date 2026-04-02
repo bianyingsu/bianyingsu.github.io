@@ -1,3 +1,4 @@
+# Idea
 ---
 aliases:
   - idea

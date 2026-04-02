@@ -1,3 +1,4 @@
+# Nginx
 ---
 aliases:
   - nginx
