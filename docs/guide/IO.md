@@ -400,34 +400,26 @@ _`// Form`_ 请求上传文件
  </html>
 
  <script>
-```
-
-`const` `sliceSize` `=` `5` `*` `1024` `*` `1024;` _`//`_ 每个文件切片大小定为 _`5MB`_
-_`//`_ 发送请求
-```
+const sliceSize = 5 * 1024 * 1024; // 每个文件切片大小定为5MB
+// 发送请求
  function upload() {
  const blob = document.getElementById("file").files[0];
-```
 
-`const` `fileSize` `=` `blob.size;` _`//`_ 文件大小
-`const` `fileName` `=` `blob.name;` _`//`_ 文件名
+const fileSize = blob.size; //文件大小
+const fileName = blob.name; //文件名
 
 
-_`//`_ 计算文件切片总数
-```
+//_ 计算文件切片总数
  const totalSlice = Math.ceil(fileSize / sliceSize);
-```
 
-_`//`_ 循环上传
-```
+// 循环上传
  for (let i = 1; i <= totalSlice; i++) {
  let chunk;
  if (i == totalSlice) {
-```
 
-_`//`_ 最后一片
-`chunk` `=` `blob.slice((i` `-` `1)` `*` `sliceSize,` `fileSize` `-` `1);` _`//`_ 切割文件
-```
+// 最后一片
+chunk = blob.slice((i - 1) * sliceSize, fileSize - 1);//切割文件
+
  } else {
  chunk = blob.slice((i - 1) * sliceSize, i * sliceSize);
  }
